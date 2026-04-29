@@ -183,6 +183,17 @@
       transition: max-height 0.32s ease, opacity 0.28s ease;
     }
     #mobile-menu.open { max-height: 420px; opacity: 1; }
+
+    /* Barber avatar selector */
+    .barber-opt { cursor: pointer; }
+    .barber-opt.active { border-color: #C9A84C !important; background: rgba(201,168,76,0.10) !important; }
+    .barber-opt.active img { border-color: #C9A84C !important; }
+    .barber-opt.active span { color: #C9A84C !important; }
+    .barber-opt img { transition: border-color 0.2s; }
+    .barber-opt:hover:not(.active) { border-color: rgba(201,168,76,0.35) !important; }
+
+    /* Form gold top bar */
+    .form-gold-bar { height: 3px; background: linear-gradient(90deg, #C9A84C 0%, rgba(201,168,76,0.2) 70%, transparent 100%); margin-bottom: 2rem; }
   </style>
 </head>
 <body>
@@ -720,123 +731,153 @@
 
 
 <!-- ── RESERVAS ────────────────────────────────────── -->
-<section id="reservar" class="py-16 lg:py-36 bg-charcoal">
-  <div class="max-w-7xl mx-auto px-5 lg:px-8">
-    <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+<section id="reservar" class="bg-charcoal overflow-hidden">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid lg:grid-cols-2 min-h-[700px]">
 
-      <!-- Info -->
-      <div>
-        <span class="section-tag mb-3">Agenda tu visita</span>
-        <h2 style="font-family:'Playfair Display',serif; font-size:clamp(2rem,5vw,3rem); font-weight:900; line-height:1.1; margin-bottom:1rem" class="text-cream">
-          Tu turno te <em class="text-gold">espera</em>
-        </h2>
-        <div style="width:44px;height:2px;background:#C9A84C;margin-bottom:1.5rem"></div>
-        <p class="text-cream/55 text-sm leading-relaxed mb-10">
-          Reserva en menos de dos minutos. Selecciona tu barbero, servicio y horario preferido. Sin esperas, sin sorpresas.
-        </p>
+      <!-- Left: Barber image panel -->
+      <div class="relative min-h-[380px] lg:min-h-full" style="background-image:url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=900&h=900&fit=crop&auto=format&q=85'); background-size:cover; background-position:center top;">
+        <!-- Dark gradient overlay -->
+        <div class="absolute inset-0" style="background:linear-gradient(160deg, rgba(20,20,20,0.30) 0%, rgba(20,20,20,0.65) 40%, rgba(20,20,20,0.97) 100%)"></div>
+        <!-- Left gold accent pole -->
+        <div class="barber-pole absolute left-0 top-0 bottom-0 w-1 opacity-50"></div>
 
-        <!-- Hours -->
-        <div>
-          <div class="flex justify-between py-4" style="border-bottom:1px solid rgba(245,240,232,0.08)">
-            <span class="text-cream/55 text-sm">Lunes — Viernes</span>
-            <span class="text-cream font-semibold text-sm">8:00 am — 8:00 pm</span>
-          </div>
-          <div class="flex justify-between py-4" style="border-bottom:1px solid rgba(245,240,232,0.08)">
-            <span class="text-cream/55 text-sm">Sábado</span>
-            <span class="text-cream font-semibold text-sm">9:00 am — 7:00 pm</span>
-          </div>
-          <div class="flex justify-between py-4" style="border-bottom:1px solid rgba(245,240,232,0.08)">
-            <span class="text-cream/55 text-sm">Domingo</span>
-            <span class="text-gold font-semibold text-sm">10:00 am — 4:00 pm</span>
-          </div>
-        </div>
+        <!-- Content -->
+        <div class="relative z-10 flex flex-col justify-end h-full p-8 lg:p-14">
+          <span class="section-tag mb-4">Agenda tu visita</span>
+          <h2 class="text-cream" style="font-family:'Playfair Display',serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:900; line-height:1.1; margin-bottom:0.75rem">
+            Tu turno te <em class="text-gold">espera</em>
+          </h2>
+          <div style="width:40px;height:2px;background:#C9A84C;margin-bottom:1.25rem"></div>
+          <p class="text-cream/55 text-sm leading-relaxed mb-8 max-w-xs">
+            Reserva en menos de dos minutos. Sin esperas, sin sorpresas.
+          </p>
 
-        <!-- Location -->
-        <div class="flex items-start gap-4 mt-10">
-          <div class="flex items-center justify-center border border-gold/30 flex-shrink-0" style="width:40px;height:40px">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <!-- Hours table -->
+          <div style="border-top:1px solid rgba(245,240,232,0.10); padding-top:1.25rem; margin-bottom:1.5rem">
+            <div class="flex justify-between py-3" style="border-bottom:1px solid rgba(245,240,232,0.07)">
+              <span class="text-cream/50 text-xs tracking-wide">Lunes — Viernes</span>
+              <span class="text-cream text-xs font-semibold">8:00 am — 8:00 pm</span>
+            </div>
+            <div class="flex justify-between py-3" style="border-bottom:1px solid rgba(245,240,232,0.07)">
+              <span class="text-cream/50 text-xs tracking-wide">Sábado</span>
+              <span class="text-cream text-xs font-semibold">9:00 am — 7:00 pm</span>
+            </div>
+            <div class="flex justify-between py-3">
+              <span class="text-cream/50 text-xs tracking-wide">Domingo</span>
+              <span class="text-gold text-xs font-semibold">10:00 am — 4:00 pm</span>
+            </div>
           </div>
-          <div>
-            <div class="text-cream font-semibold text-sm">Cra. 15 #93-47, Chapinero</div>
-            <div class="text-cream/40 text-xs mt-0.5">Bogotá, Colombia</div>
+
+          <!-- Location -->
+          <div class="flex items-center gap-3">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span class="text-cream/45 text-xs">Cra. 15 #93-47, Chapinero — Bogotá, Colombia</span>
           </div>
         </div>
       </div>
 
-      <!-- Form -->
-      <div class="p-7 lg:p-10" style="background:#242424">
-        <h3 style="font-family:'Playfair Display',serif" class="text-cream text-xl font-bold mb-7">Reservar turno</h3>
+      <!-- Right: Improved form -->
+      <div class="flex items-center py-14 lg:py-0 px-5 lg:px-0" style="background:#1C1C1C">
+        <div class="w-full max-w-md mx-auto px-0 lg:px-12">
 
-        <form onsubmit="return false" class="flex flex-col gap-5">
-          <div class="grid grid-cols-2 gap-4">
-            <div>
-              <label class="block text-cream/45 text-xs mb-2" style="letter-spacing:0.15em">NOMBRE</label>
-              <input type="text" placeholder="Tu nombre" />
-            </div>
-            <div>
-              <label class="block text-cream/45 text-xs mb-2" style="letter-spacing:0.15em">TELÉFONO</label>
-              <input type="tel" placeholder="+57 300 000 0000" />
-            </div>
-          </div>
+          <!-- Form header -->
+          <div class="form-gold-bar"></div>
+          <h3 class="text-cream font-bold mb-1" style="font-family:'Playfair Display',serif; font-size:1.5rem">Reservar turno</h3>
+          <p class="text-cream/30 text-xs mb-8 tracking-wide">Completa el formulario y te confirmamos en minutos</p>
 
-          <div>
-            <label class="block text-cream/45 text-xs mb-2" style="letter-spacing:0.15em">SERVICIO</label>
-            <div class="sel-wrap">
-              <select>
-                <option value="" style="background:#2E2E2E">Selecciona un servicio</option>
-                <option style="background:#2E2E2E">Corte Clásico — $35.000</option>
-                <option style="background:#2E2E2E">Afeitado con Navaja — $28.000</option>
-                <option style="background:#2E2E2E">Arreglo de Barba — $22.000</option>
-                <option style="background:#2E2E2E">Combo Completo — $70.000</option>
-                <option style="background:#2E2E2E">Tratamiento Capilar — $45.000</option>
-                <option style="background:#2E2E2E">Membresía Mensual — $110.000</option>
-              </select>
+          <form onsubmit="return false" class="flex flex-col gap-5">
+            <!-- Nombre + Teléfono -->
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-cream/45 text-xs mb-2" style="letter-spacing:0.15em">NOMBRE</label>
+                <input type="text" placeholder="Tu nombre" />
+              </div>
+              <div>
+                <label class="block text-cream/45 text-xs mb-2" style="letter-spacing:0.15em">TELÉFONO</label>
+                <input type="tel" placeholder="+57 300 000 0000" />
+              </div>
             </div>
-          </div>
 
-          <div>
-            <label class="block text-cream/45 text-xs mb-2" style="letter-spacing:0.15em">BARBERO</label>
-            <div class="sel-wrap">
-              <select>
-                <option style="background:#2E2E2E">Sin preferencia</option>
-                <option style="background:#2E2E2E">Ricardo Morales</option>
-                <option style="background:#2E2E2E">David Salinas</option>
-                <option style="background:#2E2E2E">Felipe Ruiz</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-2 gap-4">
+            <!-- Servicio -->
             <div>
-              <label class="block text-cream/45 text-xs mb-2" style="letter-spacing:0.15em">FECHA</label>
-              <input type="date" />
-            </div>
-            <div>
-              <label class="block text-cream/45 text-xs mb-2" style="letter-spacing:0.15em">HORA</label>
+              <label class="block text-cream/45 text-xs mb-2" style="letter-spacing:0.15em">SERVICIO</label>
               <div class="sel-wrap">
                 <select>
-                  <option style="background:#2E2E2E">8:00 am</option>
-                  <option style="background:#2E2E2E">9:00 am</option>
-                  <option style="background:#2E2E2E">10:00 am</option>
-                  <option style="background:#2E2E2E">11:00 am</option>
-                  <option style="background:#2E2E2E">12:00 pm</option>
-                  <option style="background:#2E2E2E">1:00 pm</option>
-                  <option style="background:#2E2E2E">2:00 pm</option>
-                  <option style="background:#2E2E2E">3:00 pm</option>
-                  <option style="background:#2E2E2E">4:00 pm</option>
-                  <option style="background:#2E2E2E">5:00 pm</option>
-                  <option style="background:#2E2E2E">6:00 pm</option>
-                  <option style="background:#2E2E2E">7:00 pm</option>
+                  <option value="" style="background:#2E2E2E">Selecciona un servicio</option>
+                  <option style="background:#2E2E2E">Corte Clásico — $35.000</option>
+                  <option style="background:#2E2E2E">Afeitado con Navaja — $28.000</option>
+                  <option style="background:#2E2E2E">Arreglo de Barba — $22.000</option>
+                  <option style="background:#2E2E2E">Combo Completo — $70.000</option>
+                  <option style="background:#2E2E2E">Tratamiento Capilar — $45.000</option>
+                  <option style="background:#2E2E2E">Membresía Mensual — $110.000</option>
                 </select>
               </div>
             </div>
-          </div>
 
-          <button type="submit" class="w-full bg-gold hover:bg-gold-light text-charcoal font-bold text-xs py-4 transition-colors mt-1" style="letter-spacing:0.18em; font-family:'Inter',sans-serif">
-            CONFIRMAR RESERVA
-          </button>
-        </form>
+            <!-- Barbero: avatar picker -->
+            <div>
+              <label class="block text-cream/45 text-xs mb-3" style="letter-spacing:0.15em">BARBERO</label>
+              <div class="grid grid-cols-4 gap-2">
+                <!-- Sin preferencia -->
+                <button type="button" onclick="selectBarber(this)" class="barber-opt active flex flex-col items-center gap-2 py-3 px-1 border border-gold/40 transition-all" style="background:rgba(201,168,76,0.08)">
+                  <div class="flex items-center justify-center rounded-full flex-shrink-0" style="width:46px;height:46px;background:#2A2A2A;border:2px solid #C9A84C">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5"><circle cx="12" cy="7" r="4"/><path d="M5.5 20a7 7 0 0 1 13 0"/></svg>
+                  </div>
+                  <span class="text-gold leading-tight text-center" style="font-size:0.58rem; letter-spacing:0.04em">Sin pref.</span>
+                </button>
+                <!-- Ricardo -->
+                <button type="button" onclick="selectBarber(this)" class="barber-opt flex flex-col items-center gap-2 py-3 px-1 border border-cream/10 transition-all">
+                  <img src="https://images.unsplash.com/photo-1567894340315-735d7c361db0?w=80&h=80&fit=crop&auto=format&q=80" alt="Ricardo" class="rounded-full object-cover flex-shrink-0" style="width:46px;height:46px;border:2px solid transparent" />
+                  <span class="text-cream/55 leading-tight text-center" style="font-size:0.58rem">Ricardo</span>
+                </button>
+                <!-- David -->
+                <button type="button" onclick="selectBarber(this)" class="barber-opt flex flex-col items-center gap-2 py-3 px-1 border border-cream/10 transition-all">
+                  <img src="https://images.unsplash.com/photo-1578301978018-3005759f48f7?w=80&h=80&fit=crop&auto=format&q=80" alt="David" class="rounded-full object-cover flex-shrink-0" style="width:46px;height:46px;border:2px solid transparent" />
+                  <span class="text-cream/55 leading-tight text-center" style="font-size:0.58rem">David</span>
+                </button>
+                <!-- Felipe -->
+                <button type="button" onclick="selectBarber(this)" class="barber-opt flex flex-col items-center gap-2 py-3 px-1 border border-cream/10 transition-all">
+                  <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?w=80&h=80&fit=crop&auto=format&q=80" alt="Felipe" class="rounded-full object-cover flex-shrink-0" style="width:46px;height:46px;border:2px solid transparent" />
+                  <span class="text-cream/55 leading-tight text-center" style="font-size:0.58rem">Felipe</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Fecha + Hora -->
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label for="reserva-fecha" class="block text-cream/45 text-xs mb-2" style="letter-spacing:0.15em">FECHA</label>
+                <input id="reserva-fecha" type="date" title="Fecha de la reserva" />
+              </div>
+              <div>
+                <label for="reserva-hora" class="block text-cream/45 text-xs mb-2" style="letter-spacing:0.15em">HORA</label>
+                <div class="sel-wrap">
+                  <select id="reserva-hora" title="Hora de la reserva">
+                    <option style="background:#2E2E2E">8:00 am</option>
+                    <option style="background:#2E2E2E">9:00 am</option>
+                    <option style="background:#2E2E2E">10:00 am</option>
+                    <option style="background:#2E2E2E">11:00 am</option>
+                    <option style="background:#2E2E2E">12:00 pm</option>
+                    <option style="background:#2E2E2E">1:00 pm</option>
+                    <option style="background:#2E2E2E">2:00 pm</option>
+                    <option style="background:#2E2E2E">3:00 pm</option>
+                    <option style="background:#2E2E2E">4:00 pm</option>
+                    <option style="background:#2E2E2E">5:00 pm</option>
+                    <option style="background:#2E2E2E">6:00 pm</option>
+                    <option style="background:#2E2E2E">7:00 pm</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="w-full bg-gold hover:bg-gold-light text-charcoal font-bold text-xs py-4 transition-colors mt-1" style="letter-spacing:0.18em; font-family:'Inter',sans-serif">
+              CONFIRMAR RESERVA
+            </button>
+          </form>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -953,6 +994,11 @@
   window.addEventListener('resize', () => {
     if (window.innerWidth >= 1024) document.getElementById('mobile-menu').classList.remove('open');
   });
+
+  function selectBarber(el) {
+    document.querySelectorAll('.barber-opt').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+  }
 </script>
 </body>
 </html>
