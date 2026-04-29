@@ -225,13 +225,14 @@
     </h2>
 
     <div style="display:flex; justify-content:center; gap:0; margin-bottom:44px; border-bottom:2px solid rgba(38,77,53,0.12); overflow-x:auto; -webkit-overflow-scrolling:touch;">
-      <button class="tab-btn" style="padding:10px 22px; background:none; border:none; border-bottom:3px solid #264D35; margin-bottom:-2px; font-size:14px; font-weight:700; color:#264D35; cursor:pointer; font-family:'Nunito',sans-serif; white-space:nowrap;">Entradas</button>
-      <button class="tab-btn" style="padding:10px 22px; background:none; border:none; border-bottom:3px solid transparent; font-size:14px; font-weight:600; color:rgba(38,77,53,0.45); cursor:pointer; font-family:'Nunito',sans-serif; white-space:nowrap;">Hamburguesas</button>
-      <button class="tab-btn" style="padding:10px 22px; background:none; border:none; border-bottom:3px solid transparent; font-size:14px; font-weight:600; color:rgba(38,77,53,0.45); cursor:pointer; font-family:'Nunito',sans-serif; white-space:nowrap;">Perros</button>
-      <button class="tab-btn" style="padding:10px 22px; background:none; border:none; border-bottom:3px solid transparent; font-size:14px; font-weight:600; color:rgba(38,77,53,0.45); cursor:pointer; font-family:'Nunito',sans-serif; white-space:nowrap;">Bebidas</button>
+      <button class="tab-btn" data-tab="entradas" onclick="switchTab(this,'entradas')" style="padding:10px 22px; background:none; border:none; border-bottom:3px solid #264D35; margin-bottom:-2px; font-size:14px; font-weight:700; color:#264D35; cursor:pointer; font-family:'Nunito',sans-serif; white-space:nowrap;">Entradas</button>
+      <button class="tab-btn" data-tab="hamburguesas" onclick="switchTab(this,'hamburguesas')" style="padding:10px 22px; background:none; border:none; border-bottom:3px solid transparent; font-size:14px; font-weight:600; color:rgba(38,77,53,0.45); cursor:pointer; font-family:'Nunito',sans-serif; white-space:nowrap;">Hamburguesas</button>
+      <button class="tab-btn" data-tab="perros" onclick="switchTab(this,'perros')" style="padding:10px 22px; background:none; border:none; border-bottom:3px solid transparent; font-size:14px; font-weight:600; color:rgba(38,77,53,0.45); cursor:pointer; font-family:'Nunito',sans-serif; white-space:nowrap;">Perros</button>
+      <button class="tab-btn" data-tab="bebidas" onclick="switchTab(this,'bebidas')" style="padding:10px 22px; background:none; border:none; border-bottom:3px solid transparent; font-size:14px; font-weight:600; color:rgba(38,77,53,0.45); cursor:pointer; font-family:'Nunito',sans-serif; white-space:nowrap;">Bebidas</button>
     </div>
 
-    <div class="menu-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px; max-width:960px; margin:0 auto;">
+    <!-- ENTRADAS -->
+    <div id="tab-entradas" class="menu-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px; max-width:960px; margin:0 auto;">
 
       <div class="menu-card" style="background:white; border-radius:20px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.07);">
         <div style="position:relative;">
@@ -245,12 +246,49 @@
           <p style="font-size:12px; color:#999; margin:0 0 14px; line-height:1.4;">Con sal rosada y salsa especial</p>
           <div style="display:flex; align-items:center; justify-content:space-between;">
             <span class="font-display" style="font-size:24px; font-weight:700; color:#264D35;">$12k</span>
-            <a href="https://wa.me/573001234567?text=Hola!%20Quiero%20pedir%20Papas%20Crocantes" class="btn-primary" style="background:#264D35; color:white; border:none; padding:8px 16px; border-radius:100px; font-size:12px; font-weight:700; cursor:pointer; font-family:'Nunito',sans-serif; text-decoration:none; white-space:nowrap; display:inline-flex; align-items:center; gap:6px;">
-              Pedir ahora
-            </a>
+            <a href="https://wa.me/573001234567?text=Hola!%20Quiero%20pedir%20Papas%20Crocantes" class="btn-primary" style="background:#264D35; color:white; border:none; padding:8px 16px; border-radius:100px; font-size:12px; font-weight:700; cursor:pointer; font-family:'Nunito',sans-serif; text-decoration:none; white-space:nowrap; display:inline-flex; align-items:center; gap:6px;">Pedir ahora</a>
           </div>
         </div>
       </div>
+
+      <div class="menu-card" style="background:white; border-radius:20px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.07);">
+        <div style="position:relative;">
+          <img src="https://images.unsplash.com/photo-1639024471283-03518883512d?w=320&h=200&fit=crop&auto=format&q=80" alt="Aros de Cebolla" style="width:100%; height:178px; object-fit:cover; display:block;">
+          <button class="heart-btn" style="position:absolute; top:12px; right:12px; background:white; border:none; width:32px; height:32px; border-radius:50%; box-shadow:0 2px 8px rgba(0,0,0,0.12); display:flex; align-items:center; justify-content:center; color:#ccc;">
+            <i data-lucide="heart" style="width:15px; height:15px;"></i>
+          </button>
+        </div>
+        <div style="padding:16px 18px 18px;">
+          <p style="font-weight:800; font-size:14px; color:#1A3520; margin:0 0 4px;">Aros de Cebolla</p>
+          <p style="font-size:12px; color:#999; margin:0 0 14px; line-height:1.4;">Apanados y crujientes con salsa BBQ</p>
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <span class="font-display" style="font-size:24px; font-weight:700; color:#264D35;">$10k</span>
+            <a href="https://wa.me/573001234567?text=Hola!%20Quiero%20pedir%20Aros%20de%20Cebolla" class="btn-primary" style="background:#264D35; color:white; border:none; padding:8px 16px; border-radius:100px; font-size:12px; font-weight:700; cursor:pointer; font-family:'Nunito',sans-serif; text-decoration:none; white-space:nowrap; display:inline-flex; align-items:center; gap:6px;">Pedir ahora</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-card" style="background:white; border-radius:20px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.07);">
+        <div style="position:relative;">
+          <img src="https://images.unsplash.com/photo-1541014741259-de529411b96a?w=320&h=200&fit=crop&auto=format&q=80" alt="Nuggets de Pollo" style="width:100%; height:178px; object-fit:cover; display:block;">
+          <button class="heart-btn" style="position:absolute; top:12px; right:12px; background:white; border:none; width:32px; height:32px; border-radius:50%; box-shadow:0 2px 8px rgba(0,0,0,0.12); display:flex; align-items:center; justify-content:center; color:#ccc;">
+            <i data-lucide="heart" style="width:15px; height:15px;"></i>
+          </button>
+        </div>
+        <div style="padding:16px 18px 18px;">
+          <p style="font-weight:800; font-size:14px; color:#1A3520; margin:0 0 4px;">Nuggets de Pollo</p>
+          <p style="font-size:12px; color:#999; margin:0 0 14px; line-height:1.4;">8 piezas crujientes con salsa de la casa</p>
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <span class="font-display" style="font-size:24px; font-weight:700; color:#264D35;">$14k</span>
+            <a href="https://wa.me/573001234567?text=Hola!%20Quiero%20pedir%20Nuggets%20de%20Pollo" class="btn-primary" style="background:#264D35; color:white; border:none; padding:8px 16px; border-radius:100px; font-size:12px; font-weight:700; cursor:pointer; font-family:'Nunito',sans-serif; text-decoration:none; white-space:nowrap; display:inline-flex; align-items:center; gap:6px;">Pedir ahora</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- HAMBURGUESAS -->
+    <div id="tab-hamburguesas" class="menu-grid" style="display:none; grid-template-columns:repeat(3,1fr); gap:24px; max-width:960px; margin:0 auto;">
 
       <div class="menu-card" style="background:white; border-radius:20px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.07);">
         <div style="position:relative;">
@@ -264,16 +302,53 @@
           <p style="font-size:12px; color:#999; margin:0 0 14px; line-height:1.4;">Doble carne, queso fundido y tomate</p>
           <div style="display:flex; align-items:center; justify-content:space-between;">
             <span class="font-display" style="font-size:24px; font-weight:700; color:#264D35;">$22k</span>
-            <a href="https://wa.me/573001234567?text=Hola!%20Quiero%20pedir%20una%20Hamburguesa%20Doble" class="btn-primary" style="background:#264D35; color:white; border:none; padding:8px 16px; border-radius:100px; font-size:12px; font-weight:700; cursor:pointer; font-family:'Nunito',sans-serif; text-decoration:none; white-space:nowrap; display:inline-flex; align-items:center; gap:6px;">
-              Pedir ahora
-            </a>
+            <a href="https://wa.me/573001234567?text=Hola!%20Quiero%20pedir%20una%20Hamburguesa%20Doble" class="btn-primary" style="background:#264D35; color:white; border:none; padding:8px 16px; border-radius:100px; font-size:12px; font-weight:700; cursor:pointer; font-family:'Nunito',sans-serif; text-decoration:none; white-space:nowrap; display:inline-flex; align-items:center; gap:6px;">Pedir ahora</a>
           </div>
         </div>
       </div>
 
       <div class="menu-card" style="background:white; border-radius:20px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.07);">
         <div style="position:relative;">
-          <img src="https://images.unsplash.com/photo-1554433607-66b5efe9d304?w=320&h=200&fit=crop&auto=format&q=80" alt="Perro Bogotano" style="width:100%; height:178px; object-fit:cover; display:block;">
+          <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=320&h=200&fit=crop&auto=format&q=80" alt="Smash Burger" style="width:100%; height:178px; object-fit:cover; display:block;">
+          <button class="heart-btn" style="position:absolute; top:12px; right:12px; background:white; border:none; width:32px; height:32px; border-radius:50%; box-shadow:0 2px 8px rgba(0,0,0,0.12); display:flex; align-items:center; justify-content:center; color:#ccc;">
+            <i data-lucide="heart" style="width:15px; height:15px;"></i>
+          </button>
+        </div>
+        <div style="padding:16px 18px 18px;">
+          <p style="font-weight:800; font-size:14px; color:#1A3520; margin:0 0 4px;">Smash Burger</p>
+          <p style="font-size:12px; color:#999; margin:0 0 14px; line-height:1.4;">Carne aplastada, cheddar derretido y pepinillos</p>
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <span class="font-display" style="font-size:24px; font-weight:700; color:#264D35;">$24k</span>
+            <a href="https://wa.me/573001234567?text=Hola!%20Quiero%20pedir%20un%20Smash%20Burger" class="btn-primary" style="background:#264D35; color:white; border:none; padding:8px 16px; border-radius:100px; font-size:12px; font-weight:700; cursor:pointer; font-family:'Nunito',sans-serif; text-decoration:none; white-space:nowrap; display:inline-flex; align-items:center; gap:6px;">Pedir ahora</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-card" style="background:white; border-radius:20px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.07);">
+        <div style="position:relative;">
+          <img src="https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=320&h=200&fit=crop&auto=format&q=80" alt="Burger Bogotá Especial" style="width:100%; height:178px; object-fit:cover; display:block;">
+          <button class="heart-btn" style="position:absolute; top:12px; right:12px; background:white; border:none; width:32px; height:32px; border-radius:50%; box-shadow:0 2px 8px rgba(0,0,0,0.12); display:flex; align-items:center; justify-content:center; color:#ccc;">
+            <i data-lucide="heart" style="width:15px; height:15px;"></i>
+          </button>
+        </div>
+        <div style="padding:16px 18px 18px;">
+          <p style="font-weight:800; font-size:14px; color:#1A3520; margin:0 0 4px;">Burger Bogotá Especial</p>
+          <p style="font-size:12px; color:#999; margin:0 0 14px; line-height:1.4;">Con aguacate, tocineta y aderezo secreto</p>
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <span class="font-display" style="font-size:24px; font-weight:700; color:#264D35;">$28k</span>
+            <a href="https://wa.me/573001234567?text=Hola!%20Quiero%20pedir%20la%20Burger%20Bogotá%20Especial" class="btn-primary" style="background:#264D35; color:white; border:none; padding:8px 16px; border-radius:100px; font-size:12px; font-weight:700; cursor:pointer; font-family:'Nunito',sans-serif; text-decoration:none; white-space:nowrap; display:inline-flex; align-items:center; gap:6px;">Pedir ahora</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PERROS -->
+    <div id="tab-perros" class="menu-grid" style="display:none; grid-template-columns:repeat(3,1fr); gap:24px; max-width:960px; margin:0 auto;">
+
+      <div class="menu-card" style="background:white; border-radius:20px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.07);">
+        <div style="position:relative;">
+          <img src="https://images.unsplash.com/photo-1612392062631-94c69e9f9e75?w=320&h=200&fit=crop&auto=format&q=80" alt="Perro Bogotano" style="width:100%; height:178px; object-fit:cover; display:block;">
           <button class="heart-btn" style="position:absolute; top:12px; right:12px; background:white; border:none; width:32px; height:32px; border-radius:50%; box-shadow:0 2px 8px rgba(0,0,0,0.12); display:flex; align-items:center; justify-content:center; color:#ccc;">
             <i data-lucide="heart" style="width:15px; height:15px;"></i>
           </button>
@@ -283,9 +358,97 @@
           <p style="font-size:12px; color:#999; margin:0 0 14px; line-height:1.4;">Con piña, papitas y salsas especiales</p>
           <div style="display:flex; align-items:center; justify-content:space-between;">
             <span class="font-display" style="font-size:24px; font-weight:700; color:#264D35;">$15k</span>
-            <a href="https://wa.me/573001234567?text=Hola!%20Quiero%20pedir%20un%20Perro%20Bogotano" class="btn-primary" style="background:#264D35; color:white; border:none; padding:8px 16px; border-radius:100px; font-size:12px; font-weight:700; cursor:pointer; font-family:'Nunito',sans-serif; text-decoration:none; white-space:nowrap; display:inline-flex; align-items:center; gap:6px;">
-              Pedir ahora
-            </a>
+            <a href="https://wa.me/573001234567?text=Hola!%20Quiero%20pedir%20un%20Perro%20Bogotano" class="btn-primary" style="background:#264D35; color:white; border:none; padding:8px 16px; border-radius:100px; font-size:12px; font-weight:700; cursor:pointer; font-family:'Nunito',sans-serif; text-decoration:none; white-space:nowrap; display:inline-flex; align-items:center; gap:6px;">Pedir ahora</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-card" style="background:white; border-radius:20px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.07);">
+        <div style="position:relative;">
+          <img src="https://images.unsplash.com/photo-1555072956-7758afb20e8f?w=320&h=200&fit=crop&auto=format&q=80" alt="Perro Hawaiano" style="width:100%; height:178px; object-fit:cover; display:block;">
+          <button class="heart-btn" style="position:absolute; top:12px; right:12px; background:white; border:none; width:32px; height:32px; border-radius:50%; box-shadow:0 2px 8px rgba(0,0,0,0.12); display:flex; align-items:center; justify-content:center; color:#ccc;">
+            <i data-lucide="heart" style="width:15px; height:15px;"></i>
+          </button>
+        </div>
+        <div style="padding:16px 18px 18px;">
+          <p style="font-weight:800; font-size:14px; color:#1A3520; margin:0 0 4px;">Perro Hawaiano</p>
+          <p style="font-size:12px; color:#999; margin:0 0 14px; line-height:1.4;">Con piña caramelizada y queso derretido</p>
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <span class="font-display" style="font-size:24px; font-weight:700; color:#264D35;">$16k</span>
+            <a href="https://wa.me/573001234567?text=Hola!%20Quiero%20pedir%20un%20Perro%20Hawaiano" class="btn-primary" style="background:#264D35; color:white; border:none; padding:8px 16px; border-radius:100px; font-size:12px; font-weight:700; cursor:pointer; font-family:'Nunito',sans-serif; text-decoration:none; white-space:nowrap; display:inline-flex; align-items:center; gap:6px;">Pedir ahora</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-card" style="background:white; border-radius:20px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.07);">
+        <div style="position:relative;">
+          <img src="https://images.unsplash.com/photo-1619740455993-9d8cd3c75eb0?w=320&h=200&fit=crop&auto=format&q=80" alt="Perro Cargado" style="width:100%; height:178px; object-fit:cover; display:block;">
+          <button class="heart-btn" style="position:absolute; top:12px; right:12px; background:white; border:none; width:32px; height:32px; border-radius:50%; box-shadow:0 2px 8px rgba(0,0,0,0.12); display:flex; align-items:center; justify-content:center; color:#ccc;">
+            <i data-lucide="heart" style="width:15px; height:15px;"></i>
+          </button>
+        </div>
+        <div style="padding:16px 18px 18px;">
+          <p style="font-weight:800; font-size:14px; color:#1A3520; margin:0 0 4px;">Perro Cargado</p>
+          <p style="font-size:12px; color:#999; margin:0 0 14px; line-height:1.4;">Con tocineta, queso, papitas y todas las salsas</p>
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <span class="font-display" style="font-size:24px; font-weight:700; color:#264D35;">$18k</span>
+            <a href="https://wa.me/573001234567?text=Hola!%20Quiero%20pedir%20un%20Perro%20Cargado" class="btn-primary" style="background:#264D35; color:white; border:none; padding:8px 16px; border-radius:100px; font-size:12px; font-weight:700; cursor:pointer; font-family:'Nunito',sans-serif; text-decoration:none; white-space:nowrap; display:inline-flex; align-items:center; gap:6px;">Pedir ahora</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BEBIDAS -->
+    <div id="tab-bebidas" class="menu-grid" style="display:none; grid-template-columns:repeat(3,1fr); gap:24px; max-width:960px; margin:0 auto;">
+
+      <div class="menu-card" style="background:white; border-radius:20px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.07);">
+        <div style="position:relative;">
+          <img src="https://images.unsplash.com/photo-1621263764928-df1444c5e859?w=320&h=200&fit=crop&auto=format&q=80" alt="Limonada de Coco" style="width:100%; height:178px; object-fit:cover; display:block;">
+          <button class="heart-btn" style="position:absolute; top:12px; right:12px; background:white; border:none; width:32px; height:32px; border-radius:50%; box-shadow:0 2px 8px rgba(0,0,0,0.12); display:flex; align-items:center; justify-content:center; color:#ccc;">
+            <i data-lucide="heart" style="width:15px; height:15px;"></i>
+          </button>
+        </div>
+        <div style="padding:16px 18px 18px;">
+          <p style="font-weight:800; font-size:14px; color:#1A3520; margin:0 0 4px;">Limonada de Coco</p>
+          <p style="font-size:12px; color:#999; margin:0 0 14px; line-height:1.4;">Limonada fresca con leche de coco</p>
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <span class="font-display" style="font-size:24px; font-weight:700; color:#264D35;">$8k</span>
+            <a href="https://wa.me/573001234567?text=Hola!%20Quiero%20pedir%20una%20Limonada%20de%20Coco" class="btn-primary" style="background:#264D35; color:white; border:none; padding:8px 16px; border-radius:100px; font-size:12px; font-weight:700; cursor:pointer; font-family:'Nunito',sans-serif; text-decoration:none; white-space:nowrap; display:inline-flex; align-items:center; gap:6px;">Pedir ahora</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-card" style="background:white; border-radius:20px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.07);">
+        <div style="position:relative;">
+          <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=320&h=200&fit=crop&auto=format&q=80" alt="Malteada de Chocolate" style="width:100%; height:178px; object-fit:cover; display:block;">
+          <button class="heart-btn" style="position:absolute; top:12px; right:12px; background:white; border:none; width:32px; height:32px; border-radius:50%; box-shadow:0 2px 8px rgba(0,0,0,0.12); display:flex; align-items:center; justify-content:center; color:#ccc;">
+            <i data-lucide="heart" style="width:15px; height:15px;"></i>
+          </button>
+        </div>
+        <div style="padding:16px 18px 18px;">
+          <p style="font-weight:800; font-size:14px; color:#1A3520; margin:0 0 4px;">Malteada de Chocolate</p>
+          <p style="font-size:12px; color:#999; margin:0 0 14px; line-height:1.4;">Cremosa y espesa con crema chantilly</p>
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <span class="font-display" style="font-size:24px; font-weight:700; color:#264D35;">$11k</span>
+            <a href="https://wa.me/573001234567?text=Hola!%20Quiero%20pedir%20una%20Malteada%20de%20Chocolate" class="btn-primary" style="background:#264D35; color:white; border:none; padding:8px 16px; border-radius:100px; font-size:12px; font-weight:700; cursor:pointer; font-family:'Nunito',sans-serif; text-decoration:none; white-space:nowrap; display:inline-flex; align-items:center; gap:6px;">Pedir ahora</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-card" style="background:white; border-radius:20px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.07);">
+        <div style="position:relative;">
+          <img src="https://images.unsplash.com/photo-1437418747212-8d9709afab22?w=320&h=200&fit=crop&auto=format&q=80" alt="Jugo Natural" style="width:100%; height:178px; object-fit:cover; display:block;">
+          <button class="heart-btn" style="position:absolute; top:12px; right:12px; background:white; border:none; width:32px; height:32px; border-radius:50%; box-shadow:0 2px 8px rgba(0,0,0,0.12); display:flex; align-items:center; justify-content:center; color:#ccc;">
+            <i data-lucide="heart" style="width:15px; height:15px;"></i>
+          </button>
+        </div>
+        <div style="padding:16px 18px 18px;">
+          <p style="font-weight:800; font-size:14px; color:#1A3520; margin:0 0 4px;">Jugo Natural</p>
+          <p style="font-size:12px; color:#999; margin:0 0 14px; line-height:1.4;">Mora, lulo, maracuyá o mango — elige tu sabor</p>
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <span class="font-display" style="font-size:24px; font-weight:700; color:#264D35;">$7k</span>
+            <a href="https://wa.me/573001234567?text=Hola!%20Quiero%20pedir%20un%20Jugo%20Natural" class="btn-primary" style="background:#264D35; color:white; border:none; padding:8px 16px; border-radius:100px; font-size:12px; font-weight:700; cursor:pointer; font-family:'Nunito',sans-serif; text-decoration:none; white-space:nowrap; display:inline-flex; align-items:center; gap:6px;">Pedir ahora</a>
           </div>
         </div>
       </div>
@@ -472,7 +635,7 @@
     </div>
 
     <p style="text-align:center; color:rgba(38,77,53,0.32); font-size:11px; margin:32px 0 0; font-family:'Nunito',sans-serif; letter-spacing:0.5px;">
-      © 2024 Burger Bogotá. Todos los derechos reservados.
+      © 2026 Burger Bogotá. Todos los derechos reservados.
     </p>
   </footer>
 
@@ -484,6 +647,29 @@
     }
     function closeMobileMenu() {
       document.getElementById('mobile-menu').classList.remove('open');
+    }
+
+    function switchTab(btn, tab) {
+      // Hide all tab panels
+      ['entradas','hamburguesas','perros','bebidas'].forEach(function(t) {
+        var panel = document.getElementById('tab-' + t);
+        panel.style.display = 'none';
+      });
+      // Reset all tab buttons
+      document.querySelectorAll('.tab-btn').forEach(function(b) {
+        b.style.borderBottom = '3px solid transparent';
+        b.style.fontWeight = '600';
+        b.style.color = 'rgba(38,77,53,0.45)';
+      });
+      // Show selected panel
+      var panel = document.getElementById('tab-' + tab);
+      panel.style.display = 'grid';
+      // Activate clicked button
+      btn.style.borderBottom = '3px solid #264D35';
+      btn.style.fontWeight = '700';
+      btn.style.color = '#264D35';
+      // Re-init lucide icons for newly visible cards
+      lucide.createIcons();
     }
   </script>
 
