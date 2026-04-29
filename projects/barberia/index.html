@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CORTE & ORO — Barbería</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: '#C9A84C',
+            'gold-light': '#E8C97A',
+            'gold-dark': '#9E7B2C',
+            charcoal: '#1A1A1A',
+            'charcoal-mid': '#242424',
+            'charcoal-light': '#2E2E2E',
+            cream: '#F5F0E8',
+          },
+        },
+      },
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #1A1A1A;
+      color: #F5F0E8;
+      overflow-x: hidden;
+      margin: 0;
+    }
+
+    h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #1A1A1A; }
+    ::-webkit-scrollbar-thumb { background: #C9A84C; border-radius: 2px; }
+
+    html { scroll-behavior: smooth; }
+
+    .section-tag {
+      display: block;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #C9A84C;
+      font-weight: 600;
+    }
+
+    /* Barber pole animation */
+    @keyframes pole {
+      0%   { background-position: 0 0; }
+      100% { background-position: 0 60px; }
+    }
+    .barber-pole {
+      background: repeating-linear-gradient(
+        180deg,
+        #C9A84C 0px, #C9A84C 10px,
+        #1A1A1A 10px, #1A1A1A 20px,
+        #F5F0E8 20px, #F5F0E8 30px,
+        #1A1A1A 30px, #1A1A1A 40px,
+        #C9A84C 40px, #C9A84C 50px,
+        #1A1A1A 50px, #1A1A1A 60px
+      );
+      animation: pole 2s linear infinite;
+    }
+
+    /* Marquee */
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .marquee-track { animation: marquee 22s linear infinite; }
+
+    /* Nav */
+    .nav-glass {
+      background: rgba(20,20,20,0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(201,168,76,0.12);
+    }
+
+    /* Hero */
+    .hero-bg {
+      background-image:
+        linear-gradient(160deg, rgba(20,20,20,0.96) 0%, rgba(20,20,20,0.82) 50%, rgba(20,20,20,0.60) 100%),
+        url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1920&fit=crop&auto=format&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+    /* Hero diagonal gold accent */
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #C9A84C, transparent 60%);
+    }
+
+    /* Service card hover lift */
+    .service-card { transition: transform 0.25s ease; }
+    .service-card:hover { transform: translateY(-4px); }
+
+    /* Team image zoom */
+    .team-img { transition: transform 0.5s ease; }
+    .team-card:hover .team-img { transform: scale(1.05); }
+    .team-overlay {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      background: linear-gradient(to top, rgba(20,20,20,0.95) 0%, rgba(20,20,20,0.4) 60%, transparent 100%);
+    }
+    .team-card:hover .team-overlay { opacity: 1; }
+
+    /* Quote mark */
+    .quote-mark {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      line-height: 0.7;
+      color: #C9A84C;
+      opacity: 0.35;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    /* Price row */
+    .price-row { border-bottom: 1px solid rgba(245,240,232,0.07); }
+    .price-row:hover .price-label { color: #C9A84C; }
+    .price-row:hover { background: rgba(201,168,76,0.04); }
+    .price-label { transition: color 0.2s; }
+
+    /* Input */
+    input, select, textarea {
+      background: #2E2E2E;
+      border: 1px solid rgba(245,240,232,0.10);
+      color: #F5F0E8;
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 0.875rem;
+      font-family: 'Inter', sans-serif;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      -webkit-appearance: none;
+      appearance: none;
+      border-radius: 0;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #C9A84C;
+      box-shadow: 0 0 0 2px rgba(201,168,76,0.12);
+    }
+    input::placeholder { color: rgba(245,240,232,0.25); }
+    select { cursor: pointer; }
+    input[type="date"] { color-scheme: dark; }
+
+    /* Select arrow */
+    .sel-wrap { position: relative; }
+    .sel-wrap::after {
+      content: '';
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid #C9A84C;
+      pointer-events: none;
+    }
+
+    /* Mobile menu */
+    #mobile-menu {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.32s ease, opacity 0.28s ease;
+    }
+    #mobile-menu.open { max-height: 420px; opacity: 1; }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVBAR ────────────────────────────────────── -->
+<nav class="nav-glass fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="flex items-center justify-between h-16 lg:h-20">
+
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-3">
+        <div class="barber-pole w-1.5 h-8 rounded-full flex-shrink-0"></div>
+        <div>
+          <div style="font-family:'Playfair Display',serif; font-size:0.82rem; letter-spacing:0.22em; font-weight:700" class="text-cream">
+            CORTE <span class="text-gold">&amp;</span> ORO
+          </div>
+          <div style="font-size:0.58rem; letter-spacing:0.35em; color:rgba(245,240,232,0.35)">BARBERÍA</div>
+        </div>
+      </a>
+
+      <!-- Desktop links -->
+      <div class="hidden lg:flex items-center gap-8">
+        <a href="#servicios" class="text-sm tracking-wider text-cream/60 hover:text-gold transition-colors">Servicios</a>
+        <a href="#nosotros"  class="text-sm tracking-wider text-cream/60 hover:text-gold transition-colors">Nosotros</a>
+        <a href="#equipo"    class="text-sm tracking-wider text-cream/60 hover:text-gold transition-colors">Equipo</a>
+        <a href="#galeria"   class="text-sm tracking-wider text-cream/60 hover:text-gold transition-colors">Galería</a>
+        <a href="#contacto"  class="text-sm tracking-wider text-cream/60 hover:text-gold transition-colors">Contacto</a>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <a href="#reservar" class="hidden lg:inline-flex items-center gap-2 bg-gold hover:bg-gold-light text-charcoal font-bold text-xs px-5 py-2.5 transition-colors" style="letter-spacing:0.14em">
+          RESERVAR
+        </a>
+        <!-- Hamburger -->
+        <button onclick="toggleMenu()" class="lg:hidden flex flex-col gap-1.5 p-2">
+          <span class="w-5 h-0.5 bg-cream block"></span>
+          <span class="w-3.5 h-0.5 bg-gold block"></span>
+          <span class="w-5 h-0.5 bg-cream block"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu">
+      <div class="border-t border-gold/10 py-5 flex flex-col gap-4">
+        <a href="#servicios" onclick="toggleMenu()" class="text-sm tracking-wider text-cream/70 hover:text-gold transition-colors">Servicios</a>
+        <a href="#nosotros"  onclick="toggleMenu()" class="text-sm tracking-wider text-cream/70 hover:text-gold transition-colors">Nosotros</a>
+        <a href="#equipo"    onclick="toggleMenu()" class="text-sm tracking-wider text-cream/70 hover:text-gold transition-colors">Equipo</a>
+        <a href="#galeria"   onclick="toggleMenu()" class="text-sm tracking-wider text-cream/70 hover:text-gold transition-colors">Galería</a>
+        <a href="#contacto"  onclick="toggleMenu()" class="text-sm tracking-wider text-cream/70 hover:text-gold transition-colors">Contacto</a>
+        <a href="#reservar"  onclick="toggleMenu()" class="inline-flex justify-center bg-gold text-charcoal font-bold text-xs py-3 tracking-widest">RESERVAR AHORA</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ── HERO ──────────────────────────────────────── -->
+<section class="hero-bg relative min-h-screen flex flex-col justify-end pb-12 lg:pb-24">
+
+  <!-- Left accent pole -->
+  <div class="barber-pole absolute left-0 top-0 bottom-0 w-1 opacity-40"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-5 lg:px-8 w-full pt-28 lg:pt-0">
+    <div class="max-w-xl">
+      <span class="section-tag mb-5">Desde 1998 — Bogotá, Colombia</span>
+
+      <h1 style="font-family:'Playfair Display',serif; font-size:clamp(2.8rem,8vw,5.5rem); font-weight:900; line-height:1.0; margin-bottom:1.25rem" class="text-cream">
+        El arte<br />del <em class="text-gold not-italic">corte</em><br />perfecto
+      </h1>
+
+      <p class="text-cream/55 text-base leading-relaxed mb-9 max-w-sm">
+        Donde la tradición del barbero clásico se encuentra con la precisión contemporánea. Cada visita, una experiencia.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-3">
+        <a href="#reservar" class="inline-flex items-center justify-center gap-2 bg-gold hover:bg-gold-light text-charcoal font-bold text-xs px-8 py-4 transition-colors" style="letter-spacing:0.16em">
+          RESERVAR TURNO
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#servicios" class="inline-flex items-center justify-center gap-2 border border-cream/20 hover:border-gold text-cream/65 hover:text-gold text-xs px-8 py-4 transition-colors" style="letter-spacing:0.14em">
+          VER SERVICIOS
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <div class="flex gap-10 mt-12 pt-10 border-t border-cream/10">
+        <div>
+          <div style="font-family:'Playfair Display',serif" class="text-gold text-3xl font-black">26+</div>
+          <div class="text-cream/40 text-xs tracking-wider mt-1">Años de experiencia</div>
+        </div>
+        <div>
+          <div style="font-family:'Playfair Display',serif" class="text-gold text-3xl font-black">4.9</div>
+          <div class="text-cream/40 text-xs tracking-wider mt-1">Calificación</div>
+        </div>
+        <div>
+          <div style="font-family:'Playfair Display',serif" class="text-gold text-3xl font-black">8K+</div>
+          <div class="text-cream/40 text-xs tracking-wider mt-1">Clientes felices</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll hint (desktop) -->
+  <div class="absolute bottom-10 right-10 hidden lg:flex flex-col items-center gap-2">
+    <span class="text-cream/25 text-xs" style="writing-mode:vertical-rl; letter-spacing:0.3em">SCROLL</span>
+    <div class="w-px h-14 bg-gradient-to-b from-cream/25 to-transparent"></div>
+  </div>
+</section>
+
+
+<!-- ── MARQUEE STRIP ──────────────────────────────── -->
+<div class="bg-gold py-3 overflow-hidden whitespace-nowrap">
+  <div class="marquee-track inline-flex gap-0">
+    <span class="text-charcoal font-bold text-xs px-8" style="letter-spacing:0.22em">CORTE CLÁSICO</span>
+    <span class="text-charcoal/40 text-xs">—</span>
+    <span class="text-charcoal font-bold text-xs px-8" style="letter-spacing:0.22em">AFEITADO CON NAVAJA</span>
+    <span class="text-charcoal/40 text-xs">—</span>
+    <span class="text-charcoal font-bold text-xs px-8" style="letter-spacing:0.22em">ARREGLO DE BARBA</span>
+    <span class="text-charcoal/40 text-xs">—</span>
+    <span class="text-charcoal font-bold text-xs px-8" style="letter-spacing:0.22em">TRATAMIENTO CAPILAR</span>
+    <span class="text-charcoal/40 text-xs">—</span>
+    <span class="text-charcoal font-bold text-xs px-8" style="letter-spacing:0.22em">MEMBRESÍA VIP</span>
+    <span class="text-charcoal/40 text-xs">—</span>
+    <!-- duplicate for seamless loop -->
+    <span class="text-charcoal font-bold text-xs px-8" style="letter-spacing:0.22em">CORTE CLÁSICO</span>
+    <span class="text-charcoal/40 text-xs">—</span>
+    <span class="text-charcoal font-bold text-xs px-8" style="letter-spacing:0.22em">AFEITADO CON NAVAJA</span>
+    <span class="text-charcoal/40 text-xs">—</span>
+    <span class="text-charcoal font-bold text-xs px-8" style="letter-spacing:0.22em">ARREGLO DE BARBA</span>
+    <span class="text-charcoal/40 text-xs">—</span>
+    <span class="text-charcoal font-bold text-xs px-8" style="letter-spacing:0.22em">TRATAMIENTO CAPILAR</span>
+    <span class="text-charcoal/40 text-xs">—</span>
+    <span class="text-charcoal font-bold text-xs px-8" style="letter-spacing:0.22em">MEMBRESÍA VIP</span>
+    <span class="text-charcoal/40 text-xs">—</span>
+  </div>
+</div>
+
+
+<!-- ── NOSOTROS ───────────────────────────────────── -->
+<section id="nosotros" class="py-16 lg:py-36 bg-charcoal-mid">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+
+      <!-- Image block -->
+      <div class="relative pb-4 lg:pb-0">
+        <!-- Main image -->
+        <div class="relative overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=720&h=420&fit=crop&auto=format&q=80" alt="Interior de la barbería" class="w-full object-cover" style="height:240px; object-position:center" />
+        </div>
+        <!-- Two small images below -->
+        <div class="grid grid-cols-2 gap-2 mt-2">
+          <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=340&h=200&fit=crop&auto=format&q=80" alt="Detalle herramientas" class="w-full object-cover" style="height:130px" />
+          <img src="https://images.unsplash.com/photo-1621607512022-6aecc4fed814?w=340&h=200&fit=crop&auto=format&q=80" alt="Herramientas" class="w-full object-cover" style="height:130px" />
+        </div>
+        <!-- Year badge — positioned inside the block so it doesn't overflow on mobile -->
+        <div class="absolute bg-gold flex flex-col items-center justify-center" style="bottom:0; right:0; width:80px; height:80px; z-index:10">
+          <span style="font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:900; color:#1A1A1A; line-height:1">26</span>
+          <span style="font-size:0.55rem; font-weight:700; letter-spacing:0.12em; color:#1A1A1A">AÑOS</span>
+        </div>
+      </div>
+
+      <!-- Text -->
+      <div class="pt-6 lg:pt-0">
+        <span class="section-tag mb-4">Nuestra historia</span>
+        <h2 style="font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,2.8rem); font-weight:900; line-height:1.1; margin-bottom:1rem" class="text-cream">
+          Más que un corte.<br />Un <em class="text-gold">ritual</em>.
+        </h2>
+        <div style="width:44px; height:2px; background:#C9A84C; margin-bottom:1.5rem"></div>
+        <p class="text-cream/55 text-sm leading-relaxed mb-4">
+          Desde que abrimos nuestras puertas en 1998, Corte &amp; Oro ha sido el punto de encuentro de hombres que entienden que el cuidado personal es una declaración de carácter.
+        </p>
+        <p class="text-cream/55 text-sm leading-relaxed mb-8">
+          Cada navaja tiene un filo, cada tijera un propósito. Nuestros barberos no solo cortan — componen, moldean, perfeccionan. Con productos premium y técnicas heredadas de la tradición europea.
+        </p>
+
+        <!-- Features grid -->
+        <div class="grid grid-cols-2 gap-5">
+          <div class="flex items-start gap-3">
+            <div style="width:3px; min-height:36px; background:#C9A84C; flex-shrink:0; margin-top:2px"></div>
+            <div>
+              <div class="text-cream font-semibold text-sm mb-0.5">Ambiente exclusivo</div>
+              <div class="text-cream/40 text-xs leading-relaxed">Diseñado para el hombre moderno</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div style="width:3px; min-height:36px; background:#C9A84C; flex-shrink:0; margin-top:2px"></div>
+            <div>
+              <div class="text-cream font-semibold text-sm mb-0.5">Productos premium</div>
+              <div class="text-cream/40 text-xs leading-relaxed">Marcas de alta gama seleccionadas</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div style="width:3px; min-height:36px; background:#C9A84C; flex-shrink:0; margin-top:2px"></div>
+            <div>
+              <div class="text-cream font-semibold text-sm mb-0.5">Maestros barberos</div>
+              <div class="text-cream/40 text-xs leading-relaxed">Certificados con años de práctica</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div style="width:3px; min-height:36px; background:#C9A84C; flex-shrink:0; margin-top:2px"></div>
+            <div>
+              <div class="text-cream font-semibold text-sm mb-0.5">Sin espera</div>
+              <div class="text-cream/40 text-xs leading-relaxed">Reservas precisas, tiempo tuyo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── SERVICIOS ──────────────────────────────────── -->
+<section id="servicios" class="py-16 lg:py-36 bg-charcoal">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-12 lg:mb-16 gap-4">
+      <div>
+        <span class="section-tag mb-3">Lo que ofrecemos</span>
+        <h2 style="font-family:'Playfair Display',serif; font-size:clamp(2rem,5vw,3rem); font-weight:900; line-height:1.1" class="text-cream">
+          Servicios a la <em class="text-gold">medida</em>
+        </h2>
+      </div>
+      <p class="text-cream/45 text-sm leading-relaxed lg:text-right max-w-xs">
+        Cada servicio es ejecutado con el mismo nivel de exigencia. No hay atajos aquí.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-px" style="background:rgba(245,240,232,0.06)">
+
+      <!-- Card component macro (inlined) -->
+      <!-- 01 -->
+      <div class="service-card bg-charcoal hover:bg-charcoal-light p-5 lg:p-9 cursor-default" style="transition:background 0.2s">
+        <div class="flex items-center justify-center border border-gold/25 hover:border-gold mb-5 lg:mb-7" style="width:40px;height:40px;transition:border-color 0.2s">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+        </div>
+        <div class="text-gold text-xs font-semibold mb-2" style="letter-spacing:0.2em">01</div>
+        <h3 class="text-cream text-lg font-bold mb-3" style="font-family:'Playfair Display',serif">Corte Clásico</h3>
+        <p class="text-cream/45 text-sm leading-relaxed mb-5 lg:mb-7">Consulta personalizada, lavado premium, corte con tijera o máquina y acabado con productos de calidad.</p>
+        <div class="flex items-center justify-between">
+          <span class="text-gold text-xl font-black" style="font-family:'Playfair Display',serif">$35.000</span>
+          <span class="text-cream/30 text-xs tracking-wider">45 min</span>
+        </div>
+      </div>
+
+      <!-- 02 -->
+      <div class="service-card bg-charcoal hover:bg-charcoal-light p-5 lg:p-9 cursor-default" style="transition:background 0.2s">
+        <div class="flex items-center justify-center border border-gold/25 mb-5 lg:mb-7" style="width:40px;height:40px">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5"><path d="M3 5h18M3 12h18M3 19h18"/></svg>
+        </div>
+        <div class="text-gold text-xs font-semibold mb-2" style="letter-spacing:0.2em">02</div>
+        <h3 class="text-cream text-lg font-bold mb-3" style="font-family:'Playfair Display',serif">Afeitado con Navaja</h3>
+        <p class="text-cream/45 text-sm leading-relaxed mb-5 lg:mb-7">Ritual completo: vapor caliente, crema artesanal, navaja de acero y aftershave hidratante de primera línea.</p>
+        <div class="flex items-center justify-between">
+          <span class="text-gold text-xl font-black" style="font-family:'Playfair Display',serif">$28.000</span>
+          <span class="text-cream/30 text-xs tracking-wider">30 min</span>
+        </div>
+      </div>
+
+      <!-- 03 — DESTACADO -->
+      <div class="service-card p-5 lg:p-9 cursor-default" style="background:#C9A84C">
+        <div class="flex items-center justify-center border border-charcoal/20 mb-5 lg:mb-7" style="width:40px;height:40px">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="1.5"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
+        </div>
+        <div class="text-charcoal/60 text-xs font-semibold mb-2" style="letter-spacing:0.2em">03</div>
+        <h3 class="text-charcoal text-lg font-bold mb-3" style="font-family:'Playfair Display',serif">Arreglo de Barba</h3>
+        <p class="text-charcoal/60 text-sm leading-relaxed mb-5 lg:mb-7">Diseño, perfilado y definición de líneas. Incluye aceite hidratante de nuestra colección exclusiva.</p>
+        <div class="flex items-center justify-between">
+          <span class="text-charcoal text-xl font-black" style="font-family:'Playfair Display',serif">$22.000</span>
+          <span class="text-charcoal/50 text-xs tracking-wider">25 min</span>
+        </div>
+      </div>
+
+      <!-- 04 -->
+      <div class="service-card bg-charcoal hover:bg-charcoal-light p-5 lg:p-9 cursor-default" style="transition:background 0.2s">
+        <div class="flex items-center justify-center border border-gold/25 mb-5 lg:mb-7" style="width:40px;height:40px">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        </div>
+        <div class="text-gold text-xs font-semibold mb-2" style="letter-spacing:0.2em">04</div>
+        <h3 class="text-cream text-lg font-bold mb-3" style="font-family:'Playfair Display',serif">Combo Completo</h3>
+        <p class="text-cream/45 text-sm leading-relaxed mb-5 lg:mb-7">Corte + afeitado + arreglo de barba. Nuestra experiencia insignia. Sal renovado de pies a cabeza.</p>
+        <div class="flex items-center justify-between">
+          <span class="text-gold text-xl font-black" style="font-family:'Playfair Display',serif">$70.000</span>
+          <span class="text-cream/30 text-xs tracking-wider">90 min</span>
+        </div>
+      </div>
+
+      <!-- 05 -->
+      <div class="service-card bg-charcoal hover:bg-charcoal-light p-5 lg:p-9 cursor-default" style="transition:background 0.2s">
+        <div class="flex items-center justify-center border border-gold/25 mb-5 lg:mb-7" style="width:40px;height:40px">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div class="text-gold text-xs font-semibold mb-2" style="letter-spacing:0.2em">05</div>
+        <h3 class="text-cream text-lg font-bold mb-3" style="font-family:'Playfair Display',serif">Tratamiento Capilar</h3>
+        <p class="text-cream/45 text-sm leading-relaxed mb-5 lg:mb-7">Mascarilla nutritiva, masaje de cuero cabelludo y serum de crecimiento. Para el cabello que mereces.</p>
+        <div class="flex items-center justify-between">
+          <span class="text-gold text-xl font-black" style="font-family:'Playfair Display',serif">$45.000</span>
+          <span class="text-cream/30 text-xs tracking-wider">40 min</span>
+        </div>
+      </div>
+
+      <!-- 06 -->
+      <div class="service-card bg-charcoal hover:bg-charcoal-light p-5 lg:p-9 cursor-default" style="transition:background 0.2s">
+        <div class="flex items-center justify-center border border-gold/25 mb-5 lg:mb-7" style="width:40px;height:40px">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div class="text-gold text-xs font-semibold mb-2" style="letter-spacing:0.2em">06</div>
+        <h3 class="text-cream text-lg font-bold mb-3" style="font-family:'Playfair Display',serif">Membresía Mensual</h3>
+        <p class="text-cream/45 text-sm leading-relaxed mb-5 lg:mb-7">4 cortes al mes + 20% dto. en productos + reservas prioritarias. El trato que merece un cliente fiel.</p>
+        <div class="flex items-center justify-between">
+          <span class="text-gold text-xl font-black" style="font-family:'Playfair Display',serif">$110.000</span>
+          <span class="text-cream/30 text-xs tracking-wider">/ mes</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ── GALERÍA ─────────────────────────────────────── -->
+<section id="galeria" class="py-20 lg:py-36 bg-charcoal-mid overflow-hidden">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-10 gap-4">
+      <div>
+        <span class="section-tag mb-3">Nuestro trabajo</span>
+        <h2 style="font-family:'Playfair Display',serif; font-size:clamp(2rem,5vw,3rem); font-weight:900; line-height:1.1" class="text-cream">
+          Resultados que <em class="text-gold">hablan</em>
+        </h2>
+      </div>
+      <p class="text-cream/45 text-sm max-w-xs">Cada foto es un cliente satisfecho. Sin filtros adicionales.</p>
+    </div>
+
+    <!-- Gallery grid: simple 2-col on mobile, asymmetric on desktop -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-2">
+      <!-- Feature image: full width on mobile, 2-col span on desktop -->
+      <div class="col-span-2 lg:col-span-2 lg:row-span-2">
+        <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=720&h=600&fit=crop&auto=format&q=80" alt="Corte destacado" class="w-full object-cover" style="height:240px; object-position:center" />
+      </div>
+      <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=340&h=166&fit=crop&auto=format&q=80" alt="Fade" class="w-full object-cover" style="height:118px" />
+      <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=340&h=166&fit=crop&auto=format&q=80" alt="Barba" class="w-full object-cover" style="height:118px" />
+      <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=340&h=166&fit=crop&auto=format&q=80" alt="Clásico" class="w-full object-cover" style="height:118px" />
+      <img src="https://images.unsplash.com/photo-1580518337843-f959e992563b?w=340&h=166&fit=crop&auto=format&q=80" alt="Textura" class="w-full object-cover" style="height:118px" />
+    </div>
+  </div>
+</section>
+
+
+<!-- ── EQUIPO ──────────────────────────────────────── -->
+<section id="equipo" class="py-16 lg:py-36 bg-charcoal">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="text-center mb-12 lg:mb-16">
+      <span class="section-tag mb-3">Las manos detrás del corte</span>
+      <h2 style="font-family:'Playfair Display',serif; font-size:clamp(2rem,5vw,3rem); font-weight:900" class="text-cream">
+        Nuestro <em class="text-gold">equipo</em>
+      </h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl lg:max-w-none mx-auto">
+
+      <!-- Barber 1 -->
+      <div class="team-card relative overflow-hidden cursor-default group">
+        <div class="overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1567894340315-735d7c361db0?w=480&h=540&fit=crop&auto=format&q=80" alt="Ricardo Morales" class="team-img w-full object-cover" style="height:320px" />
+        </div>
+        <div class="team-overlay absolute inset-0 flex flex-col justify-end p-6">
+          <p class="text-cream/80 text-xs leading-relaxed mb-3">Especialista en fade y diseños geométricos. 12 años transformando estilos en Bogotá.</p>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 p-5" style="background:rgba(20,20,20,0.92)">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 style="font-family:'Playfair Display',serif" class="text-cream font-bold text-base">Ricardo Morales</h3>
+              <p class="text-gold text-xs tracking-wider mt-0.5">Maestro Barbero</p>
+            </div>
+            <div class="flex items-center justify-center border border-gold/30" style="width:32px;height:32px">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barber 2 -->
+      <div class="team-card relative overflow-hidden cursor-default group">
+        <div class="overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1578301978018-3005759f48f7?w=480&h=540&fit=crop&auto=format&q=80" alt="David Salinas" class="team-img w-full object-cover" style="height:320px" />
+        </div>
+        <div class="team-overlay absolute inset-0 flex flex-col justify-end p-6">
+          <p class="text-cream/80 text-xs leading-relaxed mb-3">Experto en afeitado clásico con navaja. Formado en la escuela española de barbería tradicional.</p>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 p-5" style="background:rgba(20,20,20,0.92)">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 style="font-family:'Playfair Display',serif" class="text-cream font-bold text-base">David Salinas</h3>
+              <p class="text-gold text-xs tracking-wider mt-0.5">Barbero Senior</p>
+            </div>
+            <div class="flex items-center justify-center border border-gold/30" style="width:32px;height:32px">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barber 3 -->
+      <div class="team-card relative overflow-hidden cursor-default group">
+        <div class="overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?w=480&h=540&fit=crop&auto=format&q=80" alt="Felipe Ruiz" class="team-img w-full object-cover" style="height:320px" />
+        </div>
+        <div class="team-overlay absolute inset-0 flex flex-col justify-end p-6">
+          <p class="text-cream/80 text-xs leading-relaxed mb-3">Artista capilar en texturas y tratamientos. El favorito de los clientes con barba larga.</p>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 p-5" style="background:rgba(20,20,20,0.92)">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 style="font-family:'Playfair Display',serif" class="text-cream font-bold text-base">Felipe Ruiz</h3>
+              <p class="text-gold text-xs tracking-wider mt-0.5">Barbero &amp; Estilista</p>
+            </div>
+            <div class="flex items-center justify-center border border-gold/30" style="width:32px;height:32px">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ── PRECIOS ─────────────────────────────────────── -->
+<section class="py-16 lg:py-36 bg-charcoal-mid">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+
+      <!-- Left: prices -->
+      <div>
+        <span class="section-tag mb-3">Tarifas</span>
+        <h2 style="font-family:'Playfair Display',serif; font-size:clamp(2rem,5vw,3rem); font-weight:900; line-height:1.1; margin-bottom:2rem" class="text-cream">
+          Nuestros <em class="text-gold">precios</em>
+        </h2>
+
+        <div>
+          <div class="price-row flex items-center justify-between py-5 px-2 cursor-default">
+            <div>
+              <span class="price-label text-cream font-semibold text-sm">Corte Clásico</span>
+              <p class="text-cream/35 text-xs mt-0.5">Consulta + lavado + acabado</p>
+            </div>
+            <span class="text-gold font-black text-lg" style="font-family:'Playfair Display',serif">$35.000</span>
+          </div>
+          <div class="price-row flex items-center justify-between py-5 px-2 cursor-default">
+            <div>
+              <span class="price-label text-cream font-semibold text-sm">Afeitado con Navaja</span>
+              <p class="text-cream/35 text-xs mt-0.5">Vapor + crema + aftershave</p>
+            </div>
+            <span class="text-gold font-black text-lg" style="font-family:'Playfair Display',serif">$28.000</span>
+          </div>
+          <div class="price-row flex items-center justify-between py-5 px-2 cursor-default">
+            <div>
+              <span class="price-label text-cream font-semibold text-sm">Arreglo de Barba</span>
+              <p class="text-cream/35 text-xs mt-0.5">Diseño + perfilado + aceite</p>
+            </div>
+            <span class="text-gold font-black text-lg" style="font-family:'Playfair Display',serif">$22.000</span>
+          </div>
+          <div class="price-row flex items-center justify-between py-5 px-2 cursor-default">
+            <div>
+              <span class="price-label text-cream font-semibold text-sm">Combo Completo</span>
+              <p class="text-cream/35 text-xs mt-0.5">Corte + afeitado + barba</p>
+            </div>
+            <span class="text-gold font-black text-lg" style="font-family:'Playfair Display',serif">$70.000</span>
+          </div>
+          <div class="price-row flex items-center justify-between py-5 px-2 cursor-default">
+            <div>
+              <span class="price-label text-cream font-semibold text-sm">Tratamiento Capilar</span>
+              <p class="text-cream/35 text-xs mt-0.5">Mascarilla + masaje + serum</p>
+            </div>
+            <span class="text-gold font-black text-lg" style="font-family:'Playfair Display',serif">$45.000</span>
+          </div>
+          <div class="flex items-center justify-between py-5 px-2 cursor-default" style="border-top:1px solid rgba(201,168,76,0.3); border-bottom:1px solid rgba(201,168,76,0.3); background:rgba(201,168,76,0.05)">
+            <div>
+              <span class="text-gold font-bold text-sm">Membresía Mensual VIP</span>
+              <p class="text-cream/35 text-xs mt-0.5">4 cortes + 20% dto. + prioridad</p>
+            </div>
+            <span class="text-gold font-black text-lg" style="font-family:'Playfair Display',serif">$110.000</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: testimonial -->
+      <div>
+        <span class="section-tag mb-3">Lo que dicen</span>
+        <h2 style="font-family:'Playfair Display',serif; font-size:clamp(2rem,5vw,3rem); font-weight:900; line-height:1.1; margin-bottom:2rem" class="text-cream">
+          Clientes que <em class="text-gold">regresan</em>
+        </h2>
+
+        <div class="flex flex-col gap-6">
+          <div class="p-7" style="background:#2E2E2E; border-left:2px solid #C9A84C">
+            <span class="quote-mark">"</span>
+            <p class="text-cream/65 text-sm leading-relaxed mb-5">Llevo tres años viniendo y no cambio este lugar por nada. Ricardo sabe exactamente cómo quiero el fade sin que yo tenga que explicar nada.</p>
+            <div class="flex items-center gap-3">
+              <div class="flex items-center justify-center bg-gold font-bold text-charcoal text-sm" style="width:32px;height:32px">A</div>
+              <div>
+                <div class="text-cream text-sm font-semibold">Andrés Vargas</div>
+                <div class="text-cream/30 text-xs">Cliente desde 2021</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-7" style="background:#2E2E2E; border-left:2px solid rgba(245,240,232,0.1)">
+            <span class="quote-mark">"</span>
+            <p class="text-cream/65 text-sm leading-relaxed mb-5">El afeitado con navaja de David es una experiencia que no tiene precio. Terminas sintiéndote como un caballero del siglo XIX.</p>
+            <div class="flex items-center gap-3">
+              <div class="flex items-center justify-center border border-gold/30 text-gold font-bold text-sm" style="width:32px;height:32px;background:#242424">C</div>
+              <div>
+                <div class="text-cream text-sm font-semibold">Carlos Mendoza</div>
+                <div class="text-cream/30 text-xs">Cliente desde 2023</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-7" style="background:#2E2E2E; border-left:2px solid rgba(245,240,232,0.1)">
+            <span class="quote-mark">"</span>
+            <p class="text-cream/65 text-sm leading-relaxed mb-5">La membresía vale cada peso. Siempre hay turno y el nivel de servicio nunca baja. Consistencia total, semana tras semana.</p>
+            <div class="flex items-center gap-3">
+              <div class="flex items-center justify-center bg-gold font-bold text-charcoal text-sm" style="width:32px;height:32px">M</div>
+              <div>
+                <div class="text-cream text-sm font-semibold">Mateo Gómez</div>
+                <div class="text-cream/30 text-xs">Miembro VIP</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── RESERVAS ────────────────────────────────────── -->
+<section id="reservar" class="py-16 lg:py-36 bg-charcoal">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+
+      <!-- Info -->
+      <div>
+        <span class="section-tag mb-3">Agenda tu visita</span>
+        <h2 style="font-family:'Playfair Display',serif; font-size:clamp(2rem,5vw,3rem); font-weight:900; line-height:1.1; margin-bottom:1rem" class="text-cream">
+          Tu turno te <em class="text-gold">espera</em>
+        </h2>
+        <div style="width:44px;height:2px;background:#C9A84C;margin-bottom:1.5rem"></div>
+        <p class="text-cream/55 text-sm leading-relaxed mb-10">
+          Reserva en menos de dos minutos. Selecciona tu barbero, servicio y horario preferido. Sin esperas, sin sorpresas.
+        </p>
+
+        <!-- Hours -->
+        <div>
+          <div class="flex justify-between py-4" style="border-bottom:1px solid rgba(245,240,232,0.08)">
+            <span class="text-cream/55 text-sm">Lunes — Viernes</span>
+            <span class="text-cream font-semibold text-sm">8:00 am — 8:00 pm</span>
+          </div>
+          <div class="flex justify-between py-4" style="border-bottom:1px solid rgba(245,240,232,0.08)">
+            <span class="text-cream/55 text-sm">Sábado</span>
+            <span class="text-cream font-semibold text-sm">9:00 am — 7:00 pm</span>
+          </div>
+          <div class="flex justify-between py-4" style="border-bottom:1px solid rgba(245,240,232,0.08)">
+            <span class="text-cream/55 text-sm">Domingo</span>
+            <span class="text-gold font-semibold text-sm">10:00 am — 4:00 pm</span>
+          </div>
+        </div>
+
+        <!-- Location -->
+        <div class="flex items-start gap-4 mt-10">
+          <div class="flex items-center justify-center border border-gold/30 flex-shrink-0" style="width:40px;height:40px">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="text-cream font-semibold text-sm">Cra. 15 #93-47, Chapinero</div>
+            <div class="text-cream/40 text-xs mt-0.5">Bogotá, Colombia</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="p-7 lg:p-10" style="background:#242424">
+        <h3 style="font-family:'Playfair Display',serif" class="text-cream text-xl font-bold mb-7">Reservar turno</h3>
+
+        <form onsubmit="return false" class="flex flex-col gap-5">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-cream/45 text-xs mb-2" style="letter-spacing:0.15em">NOMBRE</label>
+              <input type="text" placeholder="Tu nombre" />
+            </div>
+            <div>
+              <label class="block text-cream/45 text-xs mb-2" style="letter-spacing:0.15em">TELÉFONO</label>
+              <input type="tel" placeholder="+57 300 000 0000" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-cream/45 text-xs mb-2" style="letter-spacing:0.15em">SERVICIO</label>
+            <div class="sel-wrap">
+              <select>
+                <option value="" style="background:#2E2E2E">Selecciona un servicio</option>
+                <option style="background:#2E2E2E">Corte Clásico — $35.000</option>
+                <option style="background:#2E2E2E">Afeitado con Navaja — $28.000</option>
+                <option style="background:#2E2E2E">Arreglo de Barba — $22.000</option>
+                <option style="background:#2E2E2E">Combo Completo — $70.000</option>
+                <option style="background:#2E2E2E">Tratamiento Capilar — $45.000</option>
+                <option style="background:#2E2E2E">Membresía Mensual — $110.000</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-cream/45 text-xs mb-2" style="letter-spacing:0.15em">BARBERO</label>
+            <div class="sel-wrap">
+              <select>
+                <option style="background:#2E2E2E">Sin preferencia</option>
+                <option style="background:#2E2E2E">Ricardo Morales</option>
+                <option style="background:#2E2E2E">David Salinas</option>
+                <option style="background:#2E2E2E">Felipe Ruiz</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-cream/45 text-xs mb-2" style="letter-spacing:0.15em">FECHA</label>
+              <input type="date" />
+            </div>
+            <div>
+              <label class="block text-cream/45 text-xs mb-2" style="letter-spacing:0.15em">HORA</label>
+              <div class="sel-wrap">
+                <select>
+                  <option style="background:#2E2E2E">8:00 am</option>
+                  <option style="background:#2E2E2E">9:00 am</option>
+                  <option style="background:#2E2E2E">10:00 am</option>
+                  <option style="background:#2E2E2E">11:00 am</option>
+                  <option style="background:#2E2E2E">12:00 pm</option>
+                  <option style="background:#2E2E2E">1:00 pm</option>
+                  <option style="background:#2E2E2E">2:00 pm</option>
+                  <option style="background:#2E2E2E">3:00 pm</option>
+                  <option style="background:#2E2E2E">4:00 pm</option>
+                  <option style="background:#2E2E2E">5:00 pm</option>
+                  <option style="background:#2E2E2E">6:00 pm</option>
+                  <option style="background:#2E2E2E">7:00 pm</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="w-full bg-gold hover:bg-gold-light text-charcoal font-bold text-xs py-4 transition-colors mt-1" style="letter-spacing:0.18em; font-family:'Inter',sans-serif">
+            CONFIRMAR RESERVA
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── CONTACTO BAND ───────────────────────────────── -->
+<section id="contacto" style="background:#C9A84C" class="py-14 lg:py-20">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="grid sm:grid-cols-3 gap-10 lg:gap-16">
+
+      <div class="flex items-start gap-4">
+        <div class="flex items-center justify-center border border-charcoal/20 flex-shrink-0" style="width:40px;height:40px">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div>
+          <div class="text-charcoal/55 text-xs tracking-widest mb-1" style="letter-spacing:0.2em">LLÁMANOS</div>
+          <div style="font-family:'Playfair Display',serif" class="font-bold text-lg text-charcoal">+57 300 123 4567</div>
+          <div class="text-charcoal/55 text-xs mt-1">WhatsApp disponible</div>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4">
+        <div class="flex items-center justify-center border border-charcoal/20 flex-shrink-0" style="width:40px;height:40px">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div>
+          <div class="text-charcoal/55 text-xs tracking-widest mb-1" style="letter-spacing:0.2em">ESCRÍBENOS</div>
+          <div style="font-family:'Playfair Display',serif" class="font-bold text-lg text-charcoal">hola@corteoro.co</div>
+          <div class="text-charcoal/55 text-xs mt-1">Respuesta en menos de 2h</div>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4">
+        <div class="flex items-center justify-center border border-charcoal/20 flex-shrink-0" style="width:40px;height:40px">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <div class="text-charcoal/55 text-xs tracking-widest mb-1" style="letter-spacing:0.2em">ENCUÉNTRANOS</div>
+          <div style="font-family:'Playfair Display',serif" class="font-bold text-lg text-charcoal">Cra. 15 #93-47</div>
+          <div class="text-charcoal/55 text-xs mt-1">Chapinero, Bogotá</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ── FOOTER ─────────────────────────────────────── -->
+<footer class="py-14 lg:py-20" style="background:#1A1A1A; border-top:1px solid rgba(245,240,232,0.05)">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="grid lg:grid-cols-4 gap-10 mb-12">
+
+      <!-- Brand -->
+      <div class="lg:col-span-2">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="barber-pole rounded-full flex-shrink-0" style="width:5px;height:24px"></div>
+          <div>
+            <div style="font-family:'Playfair Display',serif; font-size:0.82rem; letter-spacing:0.22em; font-weight:700" class="text-cream">CORTE <span class="text-gold">&amp;</span> ORO</div>
+            <div style="font-size:0.58rem; letter-spacing:0.35em; color:rgba(245,240,232,0.3)">BARBERÍA</div>
+          </div>
+        </div>
+        <p class="text-cream/40 text-sm leading-relaxed mb-6 max-w-xs">
+          Tradición, precisión y estilo. Desde 1998 siendo el lugar de confianza del hombre que se cuida.
+        </p>
+        <div class="flex gap-2">
+          <a href="#" class="flex items-center justify-center border border-cream/10 hover:border-gold transition-colors group" style="width:36px;height:36px">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-cream/40 group-hover:text-gold transition-colors"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" class="flex items-center justify-center border border-cream/10 hover:border-gold transition-colors group" style="width:36px;height:36px">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-cream/40 group-hover:text-gold transition-colors"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="#" class="flex items-center justify-center border border-cream/10 hover:border-gold transition-colors group" style="width:36px;height:36px">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-cream/40 group-hover:text-gold transition-colors"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.54C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Nav -->
+      <div>
+        <div class="text-cream/40 text-xs tracking-widest mb-5" style="letter-spacing:0.2em">NAVEGACIÓN</div>
+        <ul class="flex flex-col gap-3">
+          <li><a href="#servicios" class="text-cream/60 hover:text-gold text-sm transition-colors">Servicios</a></li>
+          <li><a href="#nosotros"  class="text-cream/60 hover:text-gold text-sm transition-colors">Nosotros</a></li>
+          <li><a href="#equipo"    class="text-cream/60 hover:text-gold text-sm transition-colors">Equipo</a></li>
+          <li><a href="#galeria"   class="text-cream/60 hover:text-gold text-sm transition-colors">Galería</a></li>
+          <li><a href="#reservar"  class="text-cream/60 hover:text-gold text-sm transition-colors">Reservar</a></li>
+        </ul>
+      </div>
+
+      <!-- Hours -->
+      <div>
+        <div class="text-cream/40 text-xs tracking-widest mb-5" style="letter-spacing:0.2em">HORARIOS</div>
+        <ul class="flex flex-col gap-3">
+          <li class="flex justify-between text-sm"><span class="text-cream/50">Lun — Vie</span><span class="text-cream">8am — 8pm</span></li>
+          <li class="flex justify-between text-sm"><span class="text-cream/50">Sábado</span><span class="text-cream">9am — 7pm</span></li>
+          <li class="flex justify-between text-sm"><span class="text-cream/50">Domingo</span><span class="text-gold">10am — 4pm</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8" style="border-top:1px solid rgba(245,240,232,0.05)">
+      <p class="text-cream/20 text-xs tracking-wider">© 2026 Corte &amp; Oro. Todos los derechos reservados.</p>
+      <p class="text-cream/20 text-xs">Hecho con precision en Bogotá, Colombia</p>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  function toggleMenu() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 1024) document.getElementById('mobile-menu').classList.remove('open');
+  });
+</script>
+</body>
+</html>

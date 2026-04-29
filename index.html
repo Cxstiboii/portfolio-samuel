@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Samuel Castillo — Desarrollador Frontend</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            accent: '#CBFF00',
+            'accent-dim': '#AEDD00',
+            dark: '#0C0C0B',
+            card: '#141413',
+            border: '#272625',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Space Grotesk', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background-color: #0C0C0B; color: #F0EDE8; font-family: 'Inter', sans-serif; }
+
+    /* Ticker */
+    .ticker-wrap { overflow: hidden; }
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      animation: ticker 30s linear infinite;
+    }
+    @keyframes ticker {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Card hover */
+    .project-card { transition: border-color 0.3s ease; }
+    .project-card:hover { border-color: rgba(203,255,0,0.25); }
+
+    /* Dot decoration */
+    .dot-grid {
+      background-image: radial-gradient(circle, #272625 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+
+    /* Glow */
+    .glow-accent { text-shadow: 0 0 60px rgba(203,255,0,0.28); }
+
+    /* Nav link underline */
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 1px;
+      background: #CBFF00;
+      transition: width 0.3s;
+    }
+    .nav-link:hover::after { width: 100%; }
+    .nav-link.active::after { width: 100%; }
+
+    /* Button glow on hover */
+    .btn-accent { transition: box-shadow 0.3s, background 0.3s; }
+    .btn-accent:hover { box-shadow: 0 0 28px rgba(203,255,0,0.35); }
+
+    /* Service card border glow */
+    .service-card { transition: border-color 0.3s, box-shadow 0.3s; }
+    .service-card:hover { border-color: rgba(203,255,0,0.35); box-shadow: 0 0 40px rgba(203,255,0,0.05); }
+
+    /* Marquee on hover pause */
+    .ticker-wrap:hover .ticker-track { animation-play-state: paused; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #0C0C0B; }
+    ::-webkit-scrollbar-thumb { background: #272625; border-radius: 2px; }
+
+    /* Process step panels */
+    .proc-panel { transition: opacity 0.35s ease, transform 0.35s ease; }
+
+    /* CTA word rotation */
+    #cta-word { display: inline-block; transition: opacity 0.28s ease, transform 0.28s ease; }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- ─── NAVBAR ─────────────────────────────────────────────── -->
+  <header class="fixed top-0 inset-x-0 z-50 border-b border-border/60 backdrop-blur-md bg-dark/80">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+
+      <!-- Logo -->
+      <a href="#" class="font-display font-bold text-lg tracking-tight text-white">
+        Samuel<span class="text-accent">/</span>
+      </a>
+
+      <!-- Nav (desktop) -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
+        <a href="#proyectos" class="nav-link hover:text-white transition-colors">Proyectos</a>
+        <a href="#servicios" class="nav-link hover:text-white transition-colors">Servicios</a>
+        <a href="#contacto" class="nav-link hover:text-white transition-colors">Contacto</a>
+      </nav>
+
+      <!-- CTA -->
+      <a href="https://wa.me/573000000000?text=Hola%20Samuel%2C%20me%20interesa%20una%20página%20web" target="_blank"
+         class="hidden md:flex items-center gap-2 px-4 py-2 rounded-full border border-accent/40 text-accent text-sm font-semibold hover:bg-accent hover:text-dark btn-accent transition-all duration-300">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+
+      <!-- Mobile menu btn -->
+      <button id="menu-btn" class="md:hidden text-gray-400 hover:text-white">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-border/60 bg-dark/95 px-6 py-4 flex flex-col gap-4 text-sm font-medium text-gray-400">
+      <a href="#proyectos" class="hover:text-white transition-colors">Proyectos</a>
+      <a href="#servicios" class="hover:text-white transition-colors">Servicios</a>
+      <a href="#contacto" class="hover:text-white transition-colors">Contacto</a>
+      <a href="https://wa.me/573000000000" target="_blank" class="text-accent">WhatsApp →</a>
+    </div>
+  </header>
+
+  <!-- ─── HERO ───────────────────────────────────────────────── -->
+  <section class="relative min-h-screen flex items-center dot-grid pt-16 overflow-hidden">
+
+    <!-- Background glow blobs -->
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-accent/5 blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full bg-purple-500/5 blur-[100px] pointer-events-none"></div>
+
+    <div class="relative max-w-6xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-12 items-center">
+
+      <!-- Text side -->
+      <div>
+        <!-- Eyebrow -->
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-accent/20 bg-accent/5 text-accent text-xs font-semibold tracking-widest uppercase mb-8">
+          <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
+          Disponible para proyectos
+        </div>
+
+        <h1 class="font-display font-bold leading-[1.05] tracking-tight mb-6">
+          <span class="block text-5xl md:text-6xl lg:text-7xl text-white">Hola, soy</span>
+          <span class="block text-5xl md:text-6xl lg:text-7xl text-accent glow-accent">Samuel.</span>
+          <span class="block text-4xl md:text-5xl lg:text-6xl text-gray-300 mt-2">Desarrollador</span>
+          <span class="block text-4xl md:text-5xl lg:text-6xl text-white">Frontend<span class="text-accent">.</span></span>
+        </h1>
+
+        <p class="text-gray-400 text-lg leading-relaxed max-w-md mb-10">
+          Creo páginas web modernas que ayudan a negocios a conseguir más clientes. Bogotá, Colombia.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="#proyectos"
+             class="px-6 py-3 rounded-full bg-accent text-dark font-bold text-sm hover:bg-accent-dim btn-accent transition-all duration-300">
+            Ver proyectos
+          </a>
+          <a href="https://wa.me/573000000000?text=Hola%20Samuel%2C%20me%20interesa%20una%20página%20web" target="_blank"
+             class="flex items-center gap-2 px-6 py-3 rounded-full border border-border hover:border-accent/40 text-gray-300 hover:text-white font-semibold text-sm transition-all duration-300">
+            <svg class="w-4 h-4 text-green-400" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Escríbeme
+          </a>
+        </div>
+
+        <!-- Stats row -->
+        <div class="mt-14 pt-10 border-t border-border/60 flex flex-wrap gap-8">
+          <div>
+            <p class="font-display font-bold text-3xl text-white">10+</p>
+            <p class="text-gray-500 text-sm mt-1">Proyectos entregados</p>
+          </div>
+          <div>
+            <p class="font-display font-bold text-3xl text-white">100%</p>
+            <p class="text-gray-500 text-sm mt-1">Clientes satisfechos</p>
+          </div>
+          <div>
+            <p class="font-display font-bold text-3xl text-white">3+</p>
+            <p class="text-gray-500 text-sm mt-1">Años de experiencia</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visual side -->
+      <div class="relative flex justify-center items-center">
+        <!-- Code card decoration -->
+        <div class="relative w-full max-w-sm">
+          <!-- Main card -->
+          <div class="rounded-2xl border border-border bg-card p-6 shadow-2xl">
+            <!-- Window dots -->
+            <div class="flex items-center gap-2 mb-5">
+              <span class="w-3 h-3 rounded-full bg-red-500/70"></span>
+              <span class="w-3 h-3 rounded-full bg-yellow-500/70"></span>
+              <span class="w-3 h-3 rounded-full bg-green-500/70"></span>
+              <span class="ml-auto text-xs text-gray-600 font-mono">portfolio.jsx</span>
+            </div>
+            <!-- Code lines -->
+            <div class="font-mono text-sm space-y-1.5">
+              <p><span class="text-purple-400">const</span> <span class="text-accent">developer</span> <span class="text-gray-500">=</span> <span class="text-gray-400">{</span></p>
+              <p class="pl-4"><span class="text-blue-400">name</span><span class="text-gray-500">:</span> <span class="text-green-400">'Samuel Castillo'</span><span class="text-gray-500">,</span></p>
+              <p class="pl-4"><span class="text-blue-400">rol</span><span class="text-gray-500">:</span> <span class="text-green-400">'Frontend Dev'</span><span class="text-gray-500">,</span></p>
+              <p class="pl-4"><span class="text-blue-400">ciudad</span><span class="text-gray-500">:</span> <span class="text-green-400">'Bogotá, Colombia'</span><span class="text-gray-500">,</span></p>
+              <p class="pl-4"><span class="text-blue-400">disponible</span><span class="text-gray-500">:</span> <span class="text-accent">true</span><span class="text-gray-500">,</span></p>
+              <p><span class="text-gray-400">}</span></p>
+            </div>
+          </div>
+
+          <!-- Floating tags -->
+          <div class="absolute -top-4 -right-4 bg-card border border-border rounded-xl px-3 py-2 text-xs font-semibold text-accent shadow-xl">
+            ⚡ React + Tailwind
+          </div>
+          <div class="absolute -bottom-4 -left-4 bg-card border border-border rounded-xl px-3 py-2 text-xs font-semibold text-gray-300 shadow-xl">
+            🚀 Entrega rápida
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-gray-600 text-xs">
+      <span class="tracking-widest uppercase text-[10px]">Scroll</span>
+      <div class="w-px h-10 bg-gradient-to-b from-gray-600 to-transparent"></div>
+    </div>
+  </section>
+
+  <!-- ─── TICKER ─────────────────────────────────────────────── -->
+  <div class="ticker-wrap border-y border-border/60 py-4 bg-card/50">
+    <div class="ticker-track">
+      <!-- Repeated twice for seamless loop -->
+      <template id="ticker-items">
+        <span class="mx-6 text-sm font-semibold text-gray-500 tracking-widest uppercase whitespace-nowrap">HTML</span>
+        <span class="mx-4 text-accent/40">✦</span>
+        <span class="mx-6 text-sm font-semibold text-gray-500 tracking-widest uppercase whitespace-nowrap">CSS</span>
+        <span class="mx-4 text-accent/40">✦</span>
+        <span class="mx-6 text-sm font-semibold text-gray-500 tracking-widest uppercase whitespace-nowrap">JavaScript</span>
+        <span class="mx-4 text-accent/40">✦</span>
+        <span class="mx-6 text-sm font-semibold text-gray-500 tracking-widest uppercase whitespace-nowrap">React</span>
+        <span class="mx-4 text-accent/40">✦</span>
+        <span class="mx-6 text-sm font-semibold text-gray-500 tracking-widest uppercase whitespace-nowrap">Tailwind CSS</span>
+        <span class="mx-4 text-accent/40">✦</span>
+        <span class="mx-6 text-sm font-semibold text-gray-500 tracking-widest uppercase whitespace-nowrap">Figma</span>
+        <span class="mx-4 text-accent/40">✦</span>
+        <span class="mx-6 text-sm font-semibold text-gray-500 tracking-widest uppercase whitespace-nowrap">Git</span>
+        <span class="mx-4 text-accent/40">✦</span>
+        <span class="mx-6 text-sm font-semibold text-gray-500 tracking-widest uppercase whitespace-nowrap">Next.js</span>
+        <span class="mx-4 text-accent/40">✦</span>
+        <span class="mx-6 text-sm font-semibold text-gray-500 tracking-widest uppercase whitespace-nowrap">Diseño Web</span>
+        <span class="mx-4 text-accent/40">✦</span>
+        <span class="mx-6 text-sm font-semibold text-gray-500 tracking-widest uppercase whitespace-nowrap">Performance</span>
+        <span class="mx-4 text-accent/40">✦</span>
+      </template>
+    </div>
+  </div>
+
+  <!-- ─── PROJECTS ───────────────────────────────────────────── -->
+  <section id="proyectos" class="py-24 md:py-32">
+    <div class="max-w-6xl mx-auto px-6">
+
+      <!-- Section header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-10 gap-6 border-b border-border/60">
+        <div>
+          <p class="text-accent text-xs font-bold tracking-widest uppercase mb-4">// Portafolio</p>
+          <h2 class="font-display font-bold text-4xl md:text-5xl text-white leading-tight">
+            Proyectos que<br>generan resultados<span class="text-accent">.</span>
+          </h2>
+        </div>
+        <p class="text-gray-500 text-sm max-w-xs leading-relaxed">
+          Cada proyecto está diseñado para atraer clientes y generar confianza desde el primer clic.
+        </p>
+      </div>
+
+      <!-- Bento grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        <!-- Card 1: Featured — 2 cols -->
+        <div class="project-card group relative rounded-2xl overflow-hidden border border-border/60 bg-card lg:col-span-2">
+          <div class="relative overflow-hidden aspect-video">
+            <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=900&h=506&fit=crop&auto=format&q=80" alt="Barbería Premium"
+              class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]" />
+            <div class="absolute inset-0 bg-gradient-to-t from-card/90 via-card/10 to-transparent"></div>
+            <span class="absolute top-5 right-6 font-display font-bold text-7xl text-white/[0.04] select-none pointer-events-none leading-none">01</span>
+            <span class="absolute bottom-5 left-5 text-[11px] font-bold tracking-widest uppercase text-accent bg-dark/75 backdrop-blur-sm px-3 py-1.5 rounded-full border border-accent/15">Barbería</span>
+            <!-- Hover overlay -->
+            <div class="absolute inset-0 bg-dark/60 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+              <a href="projects/barberia/index.html" target="_blank"
+                 class="flex items-center gap-2 px-5 py-3 rounded-xl bg-accent text-dark text-sm font-bold translate-y-3 group-hover:translate-y-0 transition-transform duration-300 shadow-xl shadow-dark/50">
+                Ver proyecto
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-start justify-between gap-4 mb-1.5">
+              <h3 class="font-display font-bold text-white text-xl">Barbería Premium</h3>
+              <span class="text-xs text-gray-600 flex-shrink-0 mt-0.5 tracking-wide">Landing page</span>
+            </div>
+            <p class="text-gray-500 text-sm leading-relaxed line-clamp-2">
+              Página que convierte visitas en reservas con agenda online y galería de trabajos.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="project-card group relative rounded-2xl overflow-hidden border border-border/60 bg-card">
+          <div class="relative overflow-hidden aspect-video">
+            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=640&h=360&fit=crop&auto=format&q=80" alt="Burger Bogotá"
+              class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]" />
+            <div class="absolute inset-0 bg-gradient-to-t from-card/90 via-card/10 to-transparent"></div>
+            <span class="absolute top-5 right-6 font-display font-bold text-7xl text-white/[0.04] select-none pointer-events-none leading-none">02</span>
+            <span class="absolute bottom-5 left-5 text-[11px] font-bold tracking-widest uppercase text-orange-400 bg-dark/75 backdrop-blur-sm px-3 py-1.5 rounded-full border border-orange-400/15">Restaurante</span>
+            <div class="absolute inset-0 bg-dark/60 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+              <a href="projects/burger-bogota/index.html" target="_blank"
+                 class="flex items-center gap-2 px-5 py-3 rounded-xl bg-accent text-dark text-sm font-bold translate-y-3 group-hover:translate-y-0 transition-transform duration-300 shadow-xl shadow-dark/50">
+                Ver proyecto
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-start justify-between gap-4 mb-1.5">
+              <h3 class="font-display font-bold text-white text-xl">Burger Bogotá</h3>
+              <span class="text-xs text-gray-600 flex-shrink-0 mt-0.5 tracking-wide">Landing page</span>
+            </div>
+            <p class="text-gray-500 text-sm leading-relaxed line-clamp-2">
+              Menú visual y botón de pedido directo por WhatsApp. Más pedidos, menos llamadas.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="project-card group relative rounded-2xl overflow-hidden border border-border/60 bg-card">
+          <div class="relative overflow-hidden aspect-video">
+            <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=640&h=360&fit=crop&auto=format&q=80" alt="Clínica Dental"
+              class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]" />
+            <div class="absolute inset-0 bg-gradient-to-t from-card/90 via-card/10 to-transparent"></div>
+            <span class="absolute top-5 right-6 font-display font-bold text-7xl text-white/[0.04] select-none pointer-events-none leading-none">03</span>
+            <span class="absolute bottom-5 left-5 text-[11px] font-bold tracking-widest uppercase text-purple-400 bg-dark/75 backdrop-blur-sm px-3 py-1.5 rounded-full border border-purple-400/15">Salud</span>
+            <div class="absolute inset-0 bg-dark/60 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+              <a href="projects/dentista/index.html" target="_blank"
+                 class="flex items-center gap-2 px-5 py-3 rounded-xl bg-accent text-dark text-sm font-bold translate-y-3 group-hover:translate-y-0 transition-transform duration-300 shadow-xl shadow-dark/50">
+                Ver proyecto
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-start justify-between gap-4 mb-1.5">
+              <h3 class="font-display font-bold text-white text-xl">Clínica Dental</h3>
+              <span class="text-xs text-gray-600 flex-shrink-0 mt-0.5 tracking-wide">Landing page</span>
+            </div>
+            <p class="text-gray-500 text-sm leading-relaxed line-clamp-2">
+              Genera confianza y agenda citas 24/7 con una web profesional y optimizada.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="project-card group relative rounded-2xl overflow-hidden border border-border/60 bg-card">
+          <div class="relative overflow-hidden aspect-video">
+            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=640&h=360&fit=crop&auto=format&q=80" alt="FitGym"
+              class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]" />
+            <div class="absolute inset-0 bg-gradient-to-t from-card/90 via-card/10 to-transparent"></div>
+            <span class="absolute top-5 right-6 font-display font-bold text-7xl text-white/[0.04] select-none pointer-events-none leading-none">04</span>
+            <span class="absolute bottom-5 left-5 text-[11px] font-bold tracking-widest uppercase text-emerald-400 bg-dark/75 backdrop-blur-sm px-3 py-1.5 rounded-full border border-emerald-400/15">Fitness</span>
+            <div class="absolute inset-0 bg-dark/60 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+              <a href="fitgym.html" target="_blank"
+                 class="flex items-center gap-2 px-5 py-3 rounded-xl bg-accent text-dark text-sm font-bold translate-y-3 group-hover:translate-y-0 transition-transform duration-300 shadow-xl shadow-dark/50">
+                Ver proyecto
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-start justify-between gap-4 mb-1.5">
+              <h3 class="font-display font-bold text-white text-xl">FitGym</h3>
+              <span class="text-xs text-gray-600 flex-shrink-0 mt-0.5 tracking-wide">Landing page</span>
+            </div>
+            <p class="text-gray-500 text-sm leading-relaxed line-clamp-2">
+              Tienda y landing de equipos fitness con catálogo, stats de comunidad y CTA de suscripción.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="project-card group relative rounded-2xl overflow-hidden border border-border/60 bg-card">
+          <div class="relative overflow-hidden aspect-video">
+            <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=640&h=360&fit=crop&auto=format&q=80" alt="Spa & Belleza"
+              class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]" />
+            <div class="absolute inset-0 bg-gradient-to-t from-card/90 via-card/10 to-transparent"></div>
+            <span class="absolute top-5 right-6 font-display font-bold text-7xl text-white/[0.04] select-none pointer-events-none leading-none">05</span>
+            <span class="absolute bottom-5 left-5 text-[11px] font-bold tracking-widest uppercase text-pink-400 bg-dark/75 backdrop-blur-sm px-3 py-1.5 rounded-full border border-pink-400/15">Belleza</span>
+            <div class="absolute inset-0 bg-dark/60 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+              <div class="flex items-center gap-2 px-5 py-3 rounded-xl bg-card/90 border border-border text-gray-400 text-sm font-medium translate-y-3 group-hover:translate-y-0 transition-transform duration-300">
+                Próximamente
+              </div>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-start justify-between gap-4 mb-1.5">
+              <h3 class="font-display font-bold text-white text-xl">Spa & Belleza</h3>
+              <span class="text-xs text-gray-600 flex-shrink-0 mt-0.5 tracking-wide">Landing page</span>
+            </div>
+            <p class="text-gray-500 text-sm leading-relaxed line-clamp-2">
+              Diseño elegante y relajante que transmite confianza y atrae nuevas clientas.
+            </p>
+          </div>
+        </div>
+
+        <!-- CTA Banner — full width -->
+        <div class="col-span-full mt-1">
+          <div class="rounded-2xl border border-border/60 bg-card/40 px-8 py-8 md:px-10 flex flex-col md:flex-row items-center md:items-start justify-between gap-6">
+            <div>
+              <p class="text-accent text-xs font-bold tracking-widest uppercase mb-3">// Próximo proyecto</p>
+              <h3 class="font-display font-bold text-white text-2xl md:text-3xl mb-1.5">¿El siguiente es el tuyo?</h3>
+              <p class="text-gray-500 text-sm">Cuéntame sobre tu negocio y te diseño algo a tu medida.</p>
+            </div>
+            <a href="https://wa.me/573000000000?text=Hola%20Samuel%2C%20quiero%20una%20página%20web%20para%20mi%20negocio" target="_blank"
+               class="flex-shrink-0 flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-accent text-dark font-bold text-sm btn-accent transition-all duration-300">
+              Hablemos por WhatsApp
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SERVICES ───────────────────────────────────────────── -->
+  <section id="servicios" class="py-24 md:py-32">
+    <div class="max-w-6xl mx-auto px-6">
+
+      <!-- Split header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 pb-10 border-b border-border/60">
+        <div>
+          <p class="text-accent text-xs font-bold tracking-widest uppercase mb-4">// Servicios</p>
+          <h2 class="font-display font-bold text-4xl md:text-5xl text-white leading-tight">
+            Lo que hago por<br>tu negocio<span class="text-accent">.</span>
+          </h2>
+        </div>
+        <p class="text-gray-500 text-sm leading-relaxed max-w-sm">
+          Soluciones web enfocadas en resultados reales — no en una presencia online genérica.
+        </p>
+      </div>
+
+      <!-- Cards grid -->
+      <div class="grid md:grid-cols-3 gap-5 items-start">
+
+        <!-- Card 1: Landing Pages -->
+        <div class="service-card group relative rounded-2xl border border-border/80 bg-card p-7 flex flex-col">
+
+          <div class="w-10 h-10 rounded-lg border border-border/80 flex items-center justify-center mb-7 text-accent group-hover:border-accent/30 transition-colors duration-300">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="14" x="2" y="3" rx="2"/>
+              <path d="M12 17v4"/>
+              <path d="M8 21h8"/>
+            </svg>
+          </div>
+
+          <h3 class="font-display font-bold text-white text-lg mb-2">Landing Pages</h3>
+          <p class="text-gray-500 text-sm leading-relaxed mb-7">
+            Páginas de alto impacto diseñadas para convertir visitantes en clientes desde el primer scroll.
+          </p>
+
+          <ul class="space-y-3 flex-1 mb-8">
+            <li class="flex items-start gap-3">
+              <span class="mt-[7px] w-1.5 h-1.5 rounded-full bg-accent/50 flex-shrink-0"></span>
+              <span class="text-gray-400 text-sm">Diseño único, sin templates</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-[7px] w-1.5 h-1.5 rounded-full bg-accent/50 flex-shrink-0"></span>
+              <span class="text-gray-400 text-sm">Integración con WhatsApp y formularios</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-[7px] w-1.5 h-1.5 rounded-full bg-accent/50 flex-shrink-0"></span>
+              <span class="text-gray-400 text-sm">Optimizada para móvil y velocidad de carga</span>
+            </li>
+          </ul>
+
+          <div class="pt-5 border-t border-border/60 flex items-center justify-between">
+            <span class="text-xs text-gray-600 font-medium tracking-wide">Entrega en 7 días</span>
+            <a href="#contacto" class="flex items-center gap-1.5 text-accent text-sm font-semibold group-hover:gap-2.5 transition-all duration-200">
+              Consultar
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 2: Optimización Web (featured) -->
+        <div class="service-card group relative rounded-2xl border border-accent/25 bg-card p-7 flex flex-col shadow-[0_0_60px_rgba(203,255,0,0.05)] md:-mt-4">
+
+          <!-- Badge -->
+          <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-dark bg-accent px-3 py-1 rounded-full tracking-wide whitespace-nowrap">Más solicitado</span>
+          </div>
+
+          <div class="w-10 h-10 rounded-lg border border-accent/25 flex items-center justify-center mb-7 mt-4 text-accent group-hover:border-accent/50 transition-colors duration-300">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m12 14 4-4"/>
+              <path d="M3.34 19a10 10 0 1 1 17.32 0"/>
+            </svg>
+          </div>
+
+          <h3 class="font-display font-bold text-white text-lg mb-2">Optimización Web</h3>
+          <p class="text-gray-500 text-sm leading-relaxed mb-7">
+            Audito y mejoro el rendimiento de tu web actual. Más velocidad, mejor posicionamiento, más ventas.
+          </p>
+
+          <ul class="space-y-3 flex-1 mb-8">
+            <li class="flex items-start gap-3">
+              <span class="mt-[7px] w-1.5 h-1.5 rounded-full bg-accent/50 flex-shrink-0"></span>
+              <span class="text-gray-400 text-sm">Auditoría completa de velocidad y SEO</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-[7px] w-1.5 h-1.5 rounded-full bg-accent/50 flex-shrink-0"></span>
+              <span class="text-gray-400 text-sm">Core Web Vitals en verde</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-[7px] w-1.5 h-1.5 rounded-full bg-accent/50 flex-shrink-0"></span>
+              <span class="text-gray-400 text-sm">Reporte detallado con resultados medibles</span>
+            </li>
+          </ul>
+
+          <div class="pt-5 border-t border-accent/10 flex items-center justify-between">
+            <span class="text-xs text-gray-600 font-medium tracking-wide">Mejora en 5–10 días</span>
+            <a href="#contacto" class="flex items-center gap-1.5 text-accent text-sm font-semibold group-hover:gap-2.5 transition-all duration-200">
+              Consultar
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 3: Automatización -->
+        <div class="service-card group relative rounded-2xl border border-border/80 bg-card p-7 flex flex-col">
+
+          <div class="w-10 h-10 rounded-lg border border-border/80 flex items-center justify-center mb-7 text-accent group-hover:border-accent/30 transition-colors duration-300">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="18" cy="5" r="3"/>
+              <circle cx="6" cy="12" r="3"/>
+              <circle cx="18" cy="19" r="3"/>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+            </svg>
+          </div>
+
+          <h3 class="font-display font-bold text-white text-lg mb-2">Automatización</h3>
+          <p class="text-gray-500 text-sm leading-relaxed mb-7">
+            Conecta tu web con WhatsApp y herramientas de captación. No pierdas un solo lead mientras duermes.
+          </p>
+
+          <ul class="space-y-3 flex-1 mb-8">
+            <li class="flex items-start gap-3">
+              <span class="mt-[7px] w-1.5 h-1.5 rounded-full bg-accent/50 flex-shrink-0"></span>
+              <span class="text-gray-400 text-sm">Bot de WhatsApp para captación 24/7</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-[7px] w-1.5 h-1.5 rounded-full bg-accent/50 flex-shrink-0"></span>
+              <span class="text-gray-400 text-sm">Formularios conectados a tu flujo de ventas</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-[7px] w-1.5 h-1.5 rounded-full bg-accent/50 flex-shrink-0"></span>
+              <span class="text-gray-400 text-sm">Notificaciones y seguimiento automático</span>
+            </li>
+          </ul>
+
+          <div class="pt-5 border-t border-border/60 flex items-center justify-between">
+            <span class="text-xs text-gray-600 font-medium tracking-wide">Activo en 24–48 hs</span>
+            <a href="#contacto" class="flex items-center gap-1.5 text-accent text-sm font-semibold group-hover:gap-2.5 transition-all duration-200">
+              Consultar
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom CTA strip -->
+      <div class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-4 rounded-xl border border-border/60 bg-card/40">
+        <p class="text-gray-500 text-sm">¿No sabes por dónde empezar? Cuéntame tu caso.</p>
+        <a href="#contacto" class="text-sm font-semibold text-accent hover:underline whitespace-nowrap">Primera consulta sin costo →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── PROCESS ────────────────────────────────────────────── -->
+  <section class="py-24 md:py-32">
+    <div class="max-w-6xl mx-auto px-6">
+
+      <!-- Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 pb-10 border-b border-border/60">
+        <div>
+          <p class="text-accent text-xs font-bold tracking-widest uppercase mb-4">// Proceso</p>
+          <h2 class="font-display font-bold text-4xl md:text-5xl text-white leading-tight">
+            Del brief al lanzamiento<span class="text-accent">.</span>
+          </h2>
+        </div>
+        <p class="text-gray-500 text-sm leading-relaxed max-w-xs">
+          Un proceso probado para que tu sitio esté listo y convirtiendo lo antes posible.
+        </p>
+      </div>
+
+      <!-- Two-panel interactive stepper -->
+      <div class="grid md:grid-cols-[260px_1fr] gap-6 md:gap-10 items-start">
+
+        <!-- Left: Step selector -->
+        <div class="relative">
+          <div class="absolute left-5 top-5 h-[calc(100%-60px)] w-px bg-border/50 hidden md:block"></div>
+          <div class="space-y-1">
+
+            <button onclick="setActiveStep(0)" id="proc-btn-0"
+              class="w-full text-left flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all duration-300 hover:bg-card/50">
+              <span id="proc-dot-0" class="flex-shrink-0 w-10 h-10 rounded-full border flex items-center justify-center font-display font-bold text-sm transition-all duration-300 relative z-10" style="border-color:#CBFF00;background:rgba(203,255,0,0.1);color:#CBFF00;">01</span>
+              <span id="proc-label-0" class="font-display font-semibold text-sm transition-colors duration-300" style="color:white;">Consulta inicial</span>
+            </button>
+
+            <button onclick="setActiveStep(1)" id="proc-btn-1"
+              class="w-full text-left flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all duration-300 hover:bg-card/50">
+              <span id="proc-dot-1" class="flex-shrink-0 w-10 h-10 rounded-full border border-border bg-card flex items-center justify-center font-display font-bold text-sm text-gray-600 transition-all duration-300 relative z-10">02</span>
+              <span id="proc-label-1" class="font-display font-semibold text-sm text-gray-500 transition-colors duration-300">Diseño y desarrollo</span>
+            </button>
+
+            <button onclick="setActiveStep(2)" id="proc-btn-2"
+              class="w-full text-left flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all duration-300 hover:bg-card/50">
+              <span id="proc-dot-2" class="flex-shrink-0 w-10 h-10 rounded-full border border-border bg-card flex items-center justify-center font-display font-bold text-sm text-gray-600 transition-all duration-300 relative z-10">03</span>
+              <span id="proc-label-2" class="font-display font-semibold text-sm text-gray-500 transition-colors duration-300">Revisión y ajustes</span>
+            </button>
+
+            <button onclick="setActiveStep(3)" id="proc-btn-3"
+              class="w-full text-left flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all duration-300 hover:bg-card/50">
+              <span id="proc-dot-3" class="flex-shrink-0 w-10 h-10 rounded-full border border-border bg-card flex items-center justify-center font-display font-bold text-sm text-gray-600 transition-all duration-300 relative z-10">04</span>
+              <span id="proc-label-3" class="font-display font-semibold text-sm text-gray-500 transition-colors duration-300">Lanzamiento</span>
+            </button>
+
+          </div>
+
+          <!-- Auto-advance progress bar -->
+          <div class="mt-5 hidden md:block px-4">
+            <div class="h-px bg-border/50 rounded-full overflow-hidden">
+              <div id="proc-progress" class="h-full bg-accent rounded-full" style="width:0%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Content panels -->
+        <div class="relative" style="min-height:300px;">
+
+          <!-- Panel 0 -->
+          <div id="proc-panel-0" class="proc-panel rounded-2xl border border-border bg-card p-8 absolute inset-0" style="opacity:1;transform:translateY(0);pointer-events:auto;">
+            <div class="flex items-start justify-between mb-5">
+              <div>
+                <span class="text-accent text-xs font-bold tracking-widest uppercase">Día 1</span>
+                <h3 class="font-display font-bold text-white text-2xl mt-1">Consulta inicial</h3>
+              </div>
+              <div class="w-11 h-11 rounded-xl border border-border/60 flex items-center justify-center text-accent flex-shrink-0">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+              </div>
+            </div>
+            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              Me cuentas sobre tu negocio, tus clientes y tus objetivos. Sin tecnicismos. En esta conversación defino la estrategia y el alcance exacto del proyecto.
+            </p>
+            <div class="grid grid-cols-2 gap-2.5">
+              <div class="flex items-center gap-2 text-xs text-gray-500"><span class="w-1.5 h-1.5 rounded-full bg-accent/60 flex-shrink-0"></span>Llamada o WhatsApp de 20 min</div>
+              <div class="flex items-center gap-2 text-xs text-gray-500"><span class="w-1.5 h-1.5 rounded-full bg-accent/60 flex-shrink-0"></span>Sin costo ni compromiso</div>
+              <div class="flex items-center gap-2 text-xs text-gray-500"><span class="w-1.5 h-1.5 rounded-full bg-accent/60 flex-shrink-0"></span>Propuesta personalizada</div>
+              <div class="flex items-center gap-2 text-xs text-gray-500"><span class="w-1.5 h-1.5 rounded-full bg-accent/60 flex-shrink-0"></span>Presupuesto claro y detallado</div>
+            </div>
+          </div>
+
+          <!-- Panel 1 -->
+          <div id="proc-panel-1" class="proc-panel rounded-2xl border border-border bg-card p-8 absolute inset-0" style="opacity:0;transform:translateY(12px);pointer-events:none;">
+            <div class="flex items-start justify-between mb-5">
+              <div>
+                <span class="text-accent text-xs font-bold tracking-widest uppercase">Días 2–6</span>
+                <h3 class="font-display font-bold text-white text-2xl mt-1">Diseño y desarrollo</h3>
+              </div>
+              <div class="w-11 h-11 rounded-xl border border-border/60 flex items-center justify-center text-accent flex-shrink-0">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                </svg>
+              </div>
+            </div>
+            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              Diseño y construyo tu página con foco en conversión. Cada sección tiene un propósito: atraer, convencer y hacer que el visitante actúe.
+            </p>
+            <div class="grid grid-cols-2 gap-2.5">
+              <div class="flex items-center gap-2 text-xs text-gray-500"><span class="w-1.5 h-1.5 rounded-full bg-accent/60 flex-shrink-0"></span>Diseño único, sin templates</div>
+              <div class="flex items-center gap-2 text-xs text-gray-500"><span class="w-1.5 h-1.5 rounded-full bg-accent/60 flex-shrink-0"></span>Actualización diaria del avance</div>
+              <div class="flex items-center gap-2 text-xs text-gray-500"><span class="w-1.5 h-1.5 rounded-full bg-accent/60 flex-shrink-0"></span>Mobile-first y rápida</div>
+              <div class="flex items-center gap-2 text-xs text-gray-500"><span class="w-1.5 h-1.5 rounded-full bg-accent/60 flex-shrink-0"></span>Integración WhatsApp y CTAs</div>
+            </div>
+          </div>
+
+          <!-- Panel 2 -->
+          <div id="proc-panel-2" class="proc-panel rounded-2xl border border-border bg-card p-8 absolute inset-0" style="opacity:0;transform:translateY(12px);pointer-events:none;">
+            <div class="flex items-start justify-between mb-5">
+              <div>
+                <span class="text-accent text-xs font-bold tracking-widest uppercase">Día 6</span>
+                <h3 class="font-display font-bold text-white text-2xl mt-1">Revisión y ajustes</h3>
+              </div>
+              <div class="w-11 h-11 rounded-xl border border-border/60 flex items-center justify-center text-accent flex-shrink-0">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                </svg>
+              </div>
+            </div>
+            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              Te muestro la página completa y recibo tu feedback. Hacemos todos los ajustes necesarios hasta que estés 100% conforme. Tu aprobación es la única luz verde.
+            </p>
+            <div class="grid grid-cols-2 gap-2.5">
+              <div class="flex items-center gap-2 text-xs text-gray-500"><span class="w-1.5 h-1.5 rounded-full bg-accent/60 flex-shrink-0"></span>Revisión en vivo contigo</div>
+              <div class="flex items-center gap-2 text-xs text-gray-500"><span class="w-1.5 h-1.5 rounded-full bg-accent/60 flex-shrink-0"></span>Rondas de cambios incluidas</div>
+              <div class="flex items-center gap-2 text-xs text-gray-500"><span class="w-1.5 h-1.5 rounded-full bg-accent/60 flex-shrink-0"></span>Sin costo extra por ajustes</div>
+              <div class="flex items-center gap-2 text-xs text-gray-500"><span class="w-1.5 h-1.5 rounded-full bg-accent/60 flex-shrink-0"></span>Tu aprobación es prioridad</div>
+            </div>
+          </div>
+
+          <!-- Panel 3 -->
+          <div id="proc-panel-3" class="proc-panel rounded-2xl border border-border bg-card p-8 absolute inset-0" style="opacity:0;transform:translateY(12px);pointer-events:none;">
+            <div class="flex items-start justify-between mb-5">
+              <div>
+                <span class="text-accent text-xs font-bold tracking-widest uppercase">Día 7</span>
+                <h3 class="font-display font-bold text-white text-2xl mt-1">Lanzamiento</h3>
+              </div>
+              <div class="w-11 h-11 rounded-xl border border-border/60 flex items-center justify-center text-accent flex-shrink-0">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
+                  <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+                  <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+                </svg>
+              </div>
+            </div>
+            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              Tu web sale en vivo. Conecto el dominio, verifico que todo funcione perfectamente y te entrego el acceso completo. Tu negocio empieza a recibir clientes online.
+            </p>
+            <div class="grid grid-cols-2 gap-2.5">
+              <div class="flex items-center gap-2 text-xs text-gray-500"><span class="w-1.5 h-1.5 rounded-full bg-accent/60 flex-shrink-0"></span>Deploy y conexión de dominio</div>
+              <div class="flex items-center gap-2 text-xs text-gray-500"><span class="w-1.5 h-1.5 rounded-full bg-accent/60 flex-shrink-0"></span>QA en dispositivos reales</div>
+              <div class="flex items-center gap-2 text-xs text-gray-500"><span class="w-1.5 h-1.5 rounded-full bg-accent/60 flex-shrink-0"></span>Soporte post-lanzamiento</div>
+              <div class="flex items-center gap-2 text-xs text-gray-500"><span class="w-1.5 h-1.5 rounded-full bg-accent/60 flex-shrink-0"></span>Lista para recibir clientes</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CTA SECTION ────────────────────────────────────────── -->
+  <section id="contacto" class="py-24 md:py-32">
+    <div class="max-w-6xl mx-auto px-6">
+
+      <!-- Card -->
+      <div class="relative rounded-3xl border border-border/80 overflow-hidden">
+        <!-- Glow layers -->
+        <div class="absolute inset-0 bg-gradient-to-br from-card via-card to-[#0c1810] pointer-events-none"></div>
+        <div class="absolute -top-40 -right-40 w-[560px] h-[560px] rounded-full bg-accent/5 blur-[100px] pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-[320px] h-[320px] rounded-full bg-accent/3 blur-[80px] pointer-events-none"></div>
+
+        <div class="relative grid md:grid-cols-[1.3fr_1fr] divide-y md:divide-y-0 md:divide-x divide-border/60">
+
+          <!-- Left: Headline -->
+          <div class="p-10 md:p-14">
+            <p class="text-accent text-xs font-bold tracking-widest uppercase mb-6">// ¿Listo para empezar?</p>
+            <h2 class="font-display font-bold text-4xl md:text-5xl lg:text-[54px] text-white leading-[1.05] mb-6">
+              Tu negocio merece<br>una web que<br><span class="text-accent" id="cta-word">convierte.</span>
+            </h2>
+            <p class="text-gray-500 text-sm leading-relaxed max-w-sm mb-10">
+              Primera consulta sin costo. Cuéntame qué necesitas y te digo exactamente cómo puedo ayudarte.
+            </p>
+            <!-- Trust chips -->
+            <div class="flex flex-wrap gap-2.5">
+              <span class="inline-flex items-center gap-2 text-xs text-gray-500 border border-border/60 bg-card/60 rounded-full px-3 py-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse flex-shrink-0"></span>
+                Disponible ahora
+              </span>
+              <span class="inline-flex items-center gap-2 text-xs text-gray-500 border border-border/60 bg-card/60 rounded-full px-3 py-1.5">
+                Respondo en menos de 24 h
+              </span>
+              <span class="inline-flex items-center gap-2 text-xs text-gray-500 border border-border/60 bg-card/60 rounded-full px-3 py-1.5">
+                Bogotá, Colombia
+              </span>
+            </div>
+          </div>
+
+          <!-- Right: Action panel -->
+          <div class="p-10 md:p-14 flex flex-col justify-center gap-7">
+
+            <!-- Live availability -->
+            <div class="flex items-center gap-3">
+              <div class="relative flex-shrink-0 w-2.5 h-2.5">
+                <span class="absolute inset-0 rounded-full bg-green-400 animate-ping opacity-60"></span>
+                <span class="relative block w-2.5 h-2.5 rounded-full bg-green-400"></span>
+              </div>
+              <span class="text-sm text-gray-300">Aceptando proyectos nuevos</span>
+            </div>
+
+            <!-- Slot meter -->
+            <div class="rounded-xl border border-border/60 bg-dark/40 p-5">
+              <p class="text-xs text-gray-600 uppercase tracking-widest mb-3">Cupos disponibles — Mayo 2026</p>
+              <div class="flex items-center gap-3">
+                <div class="flex gap-1.5">
+                  <span class="w-8 h-1.5 rounded-full bg-accent"></span>
+                  <span class="w-8 h-1.5 rounded-full bg-accent"></span>
+                  <span class="w-8 h-1.5 rounded-full bg-border/80"></span>
+                  <span class="w-8 h-1.5 rounded-full bg-border/80"></span>
+                  <span class="w-8 h-1.5 rounded-full bg-border/80"></span>
+                </div>
+                <span class="text-white text-sm font-semibold">2 / 5</span>
+              </div>
+            </div>
+
+            <!-- WhatsApp CTA -->
+            <a href="https://wa.me/573000000000?text=Hola%20Samuel%2C%20quiero%20una%20página%20web%20para%20mi%20negocio"
+               target="_blank"
+               class="flex items-center justify-center gap-3 px-6 py-4 rounded-xl bg-accent text-dark font-bold text-sm btn-accent transition-all duration-300 hover:shadow-[0_0_50px_rgba(203,255,0,0.25)]">
+              <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              Escribir por WhatsApp
+            </a>
+
+            <p class="text-center text-xs text-gray-600">
+              También por email:
+              <a href="mailto:samuelcastillo1007@gmail.com" class="text-accent/60 hover:text-accent transition-colors duration-200">samuelcastillo1007@gmail.com</a>
+            </p>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─────────────────────────────────────────────── -->
+  <footer class="border-t border-border/60 py-10">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+
+      <div class="flex items-center gap-3">
+        <span class="font-display font-bold text-white">Samuel<span class="text-accent">/</span></span>
+        <span class="text-gray-600 text-sm">Desarrollador Frontend · Bogotá</span>
+      </div>
+
+      <p class="text-gray-700 text-sm">© 2024 Samuel Castillo. Todos los derechos reservados.</p>
+
+      <div class="flex items-center gap-4">
+        <a href="https://wa.me/573000000000" target="_blank" class="text-gray-600 hover:text-accent transition-colors">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+        <a href="https://github.com/" target="_blank" class="text-gray-600 hover:text-accent transition-colors">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        </a>
+        <a href="https://linkedin.com/" target="_blank" class="text-gray-600 hover:text-accent transition-colors">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const btn = document.getElementById('menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+
+    // Close mobile menu on link click
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.add('hidden')));
+
+    // Ticker: duplicate items for seamless loop
+    const track = document.querySelector('.ticker-track');
+    const tpl = document.getElementById('ticker-items');
+    const content = tpl.innerHTML + tpl.innerHTML;
+    track.innerHTML = content;
+
+    // ── Process stepper ──────────────────────────────────────────
+    (function() {
+      const TOTAL = 4;
+      const DURATION = 4200;
+      let current = 0;
+      let timer = null;
+      let progStart = null;
+      let progRaf = null;
+
+      function applyStep(idx) {
+        for (let i = 0; i < TOTAL; i++) {
+          const dot   = document.getElementById('proc-dot-' + i);
+          const label = document.getElementById('proc-label-' + i);
+          const panel = document.getElementById('proc-panel-' + i);
+          if (i === idx) {
+            dot.style.borderColor      = '#CBFF00';
+            dot.style.backgroundColor  = 'rgba(203,255,0,0.1)';
+            dot.style.color            = '#CBFF00';
+            label.style.color          = 'white';
+            panel.style.opacity        = '1';
+            panel.style.transform      = 'translateY(0)';
+            panel.style.pointerEvents  = 'auto';
+          } else {
+            dot.style.borderColor      = '#272625';
+            dot.style.backgroundColor  = '#141413';
+            dot.style.color            = '#4B5563';
+            label.style.color          = '#6B7280';
+            panel.style.opacity        = '0';
+            panel.style.transform      = 'translateY(12px)';
+            panel.style.pointerEvents  = 'none';
+          }
+        }
+        current = idx;
+      }
+
+      function animateProgress() {
+        const bar = document.getElementById('proc-progress');
+        if (!bar) return;
+        progStart = performance.now();
+        function tick(now) {
+          const pct = Math.min((now - progStart) / DURATION * 100, 100);
+          bar.style.width = pct + '%';
+          if (pct < 100) progRaf = requestAnimationFrame(tick);
+        }
+        cancelAnimationFrame(progRaf);
+        bar.style.transition = 'none';
+        bar.style.width = '0%';
+        requestAnimationFrame(() => { progRaf = requestAnimationFrame(tick); });
+      }
+
+      function startTimer() {
+        clearTimeout(timer);
+        animateProgress();
+        timer = setTimeout(() => {
+          applyStep((current + 1) % TOTAL);
+          startTimer();
+        }, DURATION);
+      }
+
+      window.setActiveStep = function(idx) {
+        applyStep(idx);
+        startTimer();
+      };
+
+      applyStep(0);
+      startTimer();
+    })();
+
+    // ── CTA word rotation ─────────────────────────────────────────
+    (function() {
+      const words = ['convierte.', 'vende.', 'crece.', 'destaca.'];
+      let idx = 0;
+      const el = document.getElementById('cta-word');
+      if (!el) return;
+      setInterval(() => {
+        el.style.opacity   = '0';
+        el.style.transform = 'translateY(-10px)';
+        setTimeout(() => {
+          idx = (idx + 1) % words.length;
+          el.textContent     = words[idx];
+          el.style.transform = 'translateY(10px)';
+          requestAnimationFrame(() => {
+            el.style.opacity   = '1';
+            el.style.transform = 'translateY(0)';
+          });
+        }, 280);
+      }, 2600);
+    })();
+
+    // Smooth nav active state
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(l => {
+            l.classList.remove('active');
+            if (l.getAttribute('href') === '#' + entry.target.id) l.classList.add('active');
+          });
+        }
+      });
+    }, { rootMargin: '-50% 0px -50% 0px' });
+    sections.forEach(s => observer.observe(s));
+  </script>
+
+</body>
+</html>

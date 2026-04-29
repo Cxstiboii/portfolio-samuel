@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Burger Bogotá — Las Mejores Hamburguesas de Bogotá</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Nunito', sans-serif; background: #F5EDD5; overflow-x: hidden; }
+    .font-display { font-family: 'Fredoka', sans-serif; }
+
+    #mobile-menu { display: none; }
+    #mobile-menu.open { display: flex; }
+
+    /* Premium transitions */
+    .btn-primary { transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,0.28); filter: brightness(1.06); }
+    .btn-ghost { transition: background 0.18s ease; }
+    .btn-ghost:hover { background: rgba(255,255,255,0.16) !important; }
+    .nav-pill { transition: background 0.15s ease, color 0.15s ease; }
+    .nav-pill:hover { background: rgba(255,255,255,0.12) !important; color: white !important; }
+    .menu-card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .menu-card:hover { transform: translateY(-6px); box-shadow: 0 22px 55px rgba(0,0,0,0.14) !important; }
+    .heart-btn { transition: background 0.18s ease; cursor: pointer; }
+    .heart-btn:hover { background: #fff2f2 !important; }
+    .social-btn { transition: transform 0.18s ease, opacity 0.18s ease; }
+    .social-btn:hover { transform: translateY(-2px); opacity: 0.75; }
+    .tab-btn { transition: color 0.15s ease, border-color 0.15s ease; }
+    .tab-btn:hover { color: #264D35 !important; }
+
+    i[data-lucide] { display: inline-block; flex-shrink: 0; }
+
+    /* Scroll offset for sticky nav */
+    section[id], footer[id] { scroll-margin-top: 72px; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none !important; }
+      .nav-cta-desktop { display: none !important; }
+      .nav-hamburger { display: flex !important; }
+      .nav-wrapper { padding: 14px 20px !important; }
+      .hero-body { padding: 16px 20px 32px !important; min-height: unset !important; }
+      .hero-headline { font-size: clamp(38px, 11vw, 64px) !important; white-space: normal !important; max-width: 100% !important; }
+      .hero-image-wrap { display: none !important; }
+      .hero-floating-card { display: none !important; }
+      .hero-leaf { display: none !important; }
+      .hero-dots { padding-top: 24px !important; }
+      .about-section { padding: 48px 20px 60px !important; }
+      .about-images { flex-direction: column !important; align-items: center !important; gap: 16px !important; }
+      .about-img-side { width: 80% !important; max-width: 100% !important; }
+      .about-img-side img { height: 160px !important; }
+      .about-img-center { width: 80% !important; max-width: 100% !important; transform: none !important; }
+      .about-img-center img { height: 200px !important; }
+      .banner-section { padding: 36px 20px !important; }
+      .menu-section { padding: 60px 20px 70px !important; }
+      .menu-grid { grid-template-columns: 1fr !important; max-width: 400px !important; }
+      .gallery-section { padding: 48px 20px 60px !important; }
+      .gallery-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+      .gallery-collage { height: 280px !important; }
+      .stats-section { padding: 60px 20px 70px !important; }
+      .stats-row { flex-direction: column !important; align-items: center !important; gap: 32px !important; }
+      .stats-center-photo { width: 220px !important; height: 240px !important; }
+      .testimonials-section { padding: 60px 20px 70px !important; }
+      .testimonials-grid { grid-template-columns: 1fr !important; }
+      .testimonials-side-img { display: none !important; }
+      .wacta-section { padding: 0 20px 60px !important; }
+      .wacta-inner { padding: 44px 28px !important; }
+      .wacta-flex { flex-direction: column !important; align-items: center !important; text-align: center !important; }
+      .wacta-img-wrap { width: 100% !important; max-width: 340px !important; }
+      .wacta-text p { max-width: 100% !important; }
+      .footer-section { padding: 44px 20px 28px !important; }
+      .footer-cols { flex-direction: column !important; align-items: center !important; gap: 32px !important; text-align: center !important; }
+      .footer-right { text-align: center !important; }
+      .footer-contact-item { justify-content: center !important; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-headline { font-size: clamp(32px, 10vw, 48px) !important; }
+      .menu-grid { max-width: 100% !important; }
+    }
+
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+<body>
+
+  <!-- ===== STICKY NAV ===== -->
+  <nav style="position:sticky; top:0; z-index:50; background:rgba(38,77,53,0.96); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid rgba(255,255,255,0.07);">
+    <div class="nav-wrapper" style="display:flex; align-items:center; justify-content:space-between; padding:16px 48px;">
+
+      <a href="#inicio" style="display:flex; align-items:center; gap:10px; text-decoration:none;">
+        <div style="width:36px; height:36px; background:rgba(189,209,41,0.14); border:1.5px solid rgba(189,209,41,0.32); border-radius:10px; display:flex; align-items:center; justify-content:center;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BDD129" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 11h18c0-3.3-2.7-6-6-6H9C5.7 5 3 7.7 3 11z"/>
+            <line x1="3" y1="15" x2="21" y2="15"/>
+            <path d="M5 19h14a2 2 0 0 0 0-4H5a2 2 0 0 0 0 4z"/>
+          </svg>
+        </div>
+        <span style="color:white; font-family:'Fredoka',sans-serif; font-size:20px; font-weight:600; letter-spacing:0.3px;">Burger Bogotá</span>
+      </a>
+
+      <div class="nav-links" style="background:rgba(0,0,0,0.22); border-radius:100px; padding:5px 6px; display:flex; align-items:center; gap:2px;">
+        <a href="#inicio"    class="nav-pill" style="background:#3A6B4C; color:white; padding:7px 18px; border-radius:100px; font-size:14px; font-weight:700; text-decoration:none; font-family:'Nunito',sans-serif;">Inicio</a>
+        <a href="#nosotros"  class="nav-pill" style="color:rgba(255,255,255,0.85); padding:7px 16px; border-radius:100px; font-size:14px; font-weight:600; text-decoration:none; font-family:'Nunito',sans-serif;">Nosotros</a>
+        <a href="#menu"      class="nav-pill" style="color:rgba(255,255,255,0.85); padding:7px 16px; border-radius:100px; font-size:14px; font-weight:600; text-decoration:none; font-family:'Nunito',sans-serif;">Menú</a>
+        <a href="#galeria"   class="nav-pill" style="color:rgba(255,255,255,0.85); padding:7px 16px; border-radius:100px; font-size:14px; font-weight:600; text-decoration:none; font-family:'Nunito',sans-serif;">Galería</a>
+        <a href="#contacto"  class="nav-pill" style="color:rgba(255,255,255,0.85); padding:7px 16px; border-radius:100px; font-size:14px; font-weight:600; text-decoration:none; font-family:'Nunito',sans-serif;">Contacto</a>
+      </div>
+
+      <a href="https://wa.me/573001234567" class="nav-cta-desktop btn-ghost" style="border:1.5px solid rgba(255,255,255,0.48); color:white; padding:9px 22px; border-radius:100px; font-size:14px; font-weight:700; text-decoration:none; font-family:'Nunito',sans-serif; white-space:nowrap; display:inline-flex; align-items:center; gap:8px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Pedir ahora
+      </a>
+
+      <button class="nav-hamburger" onclick="toggleMobileMenu()" style="display:none; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18); border-radius:10px; width:40px; height:40px; align-items:center; justify-content:center; cursor:pointer; flex-direction:column; gap:5px; padding:8px;">
+        <span style="display:block; width:22px; height:2px; background:white; border-radius:2px;"></span>
+        <span style="display:block; width:22px; height:2px; background:white; border-radius:2px;"></span>
+        <span style="display:block; width:22px; height:2px; background:white; border-radius:2px;"></span>
+      </button>
+    </div>
+
+    <div id="mobile-menu" style="flex-direction:column; background:rgba(18,42,28,0.98); padding:16px 20px 24px; gap:4px; border-top:1px solid rgba(255,255,255,0.08);">
+      <a href="#inicio"   onclick="closeMobileMenu()" style="color:white; padding:12px 16px; font-size:15px; font-weight:700; text-decoration:none; display:block; border-radius:10px;">Inicio</a>
+      <a href="#nosotros" onclick="closeMobileMenu()" style="color:rgba(255,255,255,0.8); padding:12px 16px; font-size:15px; font-weight:600; text-decoration:none; display:block; border-radius:10px;">Nosotros</a>
+      <a href="#menu"     onclick="closeMobileMenu()" style="color:rgba(255,255,255,0.8); padding:12px 16px; font-size:15px; font-weight:600; text-decoration:none; display:block; border-radius:10px;">Menú</a>
+      <a href="#galeria"  onclick="closeMobileMenu()" style="color:rgba(255,255,255,0.8); padding:12px 16px; font-size:15px; font-weight:600; text-decoration:none; display:block; border-radius:10px;">Galería</a>
+      <a href="#contacto" onclick="closeMobileMenu()" style="color:rgba(255,255,255,0.8); padding:12px 16px; font-size:15px; font-weight:600; text-decoration:none; display:block; border-radius:10px;">Contacto</a>
+      <a href="https://wa.me/573001234567" style="background:#BDD129; color:#1A3520; padding:13px 20px; border-radius:100px; font-size:15px; font-weight:800; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:8px; margin-top:10px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#1A3520"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Pedir ahora
+      </a>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section id="inicio" style="background:#264D35; position:relative; overflow:hidden;">
+    <div class="hero-body" style="position:relative; padding:16px 48px 40px; min-height:520px;">
+
+      <!-- Leaf decoration -->
+      <span class="hero-leaf" style="position:absolute; top:10px; left:48px; z-index:1; display:block; color:rgba(189,209,41,0.5); transform:rotate(-20deg);">
+        <i data-lucide="leaf" style="width:38px; height:38px;"></i>
+      </span>
+
+      <h1 class="hero-headline font-display" style="font-size:clamp(54px,8.5vw,104px); font-weight:700; color:white; line-height:0.93; position:relative; z-index:2; max-width:72%; padding-top:10px; word-break:keep-all; white-space:nowrap;">
+        Las mejores<br>hamburguesas<br>de Bogotá
+      </h1>
+
+      <div style="position:relative; z-index:2; margin-top:22px;">
+        <p style="color:rgba(255,255,255,0.72); font-size:13px; max-width:210px; line-height:1.55; margin-bottom:20px;">
+          Disfruta hamburguesas, perros y papas preparados con amor en el corazón de Bogotá.
+        </p>
+        <a href="https://wa.me/573001234567" class="btn-primary" style="background:#BDD129; color:#1A3520; padding:13px 28px; border-radius:100px; font-size:15px; font-weight:800; text-decoration:none; display:inline-flex; align-items:center; gap:9px; font-family:'Nunito',sans-serif;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#1A3520" style="flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Pedir ahora
+        </a>
+      </div>
+
+      <div class="hero-image-wrap" style="position:absolute; right:72px; top:-10px; width:43%; max-width:480px; z-index:3; pointer-events:none;">
+        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=480&h=620&fit=crop&auto=format&q=80" alt="Hamburguesa Burger Bogotá" style="width:100%; height:auto; display:block;">
+      </div>
+
+      <div class="hero-floating-card" style="position:absolute; right:30px; bottom:70px; background:white; border-radius:20px; padding:14px; width:168px; box-shadow:0 16px 48px rgba(0,0,0,0.32); z-index:4;">
+        <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=140&h=90&fit=crop&auto=format&q=80" alt="Combo Premium" style="width:100%; height:84px; object-fit:cover; border-radius:12px; display:block;">
+        <p class="font-display" style="font-size:14px; font-weight:600; color:#1A3520; margin:10px 0 3px; line-height:1.2;">Combo Premium</p>
+        <p style="font-size:11px; color:#777; margin:0 0 10px; line-height:1.4;">Hamburguesa + Papa + Bebida</p>
+        <a href="https://wa.me/573001234567" class="btn-primary" style="background:#264D35; color:white; border:none; width:100%; padding:8px; border-radius:100px; font-size:12px; font-weight:700; cursor:pointer; font-family:'Nunito',sans-serif; display:block; text-align:center; text-decoration:none;">Pedir ahora</a>
+      </div>
+
+      <div class="hero-dots" style="display:flex; align-items:center; justify-content:center; gap:8px; padding-top:60px; position:relative; z-index:2;">
+        <div style="width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.3);"></div>
+        <div style="width:24px; height:8px; border-radius:4px; background:white;"></div>
+        <div style="width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.3);"></div>
+      </div>
+    </div>
+
+    <div style="height:78px; background:#F5EDD5; border-radius:50% 50% 0 0 / 100% 100% 0 0;"></div>
+  </section>
+
+  <!-- ===== ABOUT / STORY ===== -->
+  <section id="nosotros" class="about-section" style="background:#F5EDD5; padding:56px 48px 80px;">
+    <h2 class="font-display" style="font-size:clamp(28px,4vw,46px); font-weight:700; color:#264D35; text-align:center; max-width:680px; margin:0 auto 52px; line-height:1.15;">
+      Construye confianza y cuenta nuestra historia
+    </h2>
+
+    <div class="about-images" style="display:flex; align-items:center; justify-content:center; gap:20px; position:relative;">
+      <div class="about-img-side" style="width:26%; max-width:210px; flex-shrink:0;">
+        <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=210&h=200&fit=crop&auto=format&q=80" alt="Papas fritas" style="width:100%; height:196px; object-fit:cover; border-radius:18px; display:block;">
+      </div>
+      <div class="about-img-center" style="width:38%; max-width:310px; flex-shrink:0; transform:translateY(-28px);">
+        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=310&h=310&fit=crop&auto=format&q=80" alt="Chef preparando hamburguesas" style="width:100%; height:280px; object-fit:cover; border-radius:18px; display:block;">
+      </div>
+      <div class="about-img-side" style="width:26%; max-width:210px; flex-shrink:0;">
+        <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=210&h=200&fit=crop&auto=format&q=80" alt="Hamburguesa especial" style="width:100%; height:196px; object-fit:cover; border-radius:18px; display:block;">
+      </div>
+    </div>
+
+    <div style="display:flex; justify-content:center; align-items:center; gap:8px; margin-top:32px;">
+      <div style="width:8px; height:8px; border-radius:50%; background:rgba(38,77,53,0.22);"></div>
+      <div style="width:24px; height:8px; border-radius:4px; background:#264D35;"></div>
+    </div>
+  </section>
+
+  <!-- ===== ORANGE CTA BANNER ===== -->
+  <section class="banner-section" style="background:#C84827; padding:44px 48px;">
+    <div style="display:flex; align-items:center; justify-content:center; gap:28px; max-width:720px; margin:0 auto;">
+      <div style="flex-shrink:0; color:rgba(255,255,255,0.9); line-height:1;">
+        <i data-lucide="utensils" style="width:52px; height:52px;"></i>
+      </div>
+      <h2 class="font-display" style="font-size:clamp(26px,4.5vw,44px); font-weight:700; color:white; text-align:center; line-height:1.18;">
+        Hecho con Pasión,<br>Servido con Amor
+      </h2>
+      <div style="flex-shrink:0; color:rgba(255,255,255,0.9); line-height:1;">
+        <i data-lucide="coffee" style="width:52px; height:52px;"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MENU ===== -->
+  <section id="menu" class="menu-section" style="background:#F5EDD5; padding:80px 48px 90px;">
+    <h2 class="font-display" style="font-size:clamp(24px,3.5vw,38px); font-weight:700; color:#264D35; text-align:center; margin:0 0 32px;">
+      Descubre Nuestro Menú
+    </h2>
+
+    <div style="display:flex; justify-content:center; gap:0; margin-bottom:44px; border-bottom:2px solid rgba(38,77,53,0.12); overflow-x:auto; -webkit-overflow-scrolling:touch;">
+      <button class="tab-btn" style="padding:10px 22px; background:none; border:none; border-bottom:3px solid #264D35; margin-bottom:-2px; font-size:14px; font-weight:700; color:#264D35; cursor:pointer; font-family:'Nunito',sans-serif; white-space:nowrap;">Entradas</button>
+      <button class="tab-btn" style="padding:10px 22px; background:none; border:none; border-bottom:3px solid transparent; font-size:14px; font-weight:600; color:rgba(38,77,53,0.45); cursor:pointer; font-family:'Nunito',sans-serif; white-space:nowrap;">Hamburguesas</button>
+      <button class="tab-btn" style="padding:10px 22px; background:none; border:none; border-bottom:3px solid transparent; font-size:14px; font-weight:600; color:rgba(38,77,53,0.45); cursor:pointer; font-family:'Nunito',sans-serif; white-space:nowrap;">Perros</button>
+      <button class="tab-btn" style="padding:10px 22px; background:none; border:none; border-bottom:3px solid transparent; font-size:14px; font-weight:600; color:rgba(38,77,53,0.45); cursor:pointer; font-family:'Nunito',sans-serif; white-space:nowrap;">Bebidas</button>
+    </div>
+
+    <div class="menu-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px; max-width:960px; margin:0 auto;">
+
+      <div class="menu-card" style="background:white; border-radius:20px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.07);">
+        <div style="position:relative;">
+          <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=320&h=200&fit=crop&auto=format&q=80" alt="Papas Crocantes" style="width:100%; height:178px; object-fit:cover; display:block;">
+          <button class="heart-btn" style="position:absolute; top:12px; right:12px; background:white; border:none; width:32px; height:32px; border-radius:50%; box-shadow:0 2px 8px rgba(0,0,0,0.12); display:flex; align-items:center; justify-content:center; color:#ccc;">
+            <i data-lucide="heart" style="width:15px; height:15px;"></i>
+          </button>
+        </div>
+        <div style="padding:16px 18px 18px;">
+          <p style="font-weight:800; font-size:14px; color:#1A3520; margin:0 0 4px;">Papas Crocantes</p>
+          <p style="font-size:12px; color:#999; margin:0 0 14px; line-height:1.4;">Con sal rosada y salsa especial</p>
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <span class="font-display" style="font-size:24px; font-weight:700; color:#264D35;">$12k</span>
+            <a href="https://wa.me/573001234567?text=Hola!%20Quiero%20pedir%20Papas%20Crocantes" class="btn-primary" style="background:#264D35; color:white; border:none; padding:8px 16px; border-radius:100px; font-size:12px; font-weight:700; cursor:pointer; font-family:'Nunito',sans-serif; text-decoration:none; white-space:nowrap; display:inline-flex; align-items:center; gap:6px;">
+              Pedir ahora
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-card" style="background:white; border-radius:20px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.07);">
+        <div style="position:relative;">
+          <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=320&h=200&fit=crop&auto=format&q=80" alt="Hamburguesa Doble" style="width:100%; height:178px; object-fit:cover; display:block;">
+          <button class="heart-btn" style="position:absolute; top:12px; right:12px; background:white; border:none; width:32px; height:32px; border-radius:50%; box-shadow:0 2px 8px rgba(0,0,0,0.12); display:flex; align-items:center; justify-content:center; color:#ccc;">
+            <i data-lucide="heart" style="width:15px; height:15px;"></i>
+          </button>
+        </div>
+        <div style="padding:16px 18px 18px;">
+          <p style="font-weight:800; font-size:14px; color:#1A3520; margin:0 0 4px;">Hamburguesa Doble</p>
+          <p style="font-size:12px; color:#999; margin:0 0 14px; line-height:1.4;">Doble carne, queso fundido y tomate</p>
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <span class="font-display" style="font-size:24px; font-weight:700; color:#264D35;">$22k</span>
+            <a href="https://wa.me/573001234567?text=Hola!%20Quiero%20pedir%20una%20Hamburguesa%20Doble" class="btn-primary" style="background:#264D35; color:white; border:none; padding:8px 16px; border-radius:100px; font-size:12px; font-weight:700; cursor:pointer; font-family:'Nunito',sans-serif; text-decoration:none; white-space:nowrap; display:inline-flex; align-items:center; gap:6px;">
+              Pedir ahora
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-card" style="background:white; border-radius:20px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.07);">
+        <div style="position:relative;">
+          <img src="https://images.unsplash.com/photo-1554433607-66b5efe9d304?w=320&h=200&fit=crop&auto=format&q=80" alt="Perro Bogotano" style="width:100%; height:178px; object-fit:cover; display:block;">
+          <button class="heart-btn" style="position:absolute; top:12px; right:12px; background:white; border:none; width:32px; height:32px; border-radius:50%; box-shadow:0 2px 8px rgba(0,0,0,0.12); display:flex; align-items:center; justify-content:center; color:#ccc;">
+            <i data-lucide="heart" style="width:15px; height:15px;"></i>
+          </button>
+        </div>
+        <div style="padding:16px 18px 18px;">
+          <p style="font-weight:800; font-size:14px; color:#1A3520; margin:0 0 4px;">Perro Bogotano</p>
+          <p style="font-size:12px; color:#999; margin:0 0 14px; line-height:1.4;">Con piña, papitas y salsas especiales</p>
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <span class="font-display" style="font-size:24px; font-weight:700; color:#264D35;">$15k</span>
+            <a href="https://wa.me/573001234567?text=Hola!%20Quiero%20pedir%20un%20Perro%20Bogotano" class="btn-primary" style="background:#264D35; color:white; border:none; padding:8px 16px; border-radius:100px; font-size:12px; font-weight:700; cursor:pointer; font-family:'Nunito',sans-serif; text-decoration:none; white-space:nowrap; display:inline-flex; align-items:center; gap:6px;">
+              Pedir ahora
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== GALLERY ===== -->
+  <section id="galeria" class="gallery-section" style="background:#F5EDD5; padding:60px 48px 88px;">
+    <div class="gallery-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; max-width:1080px; margin:0 auto;">
+
+      <div>
+        <h2 class="font-display" style="font-size:clamp(44px,7vw,84px); font-weight:700; color:#264D35; line-height:0.92; margin:0 0 22px;">
+          Un Festín<br>para los<br>Ojos
+        </h2>
+        <p style="font-size:13px; color:#666; max-width:280px; line-height:1.65; margin-bottom:22px;">
+          Cada plato es una obra de arte. Nuestras hamburguesas y combos están diseñados para deleitar todos tus sentidos.
+        </p>
+        <a href="#menu" class="btn-primary" style="background:#BDD129; color:#1A3520; border:none; padding:11px 26px; border-radius:100px; font-size:14px; font-weight:800; cursor:pointer; font-family:'Nunito',sans-serif; text-decoration:none; display:inline-block;">Ver Galería Completa</a>
+      </div>
+
+      <div class="gallery-collage" style="position:relative; height:400px;">
+        <img src="https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=280&h=210&fit=crop&auto=format&q=80" alt="Hamburguesa especial" style="position:absolute; top:0; right:0; width:60%; height:48%; object-fit:cover; border-radius:18px; display:block; box-shadow:0 8px 28px rgba(0,0,0,0.15);">
+        <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=250&h=210&fit=crop&auto=format&q=80" alt="Papas con queso" style="position:absolute; bottom:0; left:4%; width:54%; height:48%; object-fit:cover; border-radius:18px; display:block;">
+        <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=220&h=200&fit=crop&auto=format&q=80" alt="Perro especial" style="position:absolute; bottom:20px; right:0; width:44%; height:44%; object-fit:cover; border-radius:18px; display:block; box-shadow:0 12px 36px rgba(0,0,0,0.22);">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STATS ===== -->
+  <section style="background:#264D35; padding:80px 48px 90px;" class="stats-section">
+    <h2 class="font-display" style="font-size:clamp(24px,3.5vw,38px); font-weight:700; color:#F5EDD5; text-align:center; margin:0 0 12px;">
+      Los Números que nos Definen
+    </h2>
+    <p style="color:rgba(245,237,213,0.65); text-align:center; max-width:480px; margin:0 auto 60px; font-size:14px; line-height:1.6;">
+      Miles de bogotanos confían en nosotros cada día para satisfacer su antojo con calidad y velocidad.
+    </p>
+
+    <div class="stats-row" style="display:flex; align-items:center; justify-content:center; gap:40px; max-width:900px; margin:0 auto;">
+
+      <div style="display:flex; flex-direction:column; align-items:center; gap:14px; flex-shrink:0;">
+        <div style="width:128px; height:128px; background:#D4CF2A; transform:rotate(45deg); border-radius:8px; display:flex; align-items:center; justify-content:center;">
+          <div style="transform:rotate(-45deg); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:4px;">
+            <span class="font-display" style="font-size:30px; font-weight:700; color:#1A3520; line-height:1;">98%</span>
+            <span style="font-size:9px; font-weight:700; color:#1A3520; line-height:1.3; margin-top:3px;">Clientes<br>Satisfechos</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-center-photo" style="width:290px; height:310px; border-radius:18px; overflow:hidden; flex-shrink:0; box-shadow:0 8px 40px rgba(0,0,0,0.3);">
+        <img src="https://images.unsplash.com/photo-1567521464027-f127ff144326?w=290&h=310&fit=crop&auto=format&q=80" alt="Cliente feliz con su hamburguesa" style="width:100%; height:100%; object-fit:cover; display:block;">
+      </div>
+
+      <div style="display:flex; flex-direction:column; align-items:center; gap:28px; flex-shrink:0;">
+        <div style="width:118px; height:118px; background:#3A7BD5; border-radius:40% 60% 70% 30% / 40% 50% 60% 50%; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+          <span class="font-display" style="font-size:26px; font-weight:700; color:white; line-height:1;">92%</span>
+          <span style="font-size:9px; font-weight:700; color:rgba(255,255,255,0.85); text-align:center; padding:0 12px; line-height:1.3;">Clientes Recurrentes</span>
+        </div>
+        <div style="width:118px; height:118px; background:#D4CF2A; border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+          <span class="font-display" style="font-size:26px; font-weight:700; color:#1A3520; line-height:1;">95%</span>
+          <span style="font-size:9px; font-weight:700; color:rgba(26,53,32,0.8); text-align:center; padding:0 10px; line-height:1.3;">Entregas a Tiempo</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="testimonials-section" style="background:#F5EDD5; padding:80px 48px 90px;">
+    <h2 class="font-display" style="font-size:clamp(24px,3.5vw,38px); font-weight:700; color:#264D35; text-align:center; margin:0 0 52px;">
+      Aprobado por Miles en Bogotá
+    </h2>
+
+    <div class="testimonials-grid" style="display:grid; grid-template-columns:1fr 2fr 1fr; gap:24px; align-items:center; max-width:1000px; margin:0 auto;">
+
+      <img class="testimonials-side-img" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=260&h=320&fit=crop&auto=format&q=80" alt="Clientes disfrutando" style="width:100%; height:280px; object-fit:cover; border-radius:18px; display:block;">
+
+      <div style="background:white; border-radius:24px; padding:34px; box-shadow:0 8px 40px rgba(0,0,0,0.08);">
+        <p style="font-size:15px; color:#444; line-height:1.75; margin:0 0 20px; font-style:italic;">
+          "¡Absolutamente increíble! Las hamburguesas son exactamente lo que Bogotá necesitaba. El sabor es inigualable y el servicio rapidísimo. ¡Ya es mi lugar favorito para comer!"
+        </p>
+        <div style="display:flex; gap:3px; margin-bottom:12px; color:#D4A82A;">
+          <i data-lucide="star" style="width:16px; height:16px; fill:#D4A82A;"></i>
+          <i data-lucide="star" style="width:16px; height:16px; fill:#D4A82A;"></i>
+          <i data-lucide="star" style="width:16px; height:16px; fill:#D4A82A;"></i>
+          <i data-lucide="star" style="width:16px; height:16px; fill:#D4A82A;"></i>
+          <i data-lucide="star" style="width:16px; height:16px; fill:#D4A82A;"></i>
+        </div>
+        <p style="font-weight:800; font-size:14px; color:#264D35; margin:0;">María González, Bogotá — Actriz</p>
+      </div>
+
+      <img class="testimonials-side-img" src="https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=260&h=320&fit=crop&auto=format&q=80" alt="Hamburguesa premium" style="width:100%; height:280px; object-fit:cover; border-radius:18px; display:block;">
+    </div>
+  </section>
+
+  <!-- ===== WHATSAPP CTA ===== -->
+  <section class="wacta-section" style="background:#F5EDD5; padding:0 48px 80px;">
+    <div class="wacta-inner" style="background:#264D35; border-radius:28px; padding:72px 60px; position:relative; overflow:hidden;">
+      <div class="wacta-flex" style="display:flex; align-items:center; justify-content:space-between; max-width:880px; margin:0 auto; gap:40px;">
+
+        <div class="wacta-img-wrap" style="position:relative; width:44%; flex-shrink:0;">
+          <div style="position:absolute; top:-28px; left:-28px; width:96px; height:96px; background:#C84827; border-radius:50%; z-index:0; opacity:0.85;"></div>
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=380&h=300&fit=crop&auto=format&q=80" alt="Pide por WhatsApp" style="width:100%; height:270px; object-fit:cover; border-radius:22px; display:block; position:relative; z-index:1;">
+        </div>
+
+        <div class="wacta-text" style="flex:1;">
+          <h2 class="font-display" style="font-size:clamp(28px,4.5vw,48px); font-weight:700; color:#F5EDD5; line-height:1.1; margin:0 0 16px;">
+            Pide por<br>WhatsApp
+          </h2>
+          <p style="color:rgba(245,237,213,0.72); font-size:14px; max-width:280px; line-height:1.65; margin-bottom:26px;">
+            Haz tu pedido fácil y rápido. Te atendemos en minutos y te llevamos hasta la puerta.
+          </p>
+          <a href="https://wa.me/573001234567" class="btn-primary" style="background:#BDD129; color:#1A3520; padding:14px 30px; border-radius:100px; font-size:15px; font-weight:800; text-decoration:none; display:inline-flex; align-items:center; gap:10px; font-family:'Nunito',sans-serif;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#1A3520" style="flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Pedir ahora
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer id="contacto" class="footer-section" style="background:#F5EDD5; padding:52px 48px 36px; border-top:1px solid rgba(38,77,53,0.1);">
+
+    <p style="text-align:center; color:rgba(38,77,53,0.4); font-size:11px; letter-spacing:2.5px; text-transform:uppercase; margin:0 0 28px; font-family:'Nunito',sans-serif; display:flex; align-items:center; justify-content:center; gap:10px;">
+      <i data-lucide="flame" style="width:13px; height:13px;"></i>
+      Saborea la Pasión en Cada Mordisco
+      <i data-lucide="utensils" style="width:13px; height:13px;"></i>
+    </p>
+
+    <div class="footer-cols" style="display:flex; align-items:center; justify-content:space-between; max-width:1060px; margin:0 auto;">
+
+      <!-- Left contact -->
+      <div>
+        <div class="footer-contact-item" style="display:flex; align-items:center; gap:7px; margin-bottom:7px;">
+          <i data-lucide="phone" style="width:13px; height:13px; color:#888; flex-shrink:0;"></i>
+          <a href="tel:+573001234567" style="font-size:13px; color:#555; text-decoration:none;">+57 (300) 123-4567</a>
+        </div>
+        <div class="footer-contact-item" style="display:flex; align-items:center; gap:7px; margin-bottom:7px;">
+          <i data-lucide="phone" style="width:13px; height:13px; color:#888; flex-shrink:0;"></i>
+          <a href="tel:+573109876543" style="font-size:13px; color:#555; text-decoration:none;">+57 (310) 987-6543</a>
+        </div>
+        <div class="footer-contact-item" style="display:flex; align-items:center; gap:7px;">
+          <i data-lucide="mail" style="width:13px; height:13px; color:#888; flex-shrink:0;"></i>
+          <a href="mailto:hola@burgerbogota.co" style="font-size:13px; color:#555; text-decoration:none;">hola@burgerbogota.co</a>
+        </div>
+      </div>
+
+      <!-- Center logo -->
+      <div style="text-align:center;">
+        <div style="width:80px; height:80px; background:#264D35; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 14px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#BDD129" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 11h18c0-3.3-2.7-6-6-6H9C5.7 5 3 7.7 3 11z"/>
+            <line x1="3" y1="15" x2="21" y2="15"/>
+            <path d="M5 19h14a2 2 0 0 0 0-4H5a2 2 0 0 0 0 4z"/>
+          </svg>
+        </div>
+        <h3 class="font-display" style="font-size:44px; font-weight:700; color:#264D35; line-height:1; letter-spacing:-1px;">Burger<br>Bogotá</h3>
+
+        <!-- Social links -->
+        <div style="display:flex; align-items:center; justify-content:center; gap:12px; margin-top:16px;">
+          <a href="https://instagram.com/burgerbogota" target="_blank" rel="noopener noreferrer" class="social-btn" style="width:36px; height:36px; background:#264D35; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; text-decoration:none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="https://wa.me/573001234567" target="_blank" rel="noopener noreferrer" class="social-btn" style="width:36px; height:36px; background:#264D35; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; text-decoration:none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right address -->
+      <div class="footer-right" style="text-align:right;">
+        <div style="display:flex; align-items:flex-start; gap:7px; justify-content:flex-end; margin-bottom:7px;">
+          <i data-lucide="map-pin" style="width:13px; height:13px; color:#888; flex-shrink:0; margin-top:2px;"></i>
+          <div>
+            <p style="font-size:13px; color:#555; margin:0 0 2px;">Cra 7 #45-22, Chapinero</p>
+            <p style="font-size:13px; color:#555; margin:0;">Bogotá DC, Colombia</p>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:7px; justify-content:flex-end; margin-top:10px;">
+          <i data-lucide="instagram" style="width:13px; height:13px; color:#888; flex-shrink:0;"></i>
+          <a href="https://instagram.com/burgerbogota" target="_blank" rel="noopener noreferrer" style="font-size:13px; color:#555; text-decoration:none;">@burgerbogota</a>
+        </div>
+      </div>
+    </div>
+
+    <p style="text-align:center; color:rgba(38,77,53,0.32); font-size:11px; margin:32px 0 0; font-family:'Nunito',sans-serif; letter-spacing:0.5px;">
+      © 2024 Burger Bogotá. Todos los derechos reservados.
+    </p>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    function toggleMobileMenu() {
+      document.getElementById('mobile-menu').classList.toggle('open');
+    }
+    function closeMobileMenu() {
+      document.getElementById('mobile-menu').classList.remove('open');
+    }
+  </script>
+
+</body>
+</html>
