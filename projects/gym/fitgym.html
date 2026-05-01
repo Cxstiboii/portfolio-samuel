@@ -42,7 +42,7 @@
     }
     .ticker-move {
       display: inline-block;
-      animation: ticker 20s linear infinite;
+      animation: ticker 22s linear infinite;
     }
     @keyframes ticker {
       0%   { transform: translateX(0); }
@@ -54,13 +54,16 @@
     .hero-title { letter-spacing: -1.5px; line-height: 0.95; }
     .hero-img { object-position: center top; }
     .hero-glow { background: #F97316; }
+    .donut-chart {
+      background: conic-gradient(#F97316 0% 35%, #fb923c 35% 60%, #60a5fa 60% 80%, #e5e7eb 80% 100%);
+    }
   </style>
 </head>
 <body class="bg-white text-gray-900 overflow-x-hidden">
 
   <!-- Barra Superior -->
   <div class="bg-[#F97316] text-white text-center text-xs font-medium py-2 px-4">
-    Envío gratis en pedidos mayores a $39 🚀
+    Envío gratis en pedidos mayores a $50 🚀 &nbsp;|&nbsp; Usa el código <strong>FIT20</strong> y obtén 20% de descuento en tu primera compra
   </div>
 
   <!-- Barra de Navegación -->
@@ -110,7 +113,7 @@
       </div>
       <!-- Imagen hero -->
       <div class="flex-1 flex justify-center md:justify-end">
-        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=460&h=480&fit=crop&auto=format&q=80" alt="Gimnasio" class="hero-img max-h-[460px] w-full object-cover rounded-xl md:rounded-2xl" />
+        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=460&h=480&fit=crop&auto=format&q=80" alt="Sala de pesas del gimnasio" class="hero-img max-h-[460px] w-full object-cover rounded-xl md:rounded-2xl" />
       </div>
     </div>
     <!-- Efecto de brillo -->
@@ -127,12 +130,12 @@
       <div class="flex flex-col items-center sm:items-start">
         <div class="flex items-center gap-2 mb-1">
           <span class="w-2.5 h-2.5 rounded-full bg-[#F97316] inline-block"></span>
-          <h3 class="font-bold text-base">Sonrisas Infinitas</h3>
+          <h3 class="font-bold text-base">+1,500 Clientes Satisfechos</h3>
         </div>
         <p class="text-gray-500 text-sm leading-relaxed">No nos creas solo a nosotros—lee las historias que inspiran.</p>
       </div>
       <div>
-        <h3 class="font-bold text-base mb-1">Soporte en Línea</h3>
+        <h3 class="font-bold text-base mb-1">Soporte en Línea 24/7</h3>
         <p class="text-gray-500 text-sm leading-relaxed">Disponibles las 24 horas para ayudarte cuando lo necesites.</p>
       </div>
     </div>
@@ -147,7 +150,9 @@
         <div class="flex-1 flex flex-col justify-center">
           <div class="flex items-center gap-2 mb-3">
             <h2 class="text-4xl font-black leading-tight">Muévete Para<br/>Mantener Tu<br/>Salud</h2>
-            <svg class="w-8 h-8 text-[#F97316]" viewBox="0 0 24 24" fill="currentColor"><path d="M3.5 18.5l4-8 3 6 2-4 2 4 4-8"/><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M3.5 18.5l4-8 3 6 2-4 2 4 4-8"/></svg>
+            <svg class="w-8 h-8 text-[#F97316]" viewBox="0 0 24 24" fill="none">
+              <path stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M3.5 18.5l4-8 3 6 2-4 2 4 4-8"/>
+            </svg>
           </div>
           <p class="text-gray-500 text-sm leading-relaxed mb-5 max-w-xs">Mantente activo, empoderado y en movimiento con equipos que potencian cada entrenamiento.</p>
           <a href="#" class="accent-btn w-fit text-xs uppercase tracking-widest">EMPEZAR AHORA</a>
@@ -155,7 +160,7 @@
 
         <!-- Imagen central -->
         <div class="flex-1 rounded-2xl overflow-hidden bg-gray-100 min-h-[240px]">
-          <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop&auto=format&q=80" alt="Entrenamiento" class="w-full h-full object-cover" />
+          <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=300&fit=crop&auto=format&q=80" alt="Persona entrenando en el gimnasio" class="w-full h-full object-cover" />
         </div>
 
         <!-- Tarjetas derecha -->
@@ -167,7 +172,7 @@
           </div>
           <!-- Imagen corredor -->
           <div class="rounded-2xl overflow-hidden bg-gray-100 flex-1 min-h-[160px]">
-            <img src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=224&h=160&fit=crop&auto=format&q=80" alt="Corredor" class="w-full h-full object-cover" />
+            <img src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=224&h=160&fit=crop&auto=format&q=80" alt="Atleta corriendo" class="w-full h-full object-cover" />
           </div>
         </div>
 
@@ -211,10 +216,10 @@
             <h4 class="text-xs font-semibold mb-1 truncate">Proteína en Polvo</h4>
             <div class="flex items-center gap-1 mb-2">
               <span class="text-[#F97316] text-xs">★★★★★</span>
-              <span class="text-gray-400 text-xs">4.6 Reseñas</span>
+              <span class="text-gray-400 text-xs">4.8 · 312 reseñas</span>
             </div>
             <div class="flex items-center justify-between">
-              <span class="font-bold text-sm">$102.00</span>
+              <span class="font-bold text-sm">$49.99</span>
               <a href="#" class="text-xs font-semibold underline text-gray-600 hover:text-black">Ver Ahora</a>
             </div>
           </div>
@@ -223,61 +228,61 @@
         <!-- Whey Isolado -->
         <div class="product-card border border-gray-100 rounded-xl overflow-hidden transition-shadow cursor-pointer group">
           <div class="relative aspect-square overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=400&h=400&fit=crop&auto=format&q=80" alt="Whey Isolado" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+            <img src="https://images.unsplash.com/photo-1579722820308-d74e571900a9?w=400&h=400&fit=crop&auto=format&q=80" alt="Whey Protein Isolado" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
             <button type="button" aria-label="Agregar a favoritos" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-red-500 shadow-sm">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
             </button>
           </div>
           <div class="p-3">
-            <h4 class="text-xs font-semibold mb-1 truncate">Whey Isolado</h4>
+            <h4 class="text-xs font-semibold mb-1 truncate">Whey Protein Isolado</h4>
             <div class="flex items-center gap-1 mb-2">
               <span class="text-[#F97316] text-xs">★★★★★</span>
-              <span class="text-gray-400 text-xs">4.6 Reseñas</span>
+              <span class="text-gray-400 text-xs">4.7 · 187 reseñas</span>
             </div>
             <div class="flex items-center justify-between">
-              <span class="font-bold text-sm">$120.00</span>
+              <span class="font-bold text-sm">$64.99</span>
               <a href="#" class="text-xs font-semibold underline text-gray-600 hover:text-black">Ver Ahora</a>
             </div>
           </div>
         </div>
 
-        <!-- Mancuernas Originales -->
+        <!-- Mancuernas Ajustables -->
         <div class="product-card border border-gray-100 rounded-xl overflow-hidden transition-shadow cursor-pointer group">
           <div class="relative aspect-square overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=400&h=400&fit=crop&auto=format&q=80" alt="Mancuernas Originales" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+            <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=400&h=400&fit=crop&auto=format&q=80" alt="Mancuernas Ajustables" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
             <button type="button" aria-label="Agregar a favoritos" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-red-500 shadow-sm">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
             </button>
           </div>
           <div class="p-3">
-            <h4 class="text-xs font-semibold mb-1 truncate">Mancuernas Originales</h4>
+            <h4 class="text-xs font-semibold mb-1 truncate">Mancuernas Ajustables</h4>
             <div class="flex items-center gap-1 mb-2">
               <span class="text-[#F97316] text-xs">★★★★★</span>
-              <span class="text-gray-400 text-xs">4.6 Reseñas</span>
+              <span class="text-gray-400 text-xs">4.6 · 98 reseñas</span>
             </div>
             <div class="flex items-center justify-between">
-              <span class="font-bold text-sm">$133.00</span>
+              <span class="font-bold text-sm">$129.99</span>
               <a href="#" class="text-xs font-semibold underline text-gray-600 hover:text-black">Ver Ahora</a>
             </div>
           </div>
         </div>
 
-        <!-- Nutrición con Aminoácidos -->
+        <!-- BCAA Aminoácidos -->
         <div class="product-card border border-gray-100 rounded-xl overflow-hidden transition-shadow cursor-pointer group">
           <div class="relative aspect-square overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=400&h=400&fit=crop&auto=format&q=80" alt="Nutrición con Aminoácidos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+            <img src="https://images.unsplash.com/photo-1550572017-edd951b55104?w=400&h=400&fit=crop&auto=format&q=80" alt="BCAA Aminoácidos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
             <button type="button" aria-label="Agregar a favoritos" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-red-500 shadow-sm">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
             </button>
           </div>
           <div class="p-3">
-            <h4 class="text-xs font-semibold mb-1 truncate">Nutrición con Aminoácidos</h4>
+            <h4 class="text-xs font-semibold mb-1 truncate">BCAA Aminoácidos</h4>
             <div class="flex items-center gap-1 mb-2">
               <span class="text-[#F97316] text-xs">★★★★★</span>
-              <span class="text-gray-400 text-xs">4.6 Reseñas</span>
+              <span class="text-gray-400 text-xs">4.5 · 143 reseñas</span>
             </div>
             <div class="flex items-center justify-between">
-              <span class="font-bold text-sm">$150.00</span>
+              <span class="font-bold text-sm">$39.99</span>
               <a href="#" class="text-xs font-semibold underline text-gray-600 hover:text-black">Ver Ahora</a>
             </div>
           </div>
@@ -286,7 +291,7 @@
         <!-- Banco de Entrenamiento -->
         <div class="product-card border border-gray-100 rounded-xl overflow-hidden transition-shadow cursor-pointer group">
           <div class="relative aspect-square overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=400&h=400&fit=crop&auto=format&q=80" alt="Banco de Entrenamiento" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+            <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=400&h=400&fit=crop&auto=format&q=80" alt="Banco de Entrenamiento Profesional" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
             <button type="button" aria-label="Agregar a favoritos" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-red-500 shadow-sm">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
             </button>
@@ -295,10 +300,10 @@
             <h4 class="text-xs font-semibold mb-1 truncate">Banco de Entrenamiento</h4>
             <div class="flex items-center gap-1 mb-2">
               <span class="text-[#F97316] text-xs">★★★★★</span>
-              <span class="text-gray-400 text-xs">4.6 Reseñas</span>
+              <span class="text-gray-400 text-xs">4.9 · 56 reseñas</span>
             </div>
             <div class="flex items-center justify-between">
-              <span class="font-bold text-sm">$505.00</span>
+              <span class="font-bold text-sm">$349.99</span>
               <a href="#" class="text-xs font-semibold underline text-gray-600 hover:text-black">Ver Ahora</a>
             </div>
           </div>
@@ -316,52 +321,52 @@
             <h4 class="text-xs font-semibold mb-1 truncate">Zapatillas de Entrenamiento</h4>
             <div class="flex items-center gap-1 mb-2">
               <span class="text-[#F97316] text-xs">★★★★★</span>
-              <span class="text-gray-400 text-xs">4.6 Reseñas</span>
+              <span class="text-gray-400 text-xs">4.7 · 224 reseñas</span>
             </div>
             <div class="flex items-center justify-between">
-              <span class="font-bold text-sm">$140.00</span>
+              <span class="font-bold text-sm">$119.99</span>
               <a href="#" class="text-xs font-semibold underline text-gray-600 hover:text-black">Ver Ahora</a>
             </div>
           </div>
         </div>
 
-        <!-- Barras y Mancuernas -->
+        <!-- Barra Olímpica + Discos -->
         <div class="product-card border border-gray-100 rounded-xl overflow-hidden transition-shadow cursor-pointer group">
           <div class="relative aspect-square overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&crop=top&auto=format&q=80" alt="Barras y Mancuernas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop&auto=format&q=80" alt="Barra Olímpica y Discos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
             <button type="button" aria-label="Agregar a favoritos" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-red-500 shadow-sm">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
             </button>
           </div>
           <div class="p-3">
-            <h4 class="text-xs font-semibold mb-1 truncate">Barras y Mancuernas</h4>
+            <h4 class="text-xs font-semibold mb-1 truncate">Barra Olímpica + Discos</h4>
             <div class="flex items-center gap-1 mb-2">
               <span class="text-[#F97316] text-xs">★★★★★</span>
-              <span class="text-gray-400 text-xs">4.6 Reseñas</span>
+              <span class="text-gray-400 text-xs">4.6 · 79 reseñas</span>
             </div>
             <div class="flex items-center justify-between">
-              <span class="font-bold text-sm">$124.00</span>
+              <span class="font-bold text-sm">$189.99</span>
               <a href="#" class="text-xs font-semibold underline text-gray-600 hover:text-black">Ver Ahora</a>
             </div>
           </div>
         </div>
 
-        <!-- Colección C4 -->
+        <!-- Pre-Entreno C4 -->
         <div class="product-card border border-gray-100 rounded-xl overflow-hidden transition-shadow cursor-pointer group">
           <div class="relative aspect-square overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop&auto=format&q=80" alt="Colección C4" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+            <img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=400&h=400&fit=crop&auto=format&q=80" alt="Pre-Entreno C4 Original" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
             <button type="button" aria-label="Agregar a favoritos" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-red-500 shadow-sm">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
             </button>
           </div>
           <div class="p-3">
-            <h4 class="text-xs font-semibold mb-1 truncate">Colección C4</h4>
+            <h4 class="text-xs font-semibold mb-1 truncate">Pre-Entreno C4 Original</h4>
             <div class="flex items-center gap-1 mb-2">
               <span class="text-[#F97316] text-xs">★★★★★</span>
-              <span class="text-gray-400 text-xs">4.6 Reseñas</span>
+              <span class="text-gray-400 text-xs">4.8 · 167 reseñas</span>
             </div>
             <div class="flex items-center justify-between">
-              <span class="font-bold text-sm">$149.00</span>
+              <span class="font-bold text-sm">$44.99</span>
               <a href="#" class="text-xs font-semibold underline text-gray-600 hover:text-black">Ver Ahora</a>
             </div>
           </div>
@@ -375,17 +380,17 @@
   <div class="bg-[#F97316] py-3 ticker-wrap">
     <div class="ticker-move text-white font-bold text-sm tracking-wide">
       <span class="mx-6">⚡ Hasta 30% de Descuento</span>
+      <span class="mx-6">🏋️ Envío Gratis en Pedidos +$50</span>
       <span class="mx-6">⚡ Hasta 30% de Descuento</span>
+      <span class="mx-6">💪 Código FIT20 — 20% Off tu Primera Compra</span>
       <span class="mx-6">⚡ Hasta 30% de Descuento</span>
+      <span class="mx-6">🏋️ Envío Gratis en Pedidos +$50</span>
       <span class="mx-6">⚡ Hasta 30% de Descuento</span>
+      <span class="mx-6">💪 Código FIT20 — 20% Off tu Primera Compra</span>
       <span class="mx-6">⚡ Hasta 30% de Descuento</span>
+      <span class="mx-6">🏋️ Envío Gratis en Pedidos +$50</span>
       <span class="mx-6">⚡ Hasta 30% de Descuento</span>
-      <span class="mx-6">⚡ Hasta 30% de Descuento</span>
-      <span class="mx-6">⚡ Hasta 30% de Descuento</span>
-      <span class="mx-6">⚡ Hasta 30% de Descuento</span>
-      <span class="mx-6">⚡ Hasta 30% de Descuento</span>
-      <span class="mx-6">⚡ Hasta 30% de Descuento</span>
-      <span class="mx-6">⚡ Hasta 30% de Descuento</span>
+      <span class="mx-6">💪 Código FIT20 — 20% Off tu Primera Compra</span>
     </div>
   </div>
 
@@ -396,13 +401,13 @@
         <!-- Avatares izquierda -->
         <div class="hidden sm:flex flex-col gap-3">
           <div class="w-14 h-14 rounded-full overflow-hidden bg-gray-600 border-2 border-[#162035]">
-            <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=56&h=56&fit=crop&auto=format&q=80" alt="Usuario 1" class="w-full h-full object-cover" />
+            <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=56&h=56&fit=crop&auto=format&q=80" alt="Cliente 1" class="w-full h-full object-cover" />
           </div>
           <div class="w-10 h-10 rounded-full overflow-hidden bg-gray-600 border-2 border-[#162035] ml-4">
-            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=40&h=40&fit=crop&auto=format&q=80" alt="Usuario 2" class="w-full h-full object-cover" />
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=40&h=40&fit=crop&auto=format&q=80" alt="Cliente 2" class="w-full h-full object-cover" />
           </div>
           <div class="w-12 h-12 rounded-full overflow-hidden bg-gray-600 border-2 border-[#162035]">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=48&h=48&fit=crop&auto=format&q=80" alt="Usuario 3" class="w-full h-full object-cover" />
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=48&h=48&fit=crop&auto=format&q=80" alt="Cliente 3" class="w-full h-full object-cover" />
           </div>
         </div>
 
@@ -411,7 +416,7 @@
           <h2 class="text-5xl font-black text-white leading-none">1500+</h2>
           <p class="text-white font-bold text-xl mt-1 mb-4">Clientes Felices</p>
           <div class="flex items-center justify-center gap-2">
-            <span class="bg-white text-[#F97316] text-xs font-bold px-2 py-1 rounded-full">Calificación 4.0</span>
+            <span class="bg-white text-[#F97316] text-xs font-bold px-2 py-1 rounded-full">Promedio 4.8 ★</span>
             <div class="flex">
               <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
             </div>
@@ -421,38 +426,38 @@
         <!-- Avatares derecha -->
         <div class="hidden sm:flex flex-col gap-3">
           <div class="w-12 h-12 rounded-full overflow-hidden bg-gray-600 border-2 border-[#162035] ml-2">
-            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=48&h=48&fit=crop&auto=format&q=80" alt="Usuario 4" class="w-full h-full object-cover" />
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=48&h=48&fit=crop&auto=format&q=80" alt="Cliente 4" class="w-full h-full object-cover" />
           </div>
           <div class="w-14 h-14 rounded-full overflow-hidden bg-gray-600 border-2 border-[#162035]">
-            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=56&h=56&fit=crop&auto=format&q=80" alt="Usuario 5" class="w-full h-full object-cover" />
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=56&h=56&fit=crop&auto=format&q=80" alt="Cliente 5" class="w-full h-full object-cover" />
           </div>
           <div class="w-10 h-10 rounded-full overflow-hidden bg-gray-600 border-2 border-[#162035] ml-6">
-            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&auto=format&q=80" alt="Usuario 6" class="w-full h-full object-cover" />
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&auto=format&q=80" alt="Cliente 6" class="w-full h-full object-cover" />
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Perspectivas Personalizadas -->
+  <!-- Tu Progreso Personalizado -->
   <section class="bg-white py-14">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl sm:text-4xl font-black text-center mb-10 leading-tight">Perspectivas y Recomendaciones<br/>Personalizadas Para Ti</h2>
+      <h2 class="text-3xl sm:text-4xl font-black text-center mb-10 leading-tight">Seguimiento y Recomendaciones<br/>Personalizadas Para Ti</h2>
       <div class="flex flex-col lg:flex-row gap-6 items-center">
 
         <!-- Izquierda: tarjeta de app -->
         <div class="bg-[#F97316] rounded-3xl p-5 w-full lg:w-72 flex-shrink-0">
-          <p class="font-black text-sm text-white uppercase tracking-wide mb-3">Registra Tu Progreso de Salud</p>
+          <p class="font-black text-sm text-white uppercase tracking-wide mb-3">Registra Tu Progreso Diario</p>
           <!-- Mini UI de app -->
           <div class="bg-white rounded-2xl p-3 shadow-sm">
-            <p class="text-xs font-semibold text-gray-500 mb-2">Progreso diario</p>
+            <p class="text-xs font-semibold text-gray-500 mb-2">Actividad del día</p>
             <!-- Gráfico donut -->
             <div class="flex items-center gap-3 mb-2">
-              <div class="w-16 h-16 rounded-full flex-shrink-0" style="background: conic-gradient(#F97316 0% 35%, #fb923c 35% 60%, #60a5fa 60% 80%, #e5e7eb 80% 100%)"></div>
+              <div class="w-16 h-16 rounded-full flex-shrink-0 donut-chart"></div>
               <div class="text-xs space-y-1">
-                <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#F97316] inline-block"></span> Sueño <span class="font-bold ml-1">6h 50m</span></div>
-                <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-orange-400 inline-block"></span> Agua <span class="font-bold ml-1">200ml</span></div>
-                <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-blue-400 inline-block"></span> Pasos <span class="font-bold ml-1">100</span></div>
+                <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#F97316] inline-block"></span> Sueño <span class="font-bold ml-1">7h 30m</span></div>
+                <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-orange-400 inline-block"></span> Agua <span class="font-bold ml-1">2.5 L</span></div>
+                <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-blue-400 inline-block"></span> Pasos <span class="font-bold ml-1">8,420</span></div>
               </div>
             </div>
           </div>
@@ -460,26 +465,26 @@
 
         <!-- Centro: imagen de persona -->
         <div class="flex-1 rounded-3xl overflow-hidden min-h-[300px] bg-gray-100">
-          <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&h=360&fit=crop&auto=format&q=80" alt="Persona en forma" class="w-full h-full object-cover" />
+          <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&h=360&fit=crop&auto=format&q=80" alt="Atleta en forma midiendo su progreso" class="w-full h-full object-cover" />
         </div>
 
-        <!-- Derecha: tarjetas de fecha -->
+        <!-- Derecha: tarjetas de programa -->
         <div class="flex flex-col gap-4 w-full lg:w-52 flex-shrink-0">
           <div class="bg-gray-50 rounded-2xl p-4 border border-gray-100">
             <div class="flex items-center gap-2 mb-1">
-              <span class="text-xs font-semibold text-gray-500">Período Actual</span>
+              <span class="text-xs font-semibold text-gray-500">Inicio del Programa</span>
               <svg class="w-4 h-4 text-[#F97316]" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
             </div>
-            <p class="font-black text-xl">12 de Septiembre,</p>
-            <p class="text-gray-400 text-sm">2025</p>
+            <p class="font-black text-xl">1 de Enero,</p>
+            <p class="text-gray-400 text-sm">2026</p>
           </div>
           <div class="bg-gray-50 rounded-2xl p-4 border border-gray-100">
             <div class="flex items-center gap-2 mb-1">
-              <span class="text-xs font-semibold text-gray-500">Último Período</span>
+              <span class="text-xs font-semibold text-gray-500">Próxima Meta</span>
               <svg class="w-4 h-4 text-[#F97316]" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
             </div>
-            <p class="font-black text-xl">5 de Octubre,</p>
-            <p class="text-gray-400 text-sm">2025</p>
+            <p class="font-black text-xl">30 de Junio,</p>
+            <p class="text-gray-400 text-sm">2026</p>
           </div>
         </div>
 
@@ -491,7 +496,7 @@
   <section class="relative bg-[#0C1A2E] py-20 overflow-hidden">
     <!-- Imagen de fondo con overlay -->
     <div class="absolute inset-0 opacity-30">
-      <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1440&h=400&fit=crop&auto=format&q=80" alt="" class="w-full h-full object-cover" />
+      <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1440&h=400&fit=crop&auto=format&q=80" alt="" class="w-full h-full object-cover" />
     </div>
     <div class="relative z-10 max-w-2xl mx-auto px-4 text-center">
       <h2 class="text-white text-3xl sm:text-4xl font-black leading-tight mb-3">Da el Primer Paso<br/>Hacia un Tú más Saludable</h2>
@@ -515,7 +520,7 @@
     </div>
     <!-- Imagen derecha -->
     <div class="absolute right-0 bottom-0 h-full w-1/3 opacity-70">
-      <img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=400&h=280&fit=crop&auto=format&q=80" alt="" class="w-full h-full object-cover object-left" />
+      <img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=400&h=280&fit=crop&auto=format&q=80" alt="" class="w-full h-full object-cover object-left" />
     </div>
     <div class="relative z-10 w-full text-center py-16 px-4">
       <h2 class="text-white font-black text-5xl sm:text-7xl lg:text-8xl leading-none italic">Únete a nuestra comunidad</h2>
@@ -556,7 +561,7 @@
 
       <!-- Pie inferior -->
       <div class="pt-4 text-xs text-gray-600 flex flex-col sm:flex-row justify-between gap-2">
-        <span>Copyright © 2025 Todos los Derechos Reservados</span>
+        <span>Copyright © 2026 FitGym. Todos los Derechos Reservados.</span>
         <div class="flex gap-4">
           <a href="#" class="hover:text-gray-400">Política de Envío</a>
           <a href="#" class="hover:text-gray-400">Política de Privacidad</a>

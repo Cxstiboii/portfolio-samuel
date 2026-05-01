@@ -38,11 +38,13 @@
     .service-card img { transition: transform .4s ease; }
     .service-card:hover img { transform: scale(1.05); }
     .accordion-content { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
-    .accordion-content.open { max-height: 200px; }
+    .accordion-content.open { max-height: 400px; }
     .accordion-icon { transition: transform .3s; }
     .accordion-icon.open { transform: rotate(180deg); }
     @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
     .fade-up { animation: fadeUp .7s ease forwards; }
+    input[type="date"] { color-scheme: dark; }
+    .booking-select option { background-color: #1e2719; color: white; }
   </style>
 </head>
 <body class="bg-cream text-gray-800">
@@ -137,10 +139,10 @@
       <!-- Right -->
       <div>
         <p class="text-gray-600 leading-loose text-sm md:text-base mb-6">
-          Our Expert Therapists Offer A Healing Touch To Release Stress, Reduce Pain, And Restore Your Natural Balance In A Peaceful, Welcoming Environment Designed To Support Your Total Wellness Journey.
+          Our expert therapists offer a healing touch to release stress, reduce pain, and restore your natural balance in a peaceful, welcoming environment designed to support your total wellness journey.
         </p>
         <p class="text-gray-600 leading-loose text-sm md:text-base">
-          Whether You're Recovering From Tension Or Simply Need A Wellness Escape, We Offer A Curated Selection Of Therapy Programmes Designed To Soothe Your Mind, Relax Your Muscles, And Renew Your Body.
+          Whether you're recovering from tension or simply need a wellness escape, we offer a curated selection of therapy programmes designed to soothe your mind, relax your muscles, and renew your body.
         </p>
         <a href="#services" class="mt-8 inline-flex items-center gap-2 text-olive-dark font-semibold text-sm hover:text-gold transition-colors">
           Explore Our Services
@@ -164,10 +166,10 @@
     </div>
 
     <!-- Scroll container -->
-    <div class="flex gap-6 overflow-x-auto hide-scroll pb-4">
+    <div class="flex gap-6 overflow-x-auto hide-scroll pb-4 md:grid md:grid-cols-3 lg:grid-cols-6 md:overflow-visible">
 
       <!-- Card template -->
-      <div class="service-card flex-shrink-0 w-48 md:w-52 text-center cursor-pointer group">
+      <div class="service-card flex-shrink-0 w-48 md:w-auto md:flex-shrink text-center cursor-pointer group">
         <div class="w-40 h-40 md:w-44 md:h-44 mx-auto rounded-full overflow-hidden mb-4 border-4 border-cream shadow-md">
           <img src="https://images.unsplash.com/photo-1519824145371-296894a0daa9?w=300&h=300&auto=format&fit=crop&q=80" alt="Deep Tissue Massage" class="w-full h-full object-cover">
         </div>
@@ -175,7 +177,7 @@
         <p class="text-xs text-gray-500 mt-1">Release deep tension</p>
       </div>
 
-      <div class="service-card flex-shrink-0 w-48 md:w-52 text-center cursor-pointer group">
+      <div class="service-card flex-shrink-0 w-48 md:w-auto md:flex-shrink text-center cursor-pointer group">
         <div class="w-40 h-40 md:w-44 md:h-44 mx-auto rounded-full overflow-hidden mb-4 border-4 border-cream shadow-md">
           <img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?w=300&h=300&auto=format&fit=crop&q=80" alt="Swedish Relaxation" class="w-full h-full object-cover">
         </div>
@@ -183,7 +185,7 @@
         <p class="text-xs text-gray-500 mt-1">Total body calm</p>
       </div>
 
-      <div class="service-card flex-shrink-0 w-48 md:w-52 text-center cursor-pointer group">
+      <div class="service-card flex-shrink-0 w-48 md:w-auto md:flex-shrink text-center cursor-pointer group">
         <div class="w-40 h-40 md:w-44 md:h-44 mx-auto rounded-full overflow-hidden mb-4 border-4 border-cream shadow-md">
           <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=300&h=300&auto=format&fit=crop&q=80" alt="Reflexology Session" class="w-full h-full object-cover">
         </div>
@@ -191,7 +193,7 @@
         <p class="text-xs text-gray-500 mt-1">Balance & harmony</p>
       </div>
 
-      <div class="service-card flex-shrink-0 w-48 md:w-52 text-center cursor-pointer group">
+      <div class="service-card flex-shrink-0 w-48 md:w-auto md:flex-shrink text-center cursor-pointer group">
         <div class="w-40 h-40 md:w-44 md:h-44 mx-auto rounded-full overflow-hidden mb-4 border-4 border-cream shadow-md">
           <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=300&h=300&auto=format&fit=crop&q=80" alt="Hot Stone Therapy" class="w-full h-full object-cover">
         </div>
@@ -199,7 +201,7 @@
         <p class="text-xs text-gray-500 mt-1">Warmth & restoration</p>
       </div>
 
-      <div class="service-card flex-shrink-0 w-48 md:w-52 text-center cursor-pointer group">
+      <div class="service-card flex-shrink-0 w-48 md:w-auto md:flex-shrink text-center cursor-pointer group">
         <div class="w-40 h-40 md:w-44 md:h-44 mx-auto rounded-full overflow-hidden mb-4 border-4 border-cream shadow-md">
           <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=300&h=300&auto=format&fit=crop&q=80" alt="Facial Treatment" class="w-full h-full object-cover">
         </div>
@@ -207,7 +209,7 @@
         <p class="text-xs text-gray-500 mt-1">Glow & radiance</p>
       </div>
 
-      <div class="service-card flex-shrink-0 w-48 md:w-52 text-center cursor-pointer group">
+      <div class="service-card flex-shrink-0 w-48 md:w-auto md:flex-shrink text-center cursor-pointer group">
         <div class="w-40 h-40 md:w-44 md:h-44 mx-auto rounded-full overflow-hidden mb-4 border-4 border-cream shadow-md">
           <img src="https://images.unsplash.com/photo-1559757148-3a3b97e45db0?w=300&h=300&auto=format&fit=crop&q=80" alt="Aromatherapy" class="w-full h-full object-cover">
         </div>
@@ -270,13 +272,13 @@
             <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=400&h=300&auto=format&fit=crop&q=80" alt="Spa candles" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
           </div>
           <div class="rounded-xl overflow-hidden h-44">
-            <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&h=300&auto=format&fit=crop&q=80" alt="Hot stone" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+            <img src="https://images.unsplash.com/photo-1519690889869-e705e59f72e1?w=400&h=300&auto=format&fit=crop&q=80" alt="Spa stones" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
           </div>
           <div class="rounded-xl overflow-hidden h-44">
-            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&auto=format&fit=crop&q=80" alt="Spa room" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+            <img src="https://images.unsplash.com/photo-1526761122248-c31c93f8b2b6?w=400&h=300&auto=format&fit=crop&q=80" alt="Relaxation" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
           </div>
           <div class="rounded-xl overflow-hidden h-44 relative group cursor-pointer">
-            <img src="https://images.unsplash.com/photo-1519824145371-296894a0daa9?w=400&h=300&auto=format&fit=crop&q=80" alt="Massage" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+            <img src="https://images.unsplash.com/photo-1563461660947-507ef49e9c47?w=400&h=300&auto=format&fit=crop&q=80" alt="Spa bath" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
           </div>
         </div>
         <!-- Text card -->
@@ -291,7 +293,7 @@
 
 <!-- ───────── QUOTE HIGHLIGHT ───────── -->
 <section class="relative py-32 overflow-hidden">
-  <img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?w=1920&auto=format&fit=crop&q=80" alt="Background" class="absolute inset-0 w-full h-full object-cover">
+  <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1920&auto=format&fit=crop&q=80" alt="Background" class="absolute inset-0 w-full h-full object-cover">
   <div class="absolute inset-0 bg-olive-dark/70"></div>
   <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
     <p class="text-gold text-xs tracking-[.3em] uppercase font-semibold mb-6">Our Promise</p>
@@ -312,7 +314,7 @@
           <img src="https://images.unsplash.com/photo-1584467735815-f778f274e296?w=600&h=700&auto=format&fit=crop&q=80" alt="Holistic wellness" class="w-full h-full object-cover">
         </div>
         <!-- Floating badge -->
-        <div class="absolute -bottom-6 -right-4 md:-right-8 bg-olive-dark text-white rounded-xl p-5 shadow-xl w-40">
+        <div class="absolute -bottom-6 right-4 md:-right-8 bg-olive-dark text-white rounded-xl p-5 shadow-xl w-40">
           <div class="font-serif text-3xl font-bold text-gold">10+</div>
           <div class="text-xs text-white/70 mt-1 leading-tight">Years of Holistic Healing</div>
         </div>
@@ -333,7 +335,7 @@
         <!-- Accordion items -->
         <div class="space-y-4 border-t border-cream-dark pt-8">
           <div class="accordion-item border-b border-cream-dark pb-4">
-            <button class="accordion-trigger flex items-center justify-between w-full text-left" onclick="toggleAccordion(this)">
+            <button type="button" class="accordion-trigger flex items-center justify-between w-full text-left" onclick="toggleAccordion(this)">
               <span class="font-serif font-semibold text-olive-dark text-lg">Stress Relief</span>
               <svg class="accordion-icon w-5 h-5 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </button>
@@ -343,7 +345,7 @@
           </div>
 
           <div class="accordion-item border-b border-cream-dark pb-4">
-            <button class="accordion-trigger flex items-center justify-between w-full text-left" onclick="toggleAccordion(this)">
+            <button type="button" class="accordion-trigger flex items-center justify-between w-full text-left" onclick="toggleAccordion(this)">
               <span class="font-serif font-semibold text-olive-dark text-lg">Pain Reduction</span>
               <svg class="accordion-icon w-5 h-5 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </button>
@@ -353,7 +355,7 @@
           </div>
 
           <div class="accordion-item border-b border-cream-dark pb-4">
-            <button class="accordion-trigger flex items-center justify-between w-full text-left" onclick="toggleAccordion(this)">
+            <button type="button" class="accordion-trigger flex items-center justify-between w-full text-left" onclick="toggleAccordion(this)">
               <span class="font-serif font-semibold text-olive-dark text-lg">Deep Relaxation</span>
               <svg class="accordion-icon w-5 h-5 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </button>
@@ -415,7 +417,7 @@
 
       <!-- Image card -->
       <div class="rounded-xl overflow-hidden h-56 md:h-auto">
-        <img src="https://images.unsplash.com/photo-1559757148-3a3b97e45db0?w=500&h=400&auto=format&fit=crop&q=80" alt="Spa candles" class="w-full h-full object-cover">
+        <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=500&h=400&auto=format&fit=crop&q=80" alt="Spa treatment" class="w-full h-full object-cover">
       </div>
 
     </div>
@@ -430,12 +432,12 @@
       <div>
         <span class="text-xs tracking-[.25em] uppercase text-brown font-semibold mb-4 block">Therapeutic Care</span>
         <h2 class="font-serif text-4xl md:text-5xl font-bold text-olive-dark leading-tight mb-8">
-          Calm Your Senses<br>With <em class="italic text-brown">Therapeutic</em>
+          Calm Your Senses<br>With <em class="italic text-brown">Therapeutic Care</em>
         </h2>
         <div class="space-y-0">
           <!-- Accordion items -->
           <div class="border-b border-cream-dark">
-            <button class="sense-trigger flex items-center justify-between w-full text-left py-4" onclick="toggleSense(this)">
+            <button type="button" class="sense-trigger flex items-center justify-between w-full text-left py-4" onclick="toggleSense(this)">
               <div class="flex items-center gap-3">
                 <div class="w-1.5 h-1.5 rounded-full bg-gold"></div>
                 <span class="font-medium text-olive-dark">Emotional Healing</span>
@@ -448,7 +450,7 @@
           </div>
 
           <div class="border-b border-cream-dark">
-            <button class="sense-trigger flex items-center justify-between w-full text-left py-4" onclick="toggleSense(this)">
+            <button type="button" class="sense-trigger flex items-center justify-between w-full text-left py-4" onclick="toggleSense(this)">
               <div class="flex items-center gap-3">
                 <div class="w-1.5 h-1.5 rounded-full bg-gold"></div>
                 <span class="font-medium text-olive-dark">Full Body Relaxation Rituals</span>
@@ -461,7 +463,7 @@
           </div>
 
           <div class="border-b border-cream-dark">
-            <button class="sense-trigger flex items-center justify-between w-full text-left py-4" onclick="toggleSense(this)">
+            <button type="button" class="sense-trigger flex items-center justify-between w-full text-left py-4" onclick="toggleSense(this)">
               <div class="flex items-center gap-3">
                 <div class="w-1.5 h-1.5 rounded-full bg-gold"></div>
                 <span class="font-medium text-olive-dark">Trained Licensed Massage Experts</span>
@@ -474,7 +476,7 @@
           </div>
 
           <div class="border-b border-cream-dark">
-            <button class="sense-trigger flex items-center justify-between w-full text-left py-4" onclick="toggleSense(this)">
+            <button type="button" class="sense-trigger flex items-center justify-between w-full text-left py-4" onclick="toggleSense(this)">
               <div class="flex items-center gap-3">
                 <div class="w-1.5 h-1.5 rounded-full bg-gold"></div>
                 <span class="font-medium text-olive-dark">Serene Spa-Inspired Environment</span>
@@ -487,7 +489,7 @@
           </div>
 
           <div class="border-b border-cream-dark">
-            <button class="sense-trigger flex items-center justify-between w-full text-left py-4" onclick="toggleSense(this)">
+            <button type="button" class="sense-trigger flex items-center justify-between w-full text-left py-4" onclick="toggleSense(this)">
               <div class="flex items-center gap-3">
                 <div class="w-1.5 h-1.5 rounded-full bg-gold"></div>
                 <span class="font-medium text-olive-dark">Tailored Massage Experience Every Time</span>
@@ -504,7 +506,7 @@
       <!-- Right: image -->
       <div class="relative">
         <div class="rounded-xl overflow-hidden aspect-[3/4]">
-          <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=600&h=750&auto=format&fit=crop&q=80" alt="Facial treatment" class="w-full h-full object-cover">
+          <img src="https://images.unsplash.com/photo-1498550744921-75f79806b8a7?w=600&h=750&auto=format&fit=crop&q=80" alt="Spa ritual" class="w-full h-full object-cover">
         </div>
         <div class="absolute top-6 -left-4 md:-left-8 bg-gold rounded-xl p-5 shadow-xl">
           <div class="font-serif text-2xl font-bold text-olive-dark">30+</div>
@@ -590,7 +592,7 @@
 
 <!-- ───────── BOOKING ───────── -->
 <section id="booking" class="relative py-32 overflow-hidden">
-  <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1920&auto=format&fit=crop&q=80" alt="Spa room" class="absolute inset-0 w-full h-full object-cover">
+  <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1920&auto=format&fit=crop&q=80" alt="Spa ambience" class="absolute inset-0 w-full h-full object-cover">
   <div class="absolute inset-0 bg-olive-dark/80"></div>
 
   <div class="relative z-10 max-w-5xl mx-auto px-6">
@@ -604,14 +606,14 @@
       <input type="text" placeholder="Last Name" class="bg-white/10 border border-white/20 text-white placeholder-white/40 px-5 py-4 rounded-sm text-sm focus:outline-none focus:border-gold transition-colors">
       <input type="tel" placeholder="Phone Number" class="bg-white/10 border border-white/20 text-white placeholder-white/40 px-5 py-4 rounded-sm text-sm focus:outline-none focus:border-gold transition-colors">
       <input type="email" placeholder="Email Address" class="bg-white/10 border border-white/20 text-white placeholder-white/40 px-5 py-4 rounded-sm text-sm focus:outline-none focus:border-gold transition-colors">
-      <select class="bg-white/10 border border-white/20 text-white/60 px-5 py-4 rounded-sm text-sm focus:outline-none focus:border-gold transition-colors appearance-none">
-        <option value="" disabled selected>Select a Treatment</option>
-        <option>Deep Tissue Massage</option>
-        <option>Swedish Relaxation</option>
-        <option>Reflexology Session</option>
-        <option>Hot Stone Therapy</option>
-        <option>Facial Treatment</option>
-        <option>Aromatherapy</option>
+      <select class="booking-select bg-white/10 border border-white/20 text-white/60 px-5 py-4 rounded-sm text-sm focus:outline-none focus:border-gold transition-colors appearance-none">
+        <option value="" disabled selected class="text-gray-400 bg-olive-dark">Select a Treatment</option>
+        <option class="bg-olive-dark text-white">Deep Tissue Massage</option>
+        <option class="bg-olive-dark text-white">Swedish Relaxation</option>
+        <option class="bg-olive-dark text-white">Reflexology Session</option>
+        <option class="bg-olive-dark text-white">Hot Stone Therapy</option>
+        <option class="bg-olive-dark text-white">Facial Treatment</option>
+        <option class="bg-olive-dark text-white">Aromatherapy</option>
       </select>
       <input type="date" class="bg-white/10 border border-white/20 text-white/60 px-5 py-4 rounded-sm text-sm focus:outline-none focus:border-gold transition-colors">
       <textarea placeholder="Additional notes (optional)" class="md:col-span-2 bg-white/10 border border-white/20 text-white placeholder-white/40 px-5 py-4 rounded-sm text-sm focus:outline-none focus:border-gold transition-colors resize-none h-24"></textarea>

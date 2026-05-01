@@ -568,9 +568,9 @@
               <h3 style="font-family:'Playfair Display',serif" class="text-cream font-bold text-base">Ricardo Morales</h3>
               <p class="text-gold text-xs tracking-wider mt-0.5">Maestro Barbero</p>
             </div>
-            <div class="flex items-center justify-center border border-gold/30" style="width:32px;height:32px">
+            <a href="#reservar" title="Reservar con Ricardo Morales" class="flex items-center justify-center border border-gold/30 hover:border-gold hover:bg-gold/10 transition-colors" style="width:32px;height:32px">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </div>
+            </a>
           </div>
         </div>
       </div>
@@ -589,9 +589,9 @@
               <h3 style="font-family:'Playfair Display',serif" class="text-cream font-bold text-base">David Salinas</h3>
               <p class="text-gold text-xs tracking-wider mt-0.5">Barbero Senior</p>
             </div>
-            <div class="flex items-center justify-center border border-gold/30" style="width:32px;height:32px">
+            <a href="#reservar" title="Reservar con David Salinas" class="flex items-center justify-center border border-gold/30 hover:border-gold hover:bg-gold/10 transition-colors" style="width:32px;height:32px">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </div>
+            </a>
           </div>
         </div>
       </div>
@@ -610,9 +610,9 @@
               <h3 style="font-family:'Playfair Display',serif" class="text-cream font-bold text-base">Felipe Ruiz</h3>
               <p class="text-gold text-xs tracking-wider mt-0.5">Barbero &amp; Estilista</p>
             </div>
-            <div class="flex items-center justify-center border border-gold/30" style="width:32px;height:32px">
+            <a href="#reservar" title="Reservar con Felipe Ruiz" class="flex items-center justify-center border border-gold/30 hover:border-gold hover:bg-gold/10 transition-colors" style="width:32px;height:32px">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </div>
+            </a>
           </div>
         </div>
       </div>
@@ -786,7 +786,16 @@
           <h3 class="text-cream font-bold mb-1" style="font-family:'Playfair Display',serif; font-size:1.5rem">Reservar turno</h3>
           <p class="text-cream/30 text-xs mb-8 tracking-wide">Completa el formulario y te confirmamos en minutos</p>
 
-          <form onsubmit="return false" class="flex flex-col gap-5">
+          <!-- Success message -->
+          <div id="form-success" class="hidden mb-6 p-5" style="background:rgba(201,168,76,0.12); border-left:3px solid #C9A84C">
+            <div class="flex items-center gap-3 mb-2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              <span class="text-gold text-sm font-bold" style="font-family:'Playfair Display',serif">¡Reserva recibida!</span>
+            </div>
+            <p class="text-cream/55 text-xs leading-relaxed">Nos pondremos en contacto contigo en los próximos minutos para confirmar tu turno. También puedes escribirnos por WhatsApp.</p>
+          </div>
+
+          <form id="reserva-form" onsubmit="submitReserva(event)" class="flex flex-col gap-5">
             <!-- Nombre + Teléfono -->
             <div class="grid grid-cols-2 gap-4">
               <div>
@@ -874,6 +883,12 @@
             <button type="submit" class="w-full bg-gold hover:bg-gold-light text-charcoal font-bold text-xs py-4 transition-colors mt-1" style="letter-spacing:0.18em; font-family:'Inter',sans-serif">
               CONFIRMAR RESERVA
             </button>
+
+            <!-- WhatsApp alternative -->
+            <a href="https://wa.me/573001234567?text=Hola%20Corte%20%26%20Oro%2C%20quiero%20reservar%20un%20turno." target="_blank" rel="noopener" class="flex items-center justify-center gap-2 border border-cream/10 hover:border-gold text-cream/45 hover:text-gold text-xs py-3 transition-colors" style="letter-spacing:0.12em">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.118.554 4.107 1.523 5.832L0 24l6.335-1.505A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.65-.51-5.17-1.4l-.37-.22-3.76.894.907-3.653-.24-.375A9.945 9.945 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+              RESERVAR POR WHATSAPP
+            </a>
           </form>
         </div>
       </div>
@@ -888,38 +903,38 @@
   <div class="max-w-7xl mx-auto px-5 lg:px-8">
     <div class="grid sm:grid-cols-3 gap-10 lg:gap-16">
 
-      <div class="flex items-start gap-4">
-        <div class="flex items-center justify-center border border-charcoal/20 flex-shrink-0" style="width:40px;height:40px">
+      <a href="https://wa.me/573001234567?text=Hola%20Corte%20%26%20Oro%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener" class="flex items-start gap-4 group">
+        <div class="flex items-center justify-center border border-charcoal/20 group-hover:border-charcoal/50 flex-shrink-0 transition-colors" style="width:40px;height:40px">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         </div>
         <div>
           <div class="text-charcoal/55 text-xs tracking-widest mb-1" style="letter-spacing:0.2em">LLÁMANOS</div>
-          <div style="font-family:'Playfair Display',serif" class="font-bold text-lg text-charcoal">+57 300 123 4567</div>
+          <div style="font-family:'Playfair Display',serif" class="font-bold text-lg text-charcoal group-hover:underline">+57 300 123 4567</div>
           <div class="text-charcoal/55 text-xs mt-1">WhatsApp disponible</div>
         </div>
-      </div>
+      </a>
 
-      <div class="flex items-start gap-4">
-        <div class="flex items-center justify-center border border-charcoal/20 flex-shrink-0" style="width:40px;height:40px">
+      <a href="mailto:hola@corteoro.co" class="flex items-start gap-4 group">
+        <div class="flex items-center justify-center border border-charcoal/20 group-hover:border-charcoal/50 flex-shrink-0 transition-colors" style="width:40px;height:40px">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         </div>
         <div>
           <div class="text-charcoal/55 text-xs tracking-widest mb-1" style="letter-spacing:0.2em">ESCRÍBENOS</div>
-          <div style="font-family:'Playfair Display',serif" class="font-bold text-lg text-charcoal">hola@corteoro.co</div>
+          <div style="font-family:'Playfair Display',serif" class="font-bold text-lg text-charcoal group-hover:underline">hola@corteoro.co</div>
           <div class="text-charcoal/55 text-xs mt-1">Respuesta en menos de 2h</div>
         </div>
-      </div>
+      </a>
 
-      <div class="flex items-start gap-4">
-        <div class="flex items-center justify-center border border-charcoal/20 flex-shrink-0" style="width:40px;height:40px">
+      <a href="https://maps.google.com/?q=Cra.+15+%2393-47+Chapinero+Bogota+Colombia" target="_blank" rel="noopener" class="flex items-start gap-4 group">
+        <div class="flex items-center justify-center border border-charcoal/20 group-hover:border-charcoal/50 flex-shrink-0 transition-colors" style="width:40px;height:40px">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
         </div>
         <div>
           <div class="text-charcoal/55 text-xs tracking-widest mb-1" style="letter-spacing:0.2em">ENCUÉNTRANOS</div>
-          <div style="font-family:'Playfair Display',serif" class="font-bold text-lg text-charcoal">Cra. 15 #93-47</div>
+          <div style="font-family:'Playfair Display',serif" class="font-bold text-lg text-charcoal group-hover:underline">Cra. 15 #93-47</div>
           <div class="text-charcoal/55 text-xs mt-1">Chapinero, Bogotá</div>
         </div>
-      </div>
+      </a>
 
     </div>
   </div>
@@ -998,6 +1013,18 @@
   function selectBarber(el) {
     document.querySelectorAll('.barber-opt').forEach(b => b.classList.remove('active'));
     el.classList.add('active');
+  }
+
+  function submitReserva(e) {
+    e.preventDefault();
+    const success = document.getElementById('form-success');
+    success.classList.remove('hidden');
+    e.target.reset();
+    // Reset barber selector to default
+    document.querySelectorAll('.barber-opt').forEach(b => b.classList.remove('active'));
+    document.querySelector('.barber-opt').classList.add('active');
+    // Scroll success message into view
+    success.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 </script>
 </body>
